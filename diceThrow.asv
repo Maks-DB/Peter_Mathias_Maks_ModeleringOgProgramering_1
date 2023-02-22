@@ -13,12 +13,10 @@ ax = uiaxes(fig);
 %sb.Text = "Roll Dice";
 
 % @Maks tester ny knap
-sb = uibutton(fig,'push','ButtonPushedFcn',@(sb,event) diceRoll(sb,ax));
-sb.Value = 0;
-sb.Text = "Roll Dice";
+sb = uibutton(fig,'push','ButtonPushedFcn',@(sb,event) diceRoll(sb,ax)););
 end
 
-function diceRoll(sb,ax)
+function diceRoll
 numDice = 7; %antal terninger
     
 
