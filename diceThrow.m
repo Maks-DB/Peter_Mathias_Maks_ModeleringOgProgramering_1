@@ -1,8 +1,6 @@
 function diceThrow
 clc
 
-
-
 %ved ikke hvad jeg laver haha, forsøg på at bruge uifigure 
 fig = uifigure;
 ax = uiaxes(fig);
@@ -14,7 +12,7 @@ ax = uiaxes(fig);
 
 % @Maks tester ny knap
 sb = uibutton(fig,'push','ButtonPushedFcn',@(sb,event) diceRoll(sb,ax));
-sb.Value = 0;
+%sb.Value = 0;
 sb.Text = "Roll Dice";
 end
 
@@ -27,7 +25,7 @@ width = 10; %Bredden af terningen
 
 startPosx= 5; %x positionen af første terning
 
-numRolls = 40; %antal slag
+numRolls = 10; %antal slag
 
 rollArray = zeros(1,numDice);
 
