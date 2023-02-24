@@ -11,9 +11,9 @@ ax = uiaxes(fig);
 %sb.Text = "Roll Dice";
 
 % @Maks tester ny knap
-sb = uibutton(fig,'push','ButtonPushedFcn',@(sb,event) diceRoll(sb,ax));
+startButton = uibutton(fig,'push','ButtonPushedFcn',@(startButton,event) diceRoll(startButton,ax));
 %sb.Value = 0;
-sb.Text = "Roll Dice";
+startButton.Text = "Roll Dice";
 end
 
 %  Chamoux eller 43½ med 7 terninger
@@ -55,7 +55,7 @@ end
 
 % SPILLEREGLER SLUT
 
-function diceRoll(sb,ax)
+function diceRoll(startButton,ax)
 numDice = 7; %antal terninger
     
 
