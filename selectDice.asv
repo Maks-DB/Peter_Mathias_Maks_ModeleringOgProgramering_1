@@ -1,4 +1,4 @@
-function diceThrow
+function selectDice;
 clc
 
 %ved ikke hvad jeg laver haha, forsøg på at bruge uifigure 
@@ -14,50 +14,20 @@ ax = uiaxes(fig);
 sb = uibutton(fig,'push','ButtonPushedFcn',@(sb,event) diceRoll(sb,ax));
 %sb.Value = 0;
 sb.Text = "Roll Dice";
+
+
+
 end
 
-%  Chamoux eller 43½ med 7 terninger
-% SPILLEREGLER: (Navneforslag til specifik funktion/variabel)
-
-% I hvert slag skal mindst en terning, der tæller, tages fra.(point...)+(regel...)
-
-%  Tæller ingen af terningerne i et slag gives -4 p.(point...)+(regel...)
-% 1'ere tæller 1 point (point...)
-% 5'ere tæller ½ point (point...)
-
-%  Er der tre fødte i et slag tæller de: (regel...)
-% 3*2 = 2 p (point...)
-% 3*3 = 3 p (point...)
-% 3*4 = 4 p (point...)
-% 3*5 = 5 p (point...)
-% 3*6 = 6 p (point...)
-% 3*1 = 10p (point...)
-
-%  Fødte terninger må ikke skilles ad lig -4 p.(point...)+(regel...)
-% Slåes en terning af samme slags, som de fødte i næste slag, 
-% fordobles deres værdi. (point...)+(regel...)
-
-%  Slår man 3 par, og er parrene ikke dannet af fødte 
-% (fødte må ALDRIG skilles ad = -4 p) 
-% og er den sidste terning ikke 1 eller 5, så tæller de som 15 p. (point...)+(regel...)
-
-%  Slår man cameron(1,2,3,4,5,6) i første slag 
-% og 7.terning ikke er 1 eller 5, tæller den 20 points. (point...)+(regel...)
-
-%  Hvis alle terninger i et slag tæller, 
-% skal slaget slås om, og man tæller sammen på ny. (regel...)
-% Sker det for tredie gang i en omgang, får man -4 p. (point...)+(regel...)
-
-%  -4 p, gælder også, hvis man ikke når over 3½ p i sin omgang. (point...)+(regel...)
-
-%  Man må altid bede om mindre end der reelt er, uden at blive straffet. (regel droppes i første omgang)
-% Bederman om for mange points, får man -4 p
-
-% SPILLEREGLER SLUT
 
 function diceRoll(sb,ax)
-numDice = 7; %antal terninger
-    
+
+numDice = 7 % total antal terninger
+numStashDice = 0 % antal terninger der giver point
+
+numActiveDice = numDice-numStashDice; %antal terninger i spil
+
+rollArray = zeros(1,numActiveDice);    
 
 height = 10; %højden af terningen
 width = 10; %Bredden af terningen
@@ -66,7 +36,8 @@ startPosx= 5; %x positionen af første terning
 
 numRolls = 10; %antal slag
 
-rollArray = zeros(1,numDice);
+
+
 
 posx = startPosx; % posx bruges i hele dokumentet til at se positionen af terningen
 posy = 0-height/2; %sætter midten af terningen til at være i 0 y
@@ -74,7 +45,7 @@ posy = 0-height/2; %sætter midten af terningen til at være i 0 y
 diceSpacing = 1.1; %afstand scalar mellem terninger. 
 
 %laver akser på koordinat systemet
-axisx = numDice * (diceSpacing*width)+2*posx; %x aksen skal være lang nok til alle terningerne
+axisx = numActiveDice * (diceSpacing*width)+2*posx; %x aksen skal være lang nok til alle terningerne
 axisy = axisx/2;
 
 ax.XLim = [0 axisx];
@@ -83,7 +54,7 @@ ax.YLim = [-axisy axisy];
 %Tegner terningerne 
 for t=1:numRolls
 
-for h = 1:numDice
+for h = 1:numActiveDice
     rectangle(ax,Position=[posx posy height width],Curvature=0.3);
 
     %ruller terningerne

@@ -1,7 +1,5 @@
-function diceThrow
+function selectDice;
 clc
-
-
 
 %ved ikke hvad jeg laver haha, forsøg på at bruge uifigure 
 fig = uifigure;
@@ -13,21 +11,40 @@ ax = uiaxes(fig);
 %sb.Text = "Roll Dice";
 
 % @Maks tester ny knap
-sb = uibutton(fig,'push','ButtonPushedFcn',@(sb,event) diceRoll(sb,ax)););
+sb = uibutton(fig,'push','ButtonPushedFcn',@(sb,event) diceRoll(sb,ax));
+%sb.Value = 0;
+sb.Text = "Roll Dice";
+
 end
 
-function diceRoll
-numDice = 7; %antal terninger
-    
+
+
+
+
+
+
+
+
+
+
+function diceRoll(sb,ax)
+
+numDice = 7 % total antal terninger
+numStashDice = 0 % antal terninger der giver point
+
+numActiveDice = numDice-numStashDice; %antal terninger i spil
+
+rollArray = zeros(1,numActiveDice);    
 
 height = 10; %højden af terningen
 width = 10; %Bredden af terningen
 
 startPosx= 5; %x positionen af første terning
 
-numRolls = 40; %antal slag
+numRolls = 10; %antal slag
 
-rollArray = zeros(1,numDice);
+
+
 
 posx = startPosx; % posx bruges i hele dokumentet til at se positionen af terningen
 posy = 0-height/2; %sætter midten af terningen til at være i 0 y
@@ -35,7 +52,7 @@ posy = 0-height/2; %sætter midten af terningen til at være i 0 y
 diceSpacing = 1.1; %afstand scalar mellem terninger. 
 
 %laver akser på koordinat systemet
-axisx = numDice * (diceSpacing*width)+2*posx; %x aksen skal være lang nok til alle terningerne
+axisx = numActiveDice * (diceSpacing*width)+2*posx; %x aksen skal være lang nok til alle terningerne
 axisy = axisx/2;
 
 ax.XLim = [0 axisx];
@@ -44,7 +61,7 @@ ax.YLim = [-axisy axisy];
 %Tegner terningerne 
 for t=1:numRolls
 
-for h = 1:numDice
+for h = 1:numActiveDice
     rectangle(ax,Position=[posx posy height width],Curvature=0.3);
 
     %ruller terningerne
