@@ -152,6 +152,8 @@ if diceCount(1) == 1 && diceCount(1) ~= 0 && diceCount(2) <= 2 && diceCount(2) ~
     legalArray(2,1:numDice) = 30;
     legalArray(3,1:numDice) = 1;
     legalArray(4,1:numDice) = 20;
+    rollArray(1:numDice) = 0;
+        tjekOmslag = 1;
     disp("!!! CAMERON i første !!!")
 end
 
@@ -174,11 +176,12 @@ end
 % tjek for tre par hvis der ikke er en ener eller femmer
 if par == 3 && diceCount(1) == 0 && diceCount(5) == 0;
     tjekTrePar = 1;
-    disp(tjekTrePar)
     legalArray(1,1:numDice) = rollArray(1,1:numDice);
     legalArray(2,1:numDice) = 40;
     legalArray(3,1:numDice) = 1;
     legalArray(4,1:numDice) = 15;
+    rollArray(1:numDice) = 0;
+    tjekOmslag = 1;
     disp("!!! Tre par i første !!!")
 end
 disp("antal par i første")
@@ -215,7 +218,8 @@ disp(tjekFemmere)
 
 % tjek for omslag
 for l = [2,3,4,6]
-    if diceCount(l) > 0 ; tjekOmslag = tjekOmslag + diceCount(l);
+    if diceCount(l) > 0 ;
+        tjekOmslag = tjekOmslag + diceCount(l);
     end
 end
 
