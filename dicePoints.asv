@@ -126,13 +126,10 @@ disp("antal femmere")
 disp(tjekFemmere)
 
 % tjek for omslag
-if diceCount(2) > 0 ; tjekOmslag = tjekOmslag + diceCount(2);
-end
-if diceCount(3) > 0 ; tjekOmslag = tjekOmslag + diceCount(3);
-end
-if diceCount(4) > 0 ; tjekOmslag = tjekOmslag + diceCount(4);
-end
-if diceCount(6) > 0 ; tjekOmslag = tjekOmslag + diceCount(6);
+if diceCount(2) > 0 ; tjekOmslag = tjekOmslag + 1;
+elseif bourneCount(3) > 0 ; tjekOmslag = tjekOmslag + 1;
+elseif bourneCount(4) > 0 ; tjekOmslag = tjekOmslag + 1;
+elseif bourneCount(6) > 0 ; tjekOmslag = tjekOmslag + 1;
 end
 
 if tjekOmslag == 0;
