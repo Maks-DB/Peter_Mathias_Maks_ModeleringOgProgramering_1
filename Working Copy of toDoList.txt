@@ -1,0 +1,10 @@
+Chamoux
+
+
+
+En tur
+
+Array antal terninger i spil
+
+Array det aktuelle slag
+
