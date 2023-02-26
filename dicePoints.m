@@ -33,7 +33,7 @@ diceCount = zeros(1,6);
 bornCount = zeros(1,6);
 
 % variabel med fødte fra sidste slag (0 = ingen fødte, 1 = fødte enere, 2= fødte toere osv)
-bornPreviousThrow = 0;
+bornPreviousThrow = 2;
 
 % antal enere der kan vælges
 tjekEnere = 0;
@@ -183,7 +183,7 @@ disp("tjek for fødte - done")
 
 
 % tjek for Cameron i første slag
-if diceCount(1) == 1 && diceCount(1) ~= 0 && diceCount(2) <= 2 && diceCount(2) ~= 0 && diceCount(3) <= 2 && diceCount(3) ~= 0 && diceCount(4) <= 2 && diceCount(4) ~= 0 && diceCount(5) == 1 && diceCount(6) <= 2 && diceCount(6) ~= 0 
+if diceCount(1) == 1 && diceCount(1) ~= 0 && diceCount(2) <= 2 && diceCount(2) ~= 0 && diceCount(3) <= 2 && diceCount(3) ~= 0 && diceCount(4) <= 2 && diceCount(4) ~= 0 && diceCount(5) == 1 && diceCount(6) <= 2 && diceCount(6) ~= 0
     legalArray(1,1:numDice) = rollArray(1,1:numDice);
     legalArray(2,1:numDice) = 30;
     legalArray(3,1:numDice) = 1;
@@ -240,6 +240,38 @@ disp("antal par i første")
 disp(par)
 disp("tjek par - done")
 
+
+
+
+
+% Tjek for point til doubling af fødte
+for r = (1:6)
+    if r == bornPreviousThrow
+        disp("de fødte kan fordobles");
+        selectOption = selectOption+1;
+        for s = (1 : numDice)
+            if rollArray(s) == bornPreviousThrow
+                diceWithValue = diceWithValue + 1;
+                legalArray(1,s) = rollArray(s);
+                legalArray(2,s) = 50;
+                legalArray(3,s) = selectOption;
+                if rollArray(s) == 1
+                    legalArray(4,s) = 10;
+                else
+                    legalArray(4,s) = rollArray(s);
+                end
+                rollArray(s) = 0;
+            end
+        end
+        bornPreviousThrow = 0;
+    end
+end
+
+
+
+
+
+
 % tjek antal enere der kan vælges
 %tjekEnere = diceCount(1);
 for m = (1:numDice)
@@ -293,7 +325,7 @@ disp(selectOptionCount)
 
 disp("mulige valg")
 disp("række 1 - n (terningens øjne)")
-disp("række 2 - (0=ulovlig, 1=enkeltterning, n+10|n+20=fødte, 30=Cameron, 40=3 par)")
+disp("række 2 - (0=ulovlig, 1=enkeltterning, n+10|n+20=fødte, 30=Cameron, 40=3 par, 50=fødte fordobles)")
 disp("række 3 - valgets navn (integer)")
 disp("række 4 - valgets point værdi)")
 disp(legalArray)

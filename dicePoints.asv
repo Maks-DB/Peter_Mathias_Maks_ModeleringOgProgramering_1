@@ -2,7 +2,8 @@
 % - numDice
 % - rollArray
 % - bornPreviousThrow
-% TEST - 
+% TEST - ovenstående sættes lige nu manuelt og der er et test terningslag
+
 function dicePoints
 % clc kun for test - skal fjernes når der åbnes med variabel værdier
 clc
@@ -32,7 +33,7 @@ diceCount = zeros(1,6);
 bornCount = zeros(1,6);
 
 % variabel med fødte fra sidste slag (0 = ingen fødte, 1 = fødte enere, 2= fødte toere osv)
-bornPreviousThrow = 0;
+bornPreviousThrow = 2;
 
 % antal enere der kan vælges
 tjekEnere = 0;
@@ -176,7 +177,27 @@ end
 % disp(diceCount)
 disp("tjek for fødte - done")
 
-
+% Tjek for point til doubling af fødte
+for r = (1:6)
+    if r == bornPreviousThrow
+        disp("de fødte kan fordobles");
+        for s = (1 : numDice)
+            if rollArray(s) == bornPreviousThrow
+                diceWithValue = diceWithValue + 1;
+                legalArray(1,s) = rollArray(s);
+                legalArray(2,s) = 50;
+                legalArray(3,s) = selectOption;
+                if rollArray(s) == 1
+                    legalArray(4,s) = 10;
+                else
+                    legalArray(4,s) = rollArray(s);
+                end
+                bornPreviousThrow = 0;
+                rollArray(s) = 0;           
+            end        
+        end        
+    end
+end
 
 
 
@@ -292,7 +313,7 @@ disp(selectOptionCount)
 
 disp("mulige valg")
 disp("række 1 - n (terningens øjne)")
-disp("række 2 - (0=ulovlig, 1=enkeltterning, n+10|n+20=fødte, 30=Cameron, 40=3 par)")
+disp("række 2 - (0=ulovlig, 1=enkeltterning, n+10|n+20=fødte, 30=Cameron, 40=3 par, 50=fødte fordobles)")
 disp("række 3 - valgets navn (integer)")
 disp("række 4 - valgets point værdi)")
 disp(legalArray)
