@@ -2,8 +2,7 @@
 % - numDice
 % - rollArray
 % - bornPreviousThrow
-% TEST - ovenstående sættes lige nu manuelt og der er et test terningslag
-
+% TEST - 
 function dicePoints
 % clc kun for test - skal fjernes når der åbnes med variabel værdier
 clc
