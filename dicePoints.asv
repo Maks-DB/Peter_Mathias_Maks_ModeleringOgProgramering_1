@@ -11,8 +11,8 @@ rollArray = zeros(1,numDice);
 % række 4 - point for valget i række 3
 legalArray = zeros(4,numDice);
 
-% tæller antallet af terninger med værdi
-diceWithValue = 0;
+% tæller der vokser med antal af valgmuligheder
+selectOption = 0;
 
 % array med antal af hver slags "6 0 0 0 0 0" betyder seks ennere
 diceCount = zeros(1,6);
@@ -83,12 +83,12 @@ while j < 6 %tjek for to sæt af fødte med samme værdi
         %fjerner de fødte fra disponiple terninger, og opdatere legalArray
         for j1 = (1:numDice)
             if j1 == 1
-                diceWithValue = diceWithValue+1;
+                selectOption = selectOption+1;
             end
             if rollArray(j1) == j && j1a < 3 ;
                 legalArray(2,j1) = legalArray(2,j1) + j + 10;
                 legalArray(1,j1) = j;
-                legalArray(3,j1) = diceWithValue;
+                legalArray(3,j1) = selectOption;
                 if j==1
                     legalArray(4,j1) = 10;
                 else
@@ -102,12 +102,12 @@ while j < 6 %tjek for to sæt af fødte med samme værdi
         %fjerner de fødte fra disponiple terninger, og opdatere legalArray
         for j2 = (1:numDice)
             if j2 == 1
-                diceWithValue = diceWithValue+1;
+                selectOption = selectOption+1;
             end
             if rollArray(j2) == j && j2a < 3 ;
                 legalArray(2,j2) = legalArray(2,j2) + j + 20;
                 legalArray(1,j2) = j;
-                legalArray(3,j2) = diceWithValue;
+                legalArray(3,j2) = selectOption;
                 if j==1
                     legalArray(4,j2) = 10;
                 else
@@ -125,12 +125,12 @@ while j < 6 %tjek for to sæt af fødte med samme værdi
         %fjerner de fødte fra disponiple terninger, og opdatere legalArray
         for j3 = (1:numDice)
             if j3 == 1
-                diceWithValue = diceWithValue+1;
+                selectOption = selectOption+1;
             end
             if rollArray(j3) == j && j3a < 3;
                 legalArray(2,j3) = legalArray(2,j3) + j + 10;
                 legalArray(1,j3) = j;
-                legalArray(3,j3) = diceWithValue;
+                legalArray(3,j3) = selectOption;
                 if j==1
                     legalArray(4,j3) = 10;
                 else
@@ -214,10 +214,10 @@ disp("tjek par - done")
 tjekEnere = diceCount(1);
 for m = (1:numDice)
     if rollArray(m) == 1;
-        diceWithValue = diceWithValue+1;
+        selectOption = selectOption+1;
         legalArray(1,m) = 1;
         legalArray(2,m) = 1;
-        legalArray(3,m) = diceWithValue;
+        legalArray(3,m) = selectOption;
         legalArray(4,m) = 1;
     end
 end
@@ -228,10 +228,10 @@ disp(tjekEnere)
 tjekFemmere = diceCount(5);
 for p = (1:numDice)
     if rollArray(p) == 5;
-        diceWithValue = diceWithValue+1;
+        selectOption = selectOption+1;
         legalArray(1,p) = 5;
         legalArray(2,p) = 1;
-        legalArray(3,p) = diceWithValue;
+        legalArray(3,p) = selectOption;
         legalArray(4,p) = 1/2;
     end
 end
