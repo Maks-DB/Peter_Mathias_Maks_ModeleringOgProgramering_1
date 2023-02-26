@@ -265,9 +265,6 @@ disp(tjekFemmere)
 
 % skal slaget slås om (er værdien 0 og selectOptionCount=1 er der omslag)
 tjekOmslag = numDice - diceWithValue;
-
-disp("antal af lovlige valg")
-disp(selectOptionCount)
 if tjekOmslag == 0 && selectOptionCount == 1
     disp("!!! Der er omslag !!!")
 end
@@ -277,9 +274,12 @@ if diceWithValue == 0
     disp("Øv Øv øv ugyldigt slag, -4 point")
 end
 
-
 disp("antal terninger der ikke tæller")
 disp(tjekOmslag)
+
+disp("antal af lovlige valg")
+disp(selectOptionCount)
+
 disp("mulige valg")
 disp("række 1 - n (terningens øjne)")
 disp("række 2 - (0=ulovlig, 1=enkeltterning, n+10|n+20=fødte, 30=Cameron, 40=3 par)")
