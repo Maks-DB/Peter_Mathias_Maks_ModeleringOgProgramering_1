@@ -11,7 +11,11 @@ rollArray = zeros(1,numDice);
 % række 4 - point for valget i række 3
 legalArray = zeros(4,numDice);
 
-% tæller antallet af terninger med værdi
+
+% sætter et nummer på de lovlige valg
+selectOption = 0;
+
+%antal at terninger med værdi
 diceWithValue = 0;
 
 % array med antal af hver slags "6 0 0 0 0 0" betyder seks ennere
@@ -20,19 +24,19 @@ diceCount = zeros(1,6);
 % array med fødte(tre af en slags) "0 1 0 0 0 0" betyder fødte toere
 bornCount = zeros(1,6);
 
-% Cameron i første slag
-tjekCameron = 0;
-
-% tre par i første
-tjekTrePar = 0;
-
 % antal enere der kan vælges
 tjekEnere = 0;
 
 % antal femmere der kan vælges
 tjekFemmere = 0;
 
-% skal slaget slås om (er værdien 0 efter tjek, er der omslag)
+% omslag på grund af at alle terninger tæller gælder kun hvis der kun er en
+% mulighed tilbage. f.eks hvis de sidste 3 terninger er 1, 5, 5, så har de
+% alle værdi - men man har 3 lovlige valg, havde slaget været 6, 6, 6,
+% havde der kun været et lovligt slag da de er fødte og turen slås om.
+selectOptionCount = 0;
+
+% skal slaget slås om (er værdien 0 og selectOptionCount=1 er der omslag)
 tjekOmslag = 0;
 
 % Terningslag for test
@@ -76,19 +80,20 @@ j = 0;
 %tjek for to sæt af fødte med samme værdien j
 while j < 6 %tjek for to sæt af fødte med samme værdi
     j = j + 1;
-    if diceCount(j) >= 6;
+    if diceCount(j) >= 6
         bornCount(j)= bornCount(j)+ 2;
         diceCount(j)= diceCount(j) - 6;
         j1a = 0; %sørger for at løkken stopper efter tre ens
         %fjerner de fødte fra disponiple terninger, og opdatere legalArray
         for j1 = (1:numDice)
             if j1 == 1
-                diceWithValue = diceWithValue+1;
+                selectOption = selectOption+1;
+                selectOptionCount = selectOptionCount + 1;
             end
-            if rollArray(j1) == j && j1a < 3 ;
+            if rollArray(j1) == j && j1a < 3
                 legalArray(2,j1) = legalArray(2,j1) + j + 10;
                 legalArray(1,j1) = j;
-                legalArray(3,j1) = diceWithValue;
+                legalArray(3,j1) = selectOption;
                 if j==1
                     legalArray(4,j1) = 10;
                 else
@@ -102,12 +107,13 @@ while j < 6 %tjek for to sæt af fødte med samme værdi
         %fjerner de fødte fra disponiple terninger, og opdatere legalArray
         for j2 = (1:numDice)
             if j2 == 1
-                diceWithValue = diceWithValue+1;
+                selectOption = selectOption+1;
+                selectOptionCount = selectOptionCount + 1;
             end
-            if rollArray(j2) == j && j2a < 3 ;
+            if rollArray(j2) == j && j2a < 3
                 legalArray(2,j2) = legalArray(2,j2) + j + 20;
                 legalArray(1,j2) = j;
-                legalArray(3,j2) = diceWithValue;
+                legalArray(3,j2) = selectOption;
                 if j==1
                     legalArray(4,j2) = 10;
                 else
@@ -117,20 +123,21 @@ while j < 6 %tjek for to sæt af fødte med samme værdi
                 j2a = j2a + 1;
             end
         end
-    %tjek for fødte med j øjne
-    elseif diceCount(j) >= 3;
+        %tjek for fødte med j øjne
+    elseif diceCount(j) >= 3
         bornCount(j)= bornCount(j)+ 1;
         diceCount(j)= diceCount(j) - 3;
         j3a = 0; %sørger for at løkken stopper efter tre ens
         %fjerner de fødte fra disponiple terninger, og opdatere legalArray
         for j3 = (1:numDice)
             if j3 == 1
-                diceWithValue = diceWithValue+1;
+                selectOption = selectOption+1;
+                selectOptionCount = selectOptionCount + 1;
             end
-            if rollArray(j3) == j && j3a < 3;
+            if rollArray(j3) == j && j3a < 3
                 legalArray(2,j3) = legalArray(2,j3) + j + 10;
                 legalArray(1,j3) = j;
-                legalArray(3,j3) = diceWithValue;
+                legalArray(3,j3) = selectOption;
                 if j==1
                     legalArray(4,j3) = 10;
                 else
@@ -143,18 +150,23 @@ while j < 6 %tjek for to sæt af fødte med samme værdi
     end
 end
 
-% skriver hvis der er fødte - retter antal terninger der gælder
+% skriver hvis der er fødte - kontrol
 for m = (1:6)
-    if bornCount(m) == 1 || bornCount(m) == 2; disp("der er fødte");
+    if bornCount(m) == 1
+        disp("der er fødte");
+        diceWithValue = diceWithValue + 3;
+    elseif bornCount(m) == 2
+        disp("der er fødte");
+        diceWithValue = diceWithValue + 6;
     end
 end
 
-disp("antal fødte")
-disp(bornCount)
-disp("tilgængelige terninger")
-disp(rollArray)
-disp("antal disponiple")
-disp(diceCount)
+% disp("antal fødte")
+% disp(bornCount)
+% disp("tilgængelige terninger")
+% disp(rollArray)
+% disp("antal disponiple")
+% disp(diceCount)
 disp("tjek for fødte - done")
 
 
@@ -164,18 +176,18 @@ disp("tjek for fødte - done")
 
 % tjek for Cameron i første slag
 if diceCount(1) == 1 && diceCount(1) ~= 0 && diceCount(2) <= 2 && diceCount(2) ~= 0 && diceCount(3) <= 2 && diceCount(3) ~= 0 && diceCount(4) <= 2 && diceCount(4) ~= 0 && diceCount(5) == 1 && diceCount(6) <= 2 && diceCount(6) ~= 0 ;
-    tjekCameron = 1;
     legalArray(1,1:numDice) = rollArray(1,1:numDice);
     legalArray(2,1:numDice) = 30;
     legalArray(3,1:numDice) = 1;
     legalArray(4,1:numDice) = 20;
     rollArray(1:numDice) = 0;
-        tjekOmslag = 1;
+    diceWithValue = diceWithValue + 6;
+    selectOptionCount =  1;
     disp("!!! CAMERON i første !!!")
 end
 
 disp("antal Cameron i første")
-disp(tjekCameron)
+
 disp("tjek Cameron - done")
 
 
@@ -187,67 +199,88 @@ disp("tjek Cameron - done")
 k = 0;
 par = 0;
 
-while k < 6;
+% tjek for par,
+while k < 6
     k = k + 1;
-    if diceCount(k) == 2;
+    if diceCount(k) == 2
         par = par + 1;
-        diceCount(k)= diceCount(k) - 2;
     end
 end
 
-% tjek for tre par hvis der ikke er en ener eller femmer
-if par == 3 && diceCount(1) == 0 && diceCount(5) == 0;
-    tjekTrePar = 1;
-    legalArray(1,1:numDice) = rollArray(1,1:numDice);
-    legalArray(2,1:numDice) = 40;
-    legalArray(3,1:numDice) = 1;
-    legalArray(4,1:numDice) = 15;
-    rollArray(1:numDice) = 0;
-    tjekOmslag = 1;
-    disp("!!! Tre par i første !!!")
+if par == 3
+    % fjerner par fra diceCount ved 3 par
+    q = 0;
+    while q < 6
+        q = q + 1;
+        if diceCount(q) == 2
+            diceCount(q)= diceCount(q) - 2;
+        end
+    end
+    % tjek for tre par hvis der ikke er en ener eller femmer
+    if diceCount(1) == 0 && diceCount(5) == 0
+        legalArray(1,1:numDice) = rollArray(1,1:numDice);
+        legalArray(2,1:numDice) = 40;
+        legalArray(3,1:numDice) = 1;
+        legalArray(4,1:numDice) = 15;
+        rollArray(1:numDice) = 0;
+        diceWithValue = diceWithValue + 6;
+        selectOptionCount =  1;
+        disp("!!! Tre par i første !!!")
+    end
 end
 disp("antal par i første")
 disp(par)
 disp("tjek par - done")
 
 % tjek antal enere der kan vælges
-tjekEnere = diceCount(1);
+%tjekEnere = diceCount(1);
 for m = (1:numDice)
-    if rollArray(m) == 1;
-        diceWithValue = diceWithValue+1;
+    if rollArray(m) == 1
+        selectOption = selectOption+1;
         legalArray(1,m) = 1;
         legalArray(2,m) = 1;
-        legalArray(3,m) = diceWithValue;
+        legalArray(3,m) = selectOption;
         legalArray(4,m) = 1;
+        diceWithValue = diceWithValue + 1;
+        selectOptionCount =  selectOptionCount + 1;
+        tjekEnere = tjekEnere + 1;
     end
 end
 disp("antal enere")
 disp(tjekEnere)
 
 % tjek antal femmere der kan vælges
-tjekFemmere = diceCount(5);
+%tjekFemmere = diceCount(5);
 for p = (1:numDice)
-    if rollArray(p) == 5;
-        diceWithValue = diceWithValue+1;
+    if rollArray(p) == 5
+        selectOption = selectOption+1;
         legalArray(1,p) = 5;
         legalArray(2,p) = 1;
-        legalArray(3,p) = diceWithValue;
+        legalArray(3,p) = selectOption;
         legalArray(4,p) = 1/2;
+        selectOptionCount = selectOptionCount + 1;
+        diceWithValue = diceWithValue + 1;
+        tjekFemmere = tjekFemmere + 1;
     end
 end
 disp("antal femmere")
 disp(tjekFemmere)
 
 % tjek for omslag
-for l = [2,3,4,6]
-    if diceCount(l) > 0 ;
-        tjekOmslag = tjekOmslag + diceCount(l);
-    end
-end
+tjekOmslag = numDice - diceWithValue;
 
-if tjekOmslag == 0;
+disp("antal af lovlige valg")
+disp(selectOptionCount)
+if tjekOmslag == 0 && selectOptionCount == 1
     disp("!!! Der er omslag !!!")
 end
+
+% tjek for ugyldigt slag (-4 point)
+if diceWithValue == 0
+    disp("Øv Øv øv ugyldigt slag, -4 point")
+end
+
+
 disp("antal terninger der ikke tæller")
 disp(tjekOmslag)
 disp("mulige valg")
