@@ -36,9 +36,6 @@ tjekFemmere = 0;
 % havde der kun været et lovligt slag da de er fødte og turen slås om.
 selectOptionCount = 0;
 
-% skal slaget slås om (er værdien 0 og selectOptionCount=1 er der omslag)
-tjekOmslag = 0;
-
 % Terningslag for test
 for h = 1:numDice
     %ruller terningerne
@@ -175,7 +172,7 @@ disp("tjek for fødte - done")
 
 
 % tjek for Cameron i første slag
-if diceCount(1) == 1 && diceCount(1) ~= 0 && diceCount(2) <= 2 && diceCount(2) ~= 0 && diceCount(3) <= 2 && diceCount(3) ~= 0 && diceCount(4) <= 2 && diceCount(4) ~= 0 && diceCount(5) == 1 && diceCount(6) <= 2 && diceCount(6) ~= 0 ;
+if diceCount(1) == 1 && diceCount(1) ~= 0 && diceCount(2) <= 2 && diceCount(2) ~= 0 && diceCount(3) <= 2 && diceCount(3) ~= 0 && diceCount(4) <= 2 && diceCount(4) ~= 0 && diceCount(5) == 1 && diceCount(6) <= 2 && diceCount(6) ~= 0 
     legalArray(1,1:numDice) = rollArray(1,1:numDice);
     legalArray(2,1:numDice) = 30;
     legalArray(3,1:numDice) = 1;
@@ -266,7 +263,7 @@ end
 disp("antal femmere")
 disp(tjekFemmere)
 
-% tjek for omslag
+% skal slaget slås om (er værdien 0 og selectOptionCount=1 er der omslag)
 tjekOmslag = numDice - diceWithValue;
 
 disp("antal af lovlige valg")
