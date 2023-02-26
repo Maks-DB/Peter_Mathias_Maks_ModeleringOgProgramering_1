@@ -1,0 +1,29 @@
+To do liste
+
+Funktion  "diceThrow"
+	Visuelt slag, synlige terninger
+
+	status - synlige terninger virker med n antal terninger
+
+	mangler - at kunne vise valgmuligheder fra "selectDice"
+	mangler - at kunne vise "diceStash"
+	mangler - at kunne vise "playerName"
+	mangler - at kunne vise "pointStatus"
+
+
+Funktion "selectDice"
+	Aflæsning af slag, med n terninger
+
+	status - funktionen virker med n antal terninger
+	status - aflæsning af fødte og beregning af deres point værdi - Virker
+	status - aflæsning af cameron og beregning af point værdi - Virker
+	status - aflæsning af "tre par "og beregning af deres point værdi - Virker
+	status - aflæsning, fordobling af fødtes værdi og beregning af deres point værdi - Virker
+	status - aflæsning, enere og beregning point værdi - Virker
+	status - aflæsning, femmere og beregning point værdi - Virker
+	status - registrering af fejlslag, -4 point - Virker
+	status - registrering af "omslag" - Virker, men uden tæller for antal omslag.
+
+	mangler - at modtage værdier fra "diceThrow"
+	mangler - at modtage valg fra spiller.
+	mangler - at overføre point til "pointStatus"

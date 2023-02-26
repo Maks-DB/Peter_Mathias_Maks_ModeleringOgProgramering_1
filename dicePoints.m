@@ -75,7 +75,7 @@ while i < numDice
 end
 disp("antal af hver")
 disp(diceCount)
-disp("tjek for antal af hver - done")
+%disp("tjek for antal af hver - done")
 
 
 
@@ -193,8 +193,6 @@ if diceCount(1) == 1 && diceCount(1) ~= 0 && diceCount(2) <= 2 && diceCount(2) ~
     selectOptionCount =  1;
     disp("!!! CAMERON i første !!!")
 end
-
-disp("antal Cameron i første")
 
 disp("tjek Cameron - done")
 
