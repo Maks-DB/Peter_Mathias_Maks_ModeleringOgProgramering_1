@@ -1,5 +1,8 @@
 To do liste
 
+Funktion "playChamoux"
+	skal holde styr på spillere, næste tur, samlede antal point osv.
+
 Funktion  "diceThrow"
 	Visuelt slag, synlige terninger
 
