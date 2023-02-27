@@ -55,11 +55,8 @@
 
 % SPILLEREGLER SLUT
 
-function diceThrow (startButton,ax)
-
-disp(startButton);
-disp(ax);
-numDice = 7; %antal terninger    
+function diceThrow (startButton,ax,numDice,rollArray)
+%numDice = 7; %antal terninger    
 
 height = 10; %højden af terningen
 width = 10; %Bredden af terningen
@@ -68,7 +65,7 @@ startPosx= 5; %x positionen af første terning
 
 numRolls = 10; %antal slag
 
-rollArray = zeros(1,numDice);
+%rollArray = zeros(1,numDice);
 
 posx = startPosx; % posx bruges i hele dokumentet til at se positionen af terningen
 posy = 0-height/2; %sætter midten af terningen til at være i 0 y
