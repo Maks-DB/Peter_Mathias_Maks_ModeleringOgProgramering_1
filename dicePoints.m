@@ -4,12 +4,12 @@
 % - bornPreviousThrow
 % TEST - ovenstående sættes lige nu manuelt og der er et test terningslag
 
-function dicePoints
+function dicePoints(numDice, rollArray)
 % clc kun for test - skal fjernes når der åbnes med variabel værdier
-clc
+%clc
 
-numDice = 7; %antal terninger
-rollArray = zeros(1,numDice);
+       numDice = 7; %antal terninger
+        rollArray = zeros(1,numDice);
 
 % array med lovlige valg,
 % række 1 antal øjne,
@@ -17,8 +17,13 @@ rollArray = zeros(1,numDice);
 % række 3 valg option. nummerisk fortløbende
 % "1 2 0 2 0 2" vælg 1 for pos1(enkeltterning), vælg 2 for pos 2,4,6(fødte)
 % række 4 - point for valget i række 3
+
+
+    %numDice = diceThrow(numDice);
+
 legalArray = zeros(4,numDice);
 
+    %rollArray = zeros(1,numDice);
 
 % sætter et nummer på de lovlige valg
 selectOption = 0;
@@ -50,12 +55,12 @@ selectOptionCount = 0;
 % Terningslag for test
 for h = 1:numDice
     %ruller terningerne
-    n = randi(6);
-    rollArray(h)=n;
-end
+     n = randi(6);
+     rollArray(h)=n;
+ end
 
 disp("Wauuu sikke et slag")
-disp(rollArray)
+disp(diceThrow(rollArray))
 
 
 

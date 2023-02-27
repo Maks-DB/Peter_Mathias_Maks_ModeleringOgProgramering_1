@@ -1,20 +1,20 @@
-function diceThrow
-clc
-
-%ved ikke hvad jeg laver haha, forsøg på at bruge uifigure 
-fig = uifigure;
-ax = uiaxes(fig);
-
-% @Peter knap - udkommenteret da @Maks tester ny knap
-%sb = uibutton(fig,'state','ValueChangedFcn','uiresume()');
-%sb.Value = 0;
-%sb.Text = "Roll Dice";
-
-% @Maks tester ny knap
-startButton = uibutton(fig,'push','ButtonPushedFcn',@(startButton,event) diceRoll(startButton,ax));
-%sb.Value = 0;
-startButton.Text = "Roll Dice";
-end
+% function diceThrow
+% clc
+% 
+% %ved ikke hvad jeg laver haha, forsøg på at bruge uifigure 
+% fig = uifigure;
+% ax = uiaxes(fig);
+% 
+% % @Peter knap - udkommenteret da @Maks tester ny knap
+% %sb = uibutton(fig,'state','ValueChangedFcn','uiresume()');
+% %sb.Value = 0;
+% %sb.Text = "Roll Dice";
+% 
+% % @Maks tester ny knap
+% startButton = uibutton(fig,'push','ButtonPushedFcn',@(startButton,event) diceRoll(startButton,ax));
+% %sb.Value = 0;
+% startButton.Text = "Roll Dice";
+% end
 
 %  Chamoux eller 43½ med 7 terninger
 % SPILLEREGLER: (Navneforslag til specifik funktion/variabel)
@@ -55,9 +55,11 @@ end
 
 % SPILLEREGLER SLUT
 
-function diceRoll(startButton,ax)
-numDice = 7; %antal terninger
-    
+function diceThrow (startButton,ax)
+
+disp(startButton);
+disp(ax);
+numDice = 7; %antal terninger    
 
 height = 10; %højden af terningen
 width = 10; %Bredden af terningen
@@ -257,6 +259,6 @@ disp("done")
         
 
     end 
-    
+%run("dicePoints(numDice, rollArray)")
 end
     
