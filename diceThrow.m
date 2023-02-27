@@ -256,7 +256,7 @@ disp("done")
         
 
     end 
-dicePoints(numDice,rollArray,legalArray)
+dicePoints(ax,numDice,rollArray,legalArray)
 %run("dicePoints(numDice, rollArray)")
 end
 

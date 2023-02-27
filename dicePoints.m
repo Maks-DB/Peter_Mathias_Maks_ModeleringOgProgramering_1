@@ -4,7 +4,7 @@
 % - bornPreviousThrow
 % TEST - ovenstående sættes lige nu manuelt og der er et test terningslag
 
-function dicePoints(numDice,rollArray,legalArray)
+function dicePoints(ax,numDice,rollArray,legalArray)
 % clc kun for test - skal fjernes når der åbnes med variabel værdier
 %clc
 
@@ -53,11 +53,11 @@ tjekFemmere = 0;
 selectOptionCount = 0;
 
 % Terningslag for test
-for h = 1:numDice
-    %ruller terningerne
-     n = randi(6);
-     rollArray(h)=n;
- end
+% for h = 1:numDice
+%     %ruller terningerne
+%      n = randi(6);
+%      rollArray(h)=n;
+%  end
 
 disp("Wauuu sikke et slag")
 
