@@ -322,7 +322,7 @@ disp("antal terninger der ikke tæller")
 disp(tjekOmslag)
 
 disp("antal af lovlige valg")
-disp(selectOptionCount)
+disp(selectOption)
 
 disp("mulige valg")
 disp("række 1 - n (terningens øjne)")

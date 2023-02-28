@@ -12,7 +12,7 @@ ax = uiaxes(fig);
 %sb.Text = "Roll Dice";
 
 %variabler der sendes til diceThrow
-numDice = 3; %antal terninger   
+numDice = 7; %antal terninger   
 rollArray = zeros(1,numDice);
 legalArray = zeros(4,numDice);
 
