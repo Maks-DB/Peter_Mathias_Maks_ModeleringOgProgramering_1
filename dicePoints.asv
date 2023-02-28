@@ -4,7 +4,7 @@
 % - bornPreviousThrow
 % TEST - ovenstående sættes lige nu manuelt og der er et test terningslag
 
-function dicePoints(ax,numDice,rollArray,playerOptionArray)
+function dicePoints(ax,numDice,rollArray,legalArray)
 % clc kun for test - skal fjernes når der åbnes med variabel værdier
 %clc
 
@@ -108,13 +108,13 @@ while j < 6 %tjek for to sæt af fødte med samme værdi
                 selectOptionCount = selectOptionCount + 1;
             end
             if rollArray(j1) == j && j1a < 3
-                playerOptionArray(2,j1) = playerOptionArray(2,j1) + j + 10;
-                playerOptionArray(1,j1) = j;
-                playerOptionArray(3,j1) = selectOption;
+                legalArray(2,j1) = legalArray(2,j1) + j + 10;
+                legalArray(1,j1) = j;
+                legalArray(3,j1) = selectOption;
                 if j==1
-                    playerOptionArray(4,j1) = 10;
+                    legalArray(4,j1) = 10;
                 else
-                    playerOptionArray(4,j1) = j;
+                    legalArray(4,j1) = j;
                 end
                 rollArray(j1) = rollArray(j1) - j;
                 j1a = j1a + 1;
@@ -128,13 +128,13 @@ while j < 6 %tjek for to sæt af fødte med samme værdi
                 selectOptionCount = selectOptionCount + 1;
             end
             if rollArray(j2) == j && j2a < 3
-                playerOptionArray(2,j2) = playerOptionArray(2,j2) + j + 20;
-                playerOptionArray(1,j2) = j;
-                playerOptionArray(3,j2) = selectOption;
+                legalArray(2,j2) = legalArray(2,j2) + j + 20;
+                legalArray(1,j2) = j;
+                legalArray(3,j2) = selectOption;
                 if j==1
-                    playerOptionArray(4,j2) = 10;
+                    legalArray(4,j2) = 10;
                 else
-                    playerOptionArray(4,j2) = j;
+                    legalArray(4,j2) = j;
                 end
                 rollArray(j2) = rollArray(j2) - j;
                 j2a = j2a + 1;
@@ -152,13 +152,13 @@ while j < 6 %tjek for to sæt af fødte med samme værdi
                 selectOptionCount = selectOptionCount + 1;
             end
             if rollArray(j3) == j && j3a < 3
-                playerOptionArray(2,j3) = playerOptionArray(2,j3) + j + 10;
-                playerOptionArray(1,j3) = j;
-                playerOptionArray(3,j3) = selectOption;
+                legalArray(2,j3) = legalArray(2,j3) + j + 10;
+                legalArray(1,j3) = j;
+                legalArray(3,j3) = selectOption;
                 if j==1
-                    playerOptionArray(4,j3) = 10;
+                    legalArray(4,j3) = 10;
                 else
-                    playerOptionArray(4,j3) = j;
+                    legalArray(4,j3) = j;
                 end
                 rollArray(j3) = rollArray(j3) - j;
                 j3a = j3a + 1;
@@ -193,10 +193,10 @@ disp("tjek for fødte - done")
 
 % tjek for Cameron i første slag
 if diceCount(1) == 1 && diceCount(1) ~= 0 && diceCount(2) <= 2 && diceCount(2) ~= 0 && diceCount(3) <= 2 && diceCount(3) ~= 0 && diceCount(4) <= 2 && diceCount(4) ~= 0 && diceCount(5) == 1 && diceCount(6) <= 2 && diceCount(6) ~= 0
-    playerOptionArray(1,1:numDice) = rollArray(1,1:numDice);
-    playerOptionArray(2,1:numDice) = 30;
-    playerOptionArray(3,1:numDice) = 1;
-    playerOptionArray(4,1:numDice) = 20;
+    legalArray(1,1:numDice) = rollArray(1,1:numDice);
+    legalArray(2,1:numDice) = 30;
+    legalArray(3,1:numDice) = 1;
+    legalArray(4,1:numDice) = 20;
     rollArray(1:numDice) = 0;
     diceWithValue = diceWithValue + 6;
     selectOptionCount =  1;
@@ -233,10 +233,10 @@ if par == 3
     end
     % tjek for tre par hvis der ikke er en ener eller femmer
     if diceCount(1) == 0 && diceCount(5) == 0
-        playerOptionArray(1,1:numDice) = rollArray(1,1:numDice);
-        playerOptionArray(2,1:numDice) = 40;
-        playerOptionArray(3,1:numDice) = 1;
-        playerOptionArray(4,1:numDice) = 15;
+        legalArray(1,1:numDice) = rollArray(1,1:numDice);
+        legalArray(2,1:numDice) = 40;
+        legalArray(3,1:numDice) = 1;
+        legalArray(4,1:numDice) = 15;
         rollArray(1:numDice) = 0;
         diceWithValue = diceWithValue + 6;
         selectOptionCount =  1;
@@ -259,13 +259,13 @@ for r = (1:6)
         for s = (1 : numDice)
             if rollArray(s) == bornPreviousThrow
                 diceWithValue = diceWithValue + 1;
-                playerOptionArray(1,s) = rollArray(s);
-                playerOptionArray(2,s) = 50;
-                playerOptionArray(3,s) = selectOption;
+                legalArray(1,s) = rollArray(s);
+                legalArray(2,s) = 50;
+                legalArray(3,s) = selectOption;
                 if rollArray(s) == 1
-                    playerOptionArray(4,s) = 10;
+                    legalArray(4,s) = 10;
                 else
-                    playerOptionArray(4,s) = rollArray(s);
+                    legalArray(4,s) = rollArray(s);
                 end
                 rollArray(s) = 0;
             end
@@ -284,10 +284,10 @@ end
 for m = (1:numDice)
     if rollArray(m) == 1
         selectOption = selectOption+1;
-        playerOptionArray(1,m) = 1;
-        playerOptionArray(2,m) = 1;
-        playerOptionArray(3,m) = selectOption;
-        playerOptionArray(4,m) = 1;
+        legalArray(1,m) = 1;
+        legalArray(2,m) = 1;
+        legalArray(3,m) = selectOption;
+        legalArray(4,m) = 1;
         diceWithValue = diceWithValue + 1;
         selectOptionCount =  selectOptionCount + 1;
         tjekEnere = tjekEnere + 1;
@@ -301,10 +301,10 @@ disp(tjekEnere)
 for p = (1:numDice)
     if rollArray(p) == 5
         selectOption = selectOption+1;
-        playerOptionArray(1,p) = 5;
-        playerOptionArray(2,p) = 1;
-        playerOptionArray(3,p) = selectOption;
-        playerOptionArray(4,p) = 1/2;
+        legalArray(1,p) = 5;
+        legalArray(2,p) = 1;
+        legalArray(3,p) = selectOption;
+        legalArray(4,p) = 1/2;
         selectOptionCount = selectOptionCount + 1;
         diceWithValue = diceWithValue + 1;
         tjekFemmere = tjekFemmere + 1;
@@ -335,4 +335,4 @@ disp("række 1 - n (terningens øjne)")
 disp("række 2 - (0=ulovlig, 1=enkeltterning, n+10|n+20=fødte, 30=Cameron, 40=3 par, 50=fødte fordobles)")
 disp("række 3 - valgets navn (integer)")
 disp("række 4 - valgets point værdi)")
-disp(playerOptionArray)
+disp(legalArray)
