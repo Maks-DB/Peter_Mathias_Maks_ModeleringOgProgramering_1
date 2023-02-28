@@ -1,20 +1,37 @@
 function playChamoux
 clc
 
-%opretter Uifigure
-fig = uifigure;
-ax = uiaxes(fig);
-
-ax(app.UIAxes, 'off'
-
 %variabler der sendes til diceThrow
-numDice = 7; %antal terninger   
+numDice = 5; %antal terninger   
 rollArray = zeros(1,numDice);
+diceSpacing = 1.1;
+
+%varibler der sendes til dicePoints
 legalArray = zeros(4,numDice);
 
-% @Maks tester ny knap
-startButton = uibutton(fig,'push','ButtonPushedFcn',@(startButton,event) diceThrow(startButton,ax,numDice,rollArray,legalArray));
-%sb.Value = 0;
-startButton.Text = "Roll Dice";
-%disp(rollArray);
+
+%opretter Uifigure
+fig = uifigure;
+axes = uiaxes(fig);
+
+axis(axes,'off')
+axis(axes,'equal')
+
+axisx = 7 * (diceSpacing*10)+2*5;
+
+axes.XLim = [0 axisx];
+
+drawnow
+
+% ------
+
+
+
+
+roll = diceThrow(axes,numDice,rollArray,diceSpacing);
+disp(roll)
+
+dicePoints(axes,numDice,roll,legalArray)
+
+
 end

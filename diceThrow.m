@@ -1,4 +1,4 @@
-function diceThrow (startButton,ax,numDice,rollArray,legalArray)
+function roll = diceThrow (axes,numDice,rollArray,diceSpacing)
 
 %numDice = 7; %antal terninger    
 
@@ -14,7 +14,7 @@ numRolls = 10; %antal slag
 posx = startPosx; % posx bruges i hele dokumentet til at se positionen af terningen
 posy = 0-height/2; %sætter midten af terningen til at være i 0 y
 
-diceSpacing = 1.1; %afstand scalar mellem terninger. 
+%diceSpacing = 1.1; %afstand scalar mellem terninger. 
 
 %laver akser på koordinat systemet
 axisx = numDice * (diceSpacing*width)+2*posx; %x aksen skal være lang nok til alle terningerne
@@ -27,7 +27,7 @@ axisy = axisx/2;
 for t=1:numRolls
 
 for h = 1:numDice
-    rectangle(ax,Position=[posx posy height width],Curvature=0.3);
+    rectangle(axes,Position=[posx posy height width],Curvature=0.3);
 
     %ruller terningerne
     n = randi(6);
@@ -49,15 +49,16 @@ pause(0.1)
 
 %undgå at slette til sidst
 if t == numRolls
-    disp(rollArray)
+    %disp(rollArray)
+    roll = rollArray;
     break
 end
 
 posx = startPosx;
-cla(ax)
+cla(axes)
 end
 
-disp("done")
+disp("Færdig med at kaste")
 
 
     %tegner terninge øjne 
@@ -187,7 +188,7 @@ disp("done")
         
         %Tegner øjne
         function drawPip
-            r = rectangle(ax,Position=[cornerx cornery rad rad]);
+            r = rectangle(axes,Position=[cornerx cornery rad rad]);
             r.Curvature=[1 1];
             r.FaceColor='black';
         end
@@ -200,7 +201,6 @@ disp("done")
         
 
     end 
-dicePoints(ax,numDice,rollArray,legalArray)
 %run("dicePoints(numDice, rollArray)")
 end
 
