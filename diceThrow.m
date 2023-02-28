@@ -5,7 +5,7 @@ function roll = diceThrow (axes,numDice,rollArray,diceSpacing)
 height = 10; %højden af terningen
 width = 10; %Bredden af terningen
 
-startPosx= 5; %x positionen af første terning
+startPosx= 0; %x positionen af første terning
 
 numRolls = 10; %antal slag
 

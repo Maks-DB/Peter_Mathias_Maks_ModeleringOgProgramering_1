@@ -1,0 +1,28 @@
+function drawOptionBox(fig, rollOptions)
+
+%disp(rollOptions)
+
+fig1 = fig;
+
+d = {'male', 52, true};
+
+optionBox = uitable(fig,'data',d);
+optionBox.Position = [10 100 500 150];
+optionBox.ColumnEditable = true;
+
+continueButton = uicontrol(fig1,'string', "Vælg Slag");
+continueButton.Callback = 'uiresu;
+
+uiwait(fig)
+
+disp('done')
+
+
+    function uiResumeFunction
+        uiresume(fig)
+    end
+
+
+
+
+%for length(rollOptions)

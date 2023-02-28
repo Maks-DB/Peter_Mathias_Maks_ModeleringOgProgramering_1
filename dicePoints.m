@@ -4,7 +4,7 @@
 % - bornPreviousThrow
 % TEST - ovenstående sættes lige nu manuelt og der er et test terningslag
 
-function dicePoints(ax,numDice,rollArray,playerOptionArray)
+function rollOptions = dicePoints(numDice,rollArray,playerOptionArray)
 % clc kun for test - skal fjernes når der åbnes med variabel værdier
 %clc
 
@@ -336,3 +336,5 @@ disp("række 2 - (0=ulovlig, 1=enkeltterning, n+10|n+20=fødte, 30=Cameron, 40=3
 disp("række 3 - valgets navn (integer)")
 disp("række 4 - valgets point værdi)")
 disp(playerOptionArray)
+
+rollOptions = playerOptionArray;
