@@ -1,31 +1,88 @@
-%function drawOptionBox(fig, rollOptions)
-function drawOptionBox
+function drawOptionBox(fig, rollOptions)
+%------------------
 
-fig = uifigure;
+%------------------
+% Formattere array så den er nemmmere at arbejde med.
+clc
 
-%disp(rollOptions)
+format short
 
-fig1 = fig;
+%tjekker hvor mange terninger
+[~, numCol] = size(rollOptions);
 
-d = {'male', 52, true};
+%laver en ny array
+rollOptionsNoZero = [];
+
+%fjerner alle nul søjler
+for t = 1:numCol
+    if rollOptions(1,t) ~= 0
+        rollOptionsNoZero = cat(2,rollOptions(:,t),rollOptionsNoZero);
+    end
+end
+
+%sætter rolloptions til at være den uden nuller og sletter variablen.
+rollOptions = rollOptionsNoZero ;
+clear rollOptionsNoZero
+
+%Fjerner ens søjler f.eks hvis der er fødte
+rollOptions = transpose(rollOptions);
+rollOptions = unique(rollOptions,"rows");
+rollOptions = transpose(rollOptions);
+
+disp(rollOptions)
+
+[~,numCol] = size(rollOptions);
+
+%-----------------------------
+% bygger data array
+
+dataArray = table('size',[numCol, 3],'VariableTypes',{'string','double','logical'});
+dataArray.Properties.VariableNames = ["Slag","Point","Valg"];
 
 
-optionBox = uitable(fig,'data',d);
+disp(dataArray)
+
+for t = 1:numCol
+    n = rollOptions(2,t);
+
+    %checker type slag for hver søjle
+    if n == 1
+
+        dataArray{t,1} = sprintf("Du har slået en %d'er ",rollOptions(1,t));
+
+        %indsætter antal point
+        dataArray{t,2} = rollOptions(4,t);
+
+    end
+end
+
+disp(dataArray)
+
+%---------------------
+% laver tabelen
+%d = rollOptions;
+
+
+optionBox = uitable(fig);
 optionBox.Position = [10 100 500 150];
-optionBox.ColumnEditable = true;
-optionBox.ColumnName = ["køn","alder","sandt/falsk"];
+optionBox.ColumnEditable = [false false true];
 
-continueButton = uicontrol(fig1,'string', "Vælg Slag");
+optionBox.Data = dataArray;
+
+continueButton = uicontrol(fig,'string', "Vælg Slag");
 %continueButton.Callback = 'uiresume(gcbf)'; - virker også
-%tager fra nettet varargin laver en function med variabel antal input
+%taget fra nettet varargin laver en function med variabel antal input
 %argumenter
 continueButton.Callback = @(varargin) uiresume(fig);
 
+
 uiwait(fig)
 
-eksData = optionBox.Data(3);
+%bruger cell2mat til at lave det til en array
+%eksData = cell2mat(optionBox.Data);
 
-disp(eksData)
+disp("----------------")
+%disp(optionBox.Data)
 
 end
 

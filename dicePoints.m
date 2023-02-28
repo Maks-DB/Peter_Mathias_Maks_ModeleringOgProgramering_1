@@ -68,6 +68,7 @@ disp("Wauuu sikke et slag")
 i = 0;
 while i < numDice
     i = i + 1;
+    
     if rollArray(i) == 1
         diceCount(1)= diceCount(1)+ 1;
     elseif rollArray(i) == 2
