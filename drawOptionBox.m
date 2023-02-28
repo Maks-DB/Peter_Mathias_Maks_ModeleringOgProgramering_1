@@ -60,29 +60,29 @@ disp(dataArray)
 
 %---------------------
 % laver tabelen
-%d = rollOptions;
-
 
 optionBox = uitable(fig);
 optionBox.Position = [10 100 500 150];
 optionBox.ColumnEditable = [false false true];
 
+%sætter data til at være dataArray
 optionBox.Data = dataArray;
 
+%laver en knap til at vælge slaget
 continueButton = uicontrol(fig,'string', "Vælg Slag");
 %continueButton.Callback = 'uiresume(gcbf)'; - virker også
 %taget fra nettet varargin laver en function med variabel antal input
 %argumenter
 continueButton.Callback = @(varargin) uiresume(fig);
 
-
+%venter på knap tryk
 uiwait(fig)
 
 %bruger cell2mat til at lave det til en array
 %eksData = cell2mat(optionBox.Data);
 
 disp("----------------")
-%disp(optionBox.Data)
+disp(optionBox.Data)
 
 end
 
