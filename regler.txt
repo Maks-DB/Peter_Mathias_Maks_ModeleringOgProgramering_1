@@ -1,0 +1,38 @@
+%  Chamoux eller 43½ med 7 terninger
+% SPILLEREGLER: (Navneforslag til specifik funktion/variabel)
+
+% I hvert slag skal mindst en terning, der tæller, tages fra.(point...)+(regel...)
+
+%  Tæller ingen af terningerne i et slag gives -4 p.(point...)+(regel...)
+% 1'ere tæller 1 point (point...)
+% 5'ere tæller ½ point (point...)
+
+%  Er der tre fødte i et slag tæller de: (regel...)
+% 3*2 = 2 p (point...)
+% 3*3 = 3 p (point...)
+% 3*4 = 4 p (point...)
+% 3*5 = 5 p (point...)
+% 3*6 = 6 p (point...)
+% 3*1 = 10p (point...)
+
+%  Fødte terninger må ikke skilles ad lig -4 p.(point...)+(regel...)
+% Slåes en terning af samme slags, som de fødte i næste slag, 
+% fordobles deres værdi. (point...)+(regel...)
+
+%  Slår man 3 par, og er parrene ikke dannet af fødte 
+% (fødte må ALDRIG skilles ad = -4 p) 
+% og er den sidste terning ikke 1 eller 5, så tæller de som 15 p. (point...)+(regel...)
+
+%  Slår man cameron(1,2,3,4,5,6) i første slag 
+% og 7.terning ikke er 1 eller 5, tæller den 20 points. (point...)+(regel...)
+
+%  Hvis alle terninger i et slag tæller, 
+% skal slaget slås om, og man tæller sammen på ny. (regel...)
+% Sker det for tredie gang i en omgang, får man -4 p. (point...)+(regel...)
+
+%  -4 p, gælder også, hvis man ikke når over 3½ p i sin omgang. (point...)+(regel...)
+
+%  Man må altid bede om mindre end der reelt er, uden at blive straffet. (regel droppes i første omgang)
+% Bederman om for mange points, får man -4 p
+
+% SPILLEREGLER SLUT

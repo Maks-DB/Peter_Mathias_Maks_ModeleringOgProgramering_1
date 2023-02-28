@@ -5,8 +5,7 @@ clc
 fig = uifigure;
 ax = uiaxes(fig);
 
-axis(ax,'off')
-axis(ax,'equal')
+ax(app.UIAxes, 'off'
 
 %variabler der sendes til diceThrow
 numDice = 7; %antal terninger   
