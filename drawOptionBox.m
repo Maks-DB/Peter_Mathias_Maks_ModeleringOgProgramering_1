@@ -3,14 +3,14 @@ function selectedDice = drawOptionBox(fig, rollOptions)
 
 % function tager en array rollOptions fra dicePoints samt en figur fig, og
 % laver en uitable så brugeren kan vælge hvilke terninger der skal beholdes
-% og hvilke der blive tilbage, den sender så de valgte slag tilbage i et 
+% og hvilke der blive tilbage, den sender så de valgte slag tilbage i et
 % array selectedDice med formen
 
 %   [Øjne;
 %    Slag Type;
 %    Point;
 %    Antal Terninger]
-    
+
 %Array har samme antal søjler som valgte terninger, fødte er kun 1 søjle.
 
 %------------------
@@ -40,10 +40,33 @@ rollOptions = rollOptionsNoZero ;
 clear rollOptionsNoZero
 
 %Fjerner ens søjler f.eks hvis der er fødte, unique virker kun med rækker
-%og vi transponere derfor matricen før og efter.
-rollOptions = transpose(rollOptions);
-rollOptions = unique(rollOptions,"rows");
-rollOptions = transpose(rollOptions);
+%og vi transponere derfor matricen før og efter. Skal ikke gøres for 3 par
+%da de håndteres anderledes
+
+disp(rollOptions)   
+if rollOptions(2,1) ~= 40
+    rollOptions = transpose(rollOptions);
+    rollOptionsUnique = unique(rollOptions,"rows");
+    rollOptions = transpose(rollOptionsUnique);
+else
+    %Finder de positioner hvor der er der er ikke-unikke søjler
+    [~,duplicatePos,~] = unique(rollOptions(1,:));
+    
+    %laver en ny array
+    rollOptionsOnlyDuplicate = [];
+    
+    %tiljøjer de ikke-unikke søjler til den nye array
+    for i = 1:size(rollOptions,2)
+        if ismember(i,duplicatePos) == 0
+            rollOptionsOnlyDuplicate=cat(2,rollOptionsOnlyDuplicate,rollOptions(:,i));
+        end
+    end
+    
+    % Gemmer til sidst den ny array i rollOptions
+    rollOptions = rollOptionsOnlyDuplicate;
+    clear rollOptionsOnlyDuplicate
+end
+
 
 numCol = size(rollOptions,2);
 
@@ -53,7 +76,6 @@ numCol = size(rollOptions,2);
 %vi laver et table og giver variablerne navne.
 dataArray = table('size',[numCol, 4],'VariableTypes',{'string','double','double','logical'});
 dataArray.Properties.VariableNames = ["Slag","Point","Terninger","Valg"];
-
 
 %Hver mulighed tilføres til dataArray
 for t = 1:numCol
@@ -73,7 +95,7 @@ for t = 1:numCol
             %en terning er en terning :)
             dataArray{t,3} = 1;
 
-        %cameron
+            %cameron
         case 30
             %Indsætter forklarende tekst
             dataArray{t,1} = "Tilykke du har slået Cameron";
@@ -83,7 +105,7 @@ for t = 1:numCol
 
             %cameron er altid 6 terninger
             dataArray{t,3} = 6;
-            
+
             %Undgå at tilføje alle cameron muligheder
             dataArray(2:numCol,:) =[];
 
@@ -91,7 +113,7 @@ for t = 1:numCol
             rollOptions(:,2:numCol) = [];
             break
 
-        %3 par
+            %3 par
         case 40
             %Indsætter forklarende tekst
             dataArray{t,1} = "Tilykke du har slået 3 Par i første slag";
@@ -104,12 +126,9 @@ for t = 1:numCol
 
             %Undgå at tilføje alle par
             dataArray(2:numCol,:) =[];
-            
-            %Fjerner også unødige rækker fra rollOptions
-            rollOptions(:,2:numCol) = [];
             break
 
-        
+
         otherwise
             %Indsætter forklarende tekst
             dataArray{t,1} = sprintf("Du har slået fødte %d'er",rollOptions(1,t));
@@ -156,9 +175,13 @@ disp(optionBox.Data)
 output = table2array(optionBox.Data(:,3:4));
 output = transpose(output);
 
+%tjekker om der er 3 par, hvis der er skal output forlænges
+if rollOptions(2,1) == 40
+    output = [output output output];
+end
+
 output = cat(1,rollOptions,output);
 disp("------------------------")
-
 
 %fjerner alle ikke valgte rækker
 outputOnlySelected = [];
@@ -180,6 +203,7 @@ end
 
 %Fjerner om man har valgt den eller ej da dette altid nu vil være 1
 outputOnlySelected(end,:) = [];
+%Fjener om det er et unkikt slag da vi har fjernet alle der ikke er.
 outputOnlySelected(3,:) = [];
 
 disp("Functionen drawOptionBox har sendt denne array ud: ")
