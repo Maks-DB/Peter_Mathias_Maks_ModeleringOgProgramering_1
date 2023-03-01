@@ -1,4 +1,4 @@
-function drawSelectedDice(fig,selectedDice,diceSpacing)
+function drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
 
 height = 10;
 width = 10;
@@ -6,7 +6,7 @@ width = 10;
 axesSelectedDice = uiaxes(fig);
 axesSelectedDice.Position = [500 200 300 400];
 
-%axis(axesSelectedDice,'off')
+axis(axesSelectedDice,'off')
 axis(axesSelectedDice,'equal')
 
 axisy = 7 * (diceSpacing*10);
@@ -14,7 +14,7 @@ axisy = 7 * (diceSpacing*10);
 axesSelectedDice.YLim = [0 axisy];
 axesSelectedDice.XLim = [0 5*(width*diceSpacing)];
 
-posx = 0;
+posx = rollNum*(width*(1.5*diceSpacing));
 posy = 0;
 
 for t = 1:size(selectedDice,2)
