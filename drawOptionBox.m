@@ -1,10 +1,12 @@
 function drawOptionBox(fig, rollOptions)
 %------------------
 
-%------------------
-% Formattere array så den er nemmmere at arbejde med.
 clc
 
+%------------------
+% Formattere array så den er nemmmere at arbejde med.
+
+%forhåbentlig fjerner den alt for mange nuller?, ikke helt sikker.
 format short
 
 %tjekker hvor mange terninger
@@ -16,6 +18,9 @@ rollOptionsNoZero = [];
 %fjerner alle nul søjler
 for t = 1:numCol
     if rollOptions(1,t) ~= 0
+        % cat er concatenate, så vi tilføjer alle søjler der ikke 
+        % indeholder et 0, den tager 1 eller 2 som arugment alt efter
+        % om den skal på under eller på siden.
         rollOptionsNoZero = cat(2,rollOptions(:,t),rollOptionsNoZero);
     end
 end
@@ -24,7 +29,8 @@ end
 rollOptions = rollOptionsNoZero ;
 clear rollOptionsNoZero
 
-%Fjerner ens søjler f.eks hvis der er fødte
+%Fjerner ens søjler f.eks hvis der er fødte, unique virker kun med rækker
+%og vi transponere derfor matricen før og efter.
 rollOptions = transpose(rollOptions);
 rollOptions = unique(rollOptions,"rows");
 rollOptions = transpose(rollOptions);
@@ -36,22 +42,39 @@ disp(rollOptions)
 %-----------------------------
 % bygger data array
 
-dataArray = table('size',[numCol, 3],'VariableTypes',{'string','double','logical'});
-dataArray.Properties.VariableNames = ["Slag","Point","Valg"];
+%vi laver et table og giver variablerne navne. 
+dataArray = table('size',[numCol, 4],'VariableTypes',{'string','double','double','logical'});
+dataArray.Properties.VariableNames = ["Slag","Point","Terninger","Valg"];
 
 
-disp(dataArray)
-
+%Hver mulighed tilføres til dataArray
 for t = 1:numCol
     n = rollOptions(2,t);
 
     %checker type slag for hver søjle
-    if n == 1
 
+    %enkelt terning 
+    if n == 1
+        %Indsætter forklarende tekst
         dataArray{t,1} = sprintf("Du har slået en %d'er ",rollOptions(1,t));
 
         %indsætter antal point
         dataArray{t,2} = rollOptions(4,t);
+
+        dataArray{t,3} = 1;
+    
+    %cameron
+    elseif n == 30
+        %Indsætter forklarende tekst
+        dataArray{t,1} = "Tilykke du har slået Cameron";
+
+        %indsætter antal point
+        dataArray{t,2} = rollOptions(4,t);
+        
+        %cameron er altid 6 terninger 
+        dataArray{t,3} = 6;
+
+    elseif n == 
 
     end
 end
@@ -63,7 +86,7 @@ disp(dataArray)
 
 optionBox = uitable(fig);
 optionBox.Position = [10 100 500 150];
-optionBox.ColumnEditable = [false false true];
+optionBox.ColumnEditable = [false false false true];
 
 %sætter data til at være dataArray
 optionBox.Data = dataArray;
@@ -75,7 +98,7 @@ continueButton = uicontrol(fig,'string', "Vælg Slag");
 %argumenter
 continueButton.Callback = @(varargin) uiresume(fig);
 
-%venter på knap tryk
+%venter på knappen bliver trykket
 uiwait(fig)
 
 %bruger cell2mat til at lave det til en array
