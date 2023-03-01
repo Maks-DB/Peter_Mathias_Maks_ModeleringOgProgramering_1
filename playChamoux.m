@@ -31,14 +31,13 @@ drawnow
 % ------
 
 
-% Kalder diceThrow og retunere dit rull
+% Kalder diceThrow og retunere dit rul
 roll = diceThrow(axes,numDice,rollArray,diceSpacing);
 disp(roll)
 
 % Giver rullet til dicepoints 
 rollOptions = dicePoints(numDice,roll,legalArray);
 
-drawOptionBox(fig,rollOptions);
-
+selectedDice = drawOptionBox(fig,rollOptions);
 
 end

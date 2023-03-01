@@ -85,7 +85,10 @@ for t = 1:numCol
             dataArray{t,3} = 6;
             
             %Undgå at tilføje alle cameron muligheder
-            dataArray(2:6,:) =[];
+            dataArray(2:numCol,:) =[];
+
+            %Fjerner også unødige rækker fra rollOptions
+            rollOptions(:,2:numCol) = [];
             break
 
         %3 par
@@ -98,6 +101,13 @@ for t = 1:numCol
 
             %3 par er altid 6 terninger
             dataArray{t,3} = 6;
+
+            %Undgå at tilføje alle par
+            dataArray(2:numCol,:) =[];
+            
+            %Fjerner også unødige rækker fra rollOptions
+            rollOptions(:,2:numCol) = [];
+            break
 
         
         otherwise
@@ -140,7 +150,7 @@ uiwait(fig)
 %bruger cell2mat til at lave det til en array
 %eksData = cell2mat(optionBox.Data);
 
-disp("Din Tabel burde vise: ")
+disp("Tabellen efter valg burde have set sådanne ud: ")
 disp(optionBox.Data)
 
 output = table2array(optionBox.Data(:,3:4));
@@ -158,11 +168,20 @@ for t = 1:size(output,2)
     end
 end
 
+disp(outputOnlySelected)
+
+if isempty(outputOnlySelected) == 1
+    disp("Da der ingen slag blev valgt har functionen drawOptionBox sendt denne array ud: ")
+    selectedDice = [0;0;0;0];
+    disp(selectedDice)
+    return
+end
+
 %Fjerner om man har valgt den eller ej da dette altid nu vil være 1
 outputOnlySelected(end,:) = [];
 outputOnlySelected(3,:) = [];
 
-disp("Functionen drawOptionBox Har sendt denne array ud: ")
+disp("Functionen drawOptionBox har sendt denne array ud: ")
 disp(outputOnlySelected)
 
 selectedDice = outputOnlySelected;

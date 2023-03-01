@@ -27,7 +27,7 @@ axisy = axisx/2;
 for t=1:numRolls
 
 for h = 1:numDice
-    rectangle(axes,Position=[posx posy height width],Curvature=0.3);
+    rectangle(axes,Position=[posx posy height width],Curvature=0.3,FaceColor=[1 1 1]);
 
     %ruller terningerne
     n = randi(6);
