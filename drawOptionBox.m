@@ -1,13 +1,17 @@
-%function drawOptionBox(fig, rollOptions)
+function selectedDice = drawOptionBox(fig, rollOptions)
 %------------------
-function drawOptionBox
-fig = uifigure;
 
-rollOptions = [1 2 3 4 5 6 4;
-              30 30 30 30 30 30 30;
-               1 1 1 1 1 1 1;
-               20 20 20 20 20 20 20];
+% function tager en array rollOptions fra dicePoints samt en figur fig, og
+% laver en uitable så brugeren kan vælge hvilke terninger der skal beholdes
+% og hvilke der blive tilbage, den sender så de valgte slag tilbage i et 
+% array selectedDice med formen
 
+%   [Øjne;
+%    Slag Type;
+%    Point;
+%    Antal Terninger]
+    
+%Array har samme antal søgler som valgte terninger, fødte er kun 1 søjle.
 
 %------------------
 % Formattere array så den er nemmmere at arbejde med.
@@ -16,7 +20,7 @@ rollOptions = [1 2 3 4 5 6 4;
 format short
 
 %tjekker hvor mange terninger
-[~, numCol] = size(rollOptions);
+numCol = size(rollOptions,2);
 
 %laver en ny array
 rollOptionsNoZero = [];
@@ -41,9 +45,7 @@ rollOptions = transpose(rollOptions);
 rollOptions = unique(rollOptions,"rows");
 rollOptions = transpose(rollOptions);
 
-disp(rollOptions)
-
-[~,numCol] = size(rollOptions);
+numCol = size(rollOptions,2);
 
 %-----------------------------
 % bygger data array
@@ -112,7 +114,6 @@ for t = 1:numCol
     end
 end
 
-disp(dataArray)
 
 %---------------------
 % laver tabelen
@@ -127,7 +128,7 @@ optionBox.Data = dataArray;
 %laver en knap til at vælge slaget
 continueButton = uicontrol(fig,'string', "Vælg Slag");
 continueButton.Position = [210 260 100 30];
-continueButton.BackgroundColor = 'g';
+continueButton.BackgroundColor = '#90EE90';
 %continueButton.Callback = 'uiresume(gcbf)'; - virker også
 %taget fra nettet varargin laver en function med variabel antal input
 %argumenter
@@ -139,12 +140,29 @@ uiwait(fig)
 %bruger cell2mat til at lave det til en array
 %eksData = cell2mat(optionBox.Data);
 
-disp("----------------")
+disp("Din Tabel burde vise: ")
 disp(optionBox.Data)
 
+output = table2array(optionBox.Data(:,3:4));
+output = transpose(output);
+
+output = cat(1,rollOptions,output);
+disp("------------------------")
+
+
+%fjerner alle ikke valgte rækker
+outputOnlySelected = [];
+for t = 1:size(output,2)
+    if output(6,t) == 1
+        outputOnlySelected = cat(2,output(:,t),outputOnlySelected);
+    end
 end
 
+%Fjerner om man har valgt den eller ej da dette altid nu vil være 1
+outputOnlySelected(end,:) = [];
+outputOnlySelected(3,:) = [];
 
+disp("Functionen drawOptionBox Har sendt denne array ud: ")
+disp(outputOnlySelected)
 
-
-%for length(rollOptions)
+selectedDice = outputOnlySelected;

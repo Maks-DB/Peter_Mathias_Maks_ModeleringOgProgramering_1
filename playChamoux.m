@@ -38,7 +38,7 @@ disp(roll)
 % Giver rullet til dicepoints 
 rollOptions = dicePoints(numDice,roll,legalArray);
 
-drawOptionBox(fig,rollOptions)
+drawOptionBox(fig,rollOptions);
 
 
 end
