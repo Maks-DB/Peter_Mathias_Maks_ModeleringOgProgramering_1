@@ -11,7 +11,7 @@ function selectedDice = drawOptionBox(fig, rollOptions)
 %    Point;
 %    Antal Terninger]
     
-%Array har samme antal søgler som valgte terninger, fødte er kun 1 søjle.
+%Array har samme antal søjler som valgte terninger, fødte er kun 1 søjle.
 
 %------------------
 % Formattere array så den er nemmmere at arbejde med.
@@ -170,6 +170,7 @@ end
 
 disp(outputOnlySelected)
 
+%checker om der er blevet valgt nogen slag
 if isempty(outputOnlySelected) == 1
     disp("Da der ingen slag blev valgt har functionen drawOptionBox sendt denne array ud: ")
     selectedDice = [0;0;0;0];
@@ -184,4 +185,10 @@ outputOnlySelected(3,:) = [];
 disp("Functionen drawOptionBox har sendt denne array ud: ")
 disp(outputOnlySelected)
 
+%sletter knappen og uitable
+delete(continueButton)
+delete(optionBox)
+
+%sætter selectedDice værdien til brug i andre funktioner
 selectedDice = outputOnlySelected;
+return

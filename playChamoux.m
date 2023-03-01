@@ -24,7 +24,7 @@ axis(axes,'equal')
 axisx = 7 * (diceSpacing*10);
 
 axes.XLim = [0 axisx];
-axes.YLim = [-10 10];
+axes.YLim = [-5 5];
 
 drawnow
 
@@ -38,6 +38,11 @@ disp(roll)
 % Giver rullet til dicepoints 
 rollOptions = dicePoints(numDice,roll,legalArray);
 
+%Giver rollOptions til drawOptionsBox
 selectedDice = drawOptionBox(fig,rollOptions);
+
+
+
+drawSelectedDice(fig,selectedDice,diceSpacing)
 
 end

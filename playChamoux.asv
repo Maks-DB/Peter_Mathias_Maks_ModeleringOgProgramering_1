@@ -40,6 +40,6 @@ rollOptions = dicePoints(numDice,roll,legalArray);
 
 selectedDice = drawOptionBox(fig,rollOptions);
 
-disp("play")
+drawSelectedDice
 
 end
