@@ -11,8 +11,8 @@ axis(axesSelectedDice,'equal')
 
 axisy = 7 * (diceSpacing*10);
 
-axesSelectedDice.YLim = [0 axisy];
-axesSelectedDice.XLim = [0 5*(width*diceSpacing)];
+axesSelectedDice.YLim = [-5 axisy];
+axesSelectedDice.XLim = [-5 5*(width*diceSpacing)];
 
 posx = rollNum*(width*(1.5*diceSpacing));
 posy = 0;

@@ -37,6 +37,8 @@ while numDice >= 1
     % Kalder diceThrow og retunere dit rul
     roll = diceThrow(axes,numDice,rollArray,diceSpacing);
 
+    
+
     % Giver rullet til dicepoints
     rollOptions = dicePoints(numDice,roll,legalArray);
 
