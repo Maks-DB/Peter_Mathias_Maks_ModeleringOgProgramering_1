@@ -1,5 +1,10 @@
 function playChamoux
 
+
+%variabler til playChamoux
+usedDice = 0;
+
+
 %variabler der sendes til diceThrow
 numDice = 7; %antal terninger
 rollArray = zeros(1,numDice);
@@ -7,7 +12,6 @@ diceSpacing = 1.1;
 
 %varibler der sendes til dicePoints
 legalArray = zeros(4,numDice);
-
 
 %opretter Uifigure
 fig = uifigure;
@@ -52,16 +56,16 @@ while numDice >= 1
 
     for t = 1:size(selectedDice,2)
         if selectedDice(2,1) <= 16 && selectedDice(2,1) >= 10
-            antalTerninger = 3;
+            usedDice = usedDice + 3;
         else
-            antalTerninger = size(selectedDice,2);
+            usedDice = usedDice + 1;
         end
     end
 
-    numDice = numDice - antalTerninger;
+    numDice = numDice - usedDice;
     rollNum = rollNum + 1;
 
-    disp("Antal Terninger")
+    disp("Antal terninger tilbage")
     disp(numDice)
 
 end
