@@ -32,7 +32,7 @@ drawnow
 %Laver en  varible til antal rull i et slag
 rollNum = 0;
 
-while numDice > 3
+while numDice >= 1
 
     % Kalder diceThrow og retunere dit rul
     roll = diceThrow(axes,numDice,rollArray,diceSpacing);

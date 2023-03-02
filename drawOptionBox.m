@@ -43,7 +43,7 @@ clear rollOptionsNoZero
 %og vi transponere derfor matricen før og efter. Skal ikke gøres for 3 par
 %da de håndteres anderledes
 
-disp(rollOptions)   
+disp(rollOptions)
 if rollOptions(2,1) ~= 40
     rollOptions = transpose(rollOptions);
     rollOptionsUnique = unique(rollOptions,"rows");
@@ -51,17 +51,17 @@ if rollOptions(2,1) ~= 40
 else
     %Finder de positioner hvor der er der er ikke-unikke søjler
     [~,duplicatePos,~] = unique(rollOptions(1,:));
-    
+
     %laver en ny array
     rollOptionsOnlyDuplicate = [];
-    
+
     %tiljøjer de ikke-unikke søjler til den nye array
     for i = 1:size(rollOptions,2)
         if ismember(i,duplicatePos) == 0
             rollOptionsOnlyDuplicate=cat(2,rollOptionsOnlyDuplicate,rollOptions(:,i));
         end
     end
-    
+
     % Gemmer til sidst den ny array i rollOptions
     rollOptions = rollOptionsOnlyDuplicate;
     clear rollOptionsOnlyDuplicate
@@ -128,6 +128,29 @@ for t = 1:numCol
             dataArray(2:numCol,:) =[];
             break
 
+        case 60
+            %Indsætter forklarende tekst
+            dataArray{t,1} = "ØV ingen terninger kan vælges, -4 point";
+
+            %indsætter antal point
+            dataArray{t,2} = rollOptions(4,t);
+
+            %Der fratages ingen terninger
+            dataArray{t,3} = 0;
+
+            break
+
+        case 70
+            %Indsætter forklarende tekst
+            dataArray{t,1} = "Alle terninger tæller - du må slå runden om";
+
+            %indsætter antal point
+            dataArray{t,2} = rollOptions(4,t);
+
+            %Der fratages ingen terninger
+            dataArray{t,3} = 0;
+            
+            break
 
         otherwise
             %Indsætter forklarende tekst

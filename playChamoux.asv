@@ -1,8 +1,7 @@
 function playChamoux
-clc
 
 %variabler der sendes til diceThrow
-numDice = 7; %antal terninger   
+numDice = 3; %antal terninger
 rollArray = zeros(1,numDice);
 diceSpacing = 1.1;
 
@@ -30,20 +29,26 @@ drawnow
 
 % ------
 
+%Laver en  varible til antal rull i et slag
+rollNum = 0;
+
 while numDice > 3
 
-% Kalder diceThrow og retunere dit rul
-roll = diceThrow(axes,numDice,rollArray,diceSpacing);
-disp(roll)
+    % Kalder diceThrow og retunere dit rul
+    roll = diceThrow(axes,numDice,rollArray,diceSpacing);
 
-% Giver rullet til dicepoints 
-rollOptions = dicePoints(numDice,roll,legalArray);
+    % Giver rullet til dicepoints
+    rollOptions = dicePoints(numDice,roll,legalArray);
 
-%Giver rollOptions til drawOptionsBox
-selectedDice = drawOptionBox(fig,rollOptions);
+    %Giver rollOptions til drawOptionsBox
+    selectedDice = drawOptionBox(fig,rollOptions);
+    
+    cla(axes)
 
+    drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
+    
 
-
-drawSelectedDice(fig,selectedDice,diceSpacing)
+    numDice = numDice - size(selectedDice,2);
+    rollNum = rollNum + 1;
 
 end
