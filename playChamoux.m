@@ -37,6 +37,7 @@ while numDice >= 1
     % Kalder diceThrow og retunere dit rul
     roll = diceThrow(axes,numDice,rollArray,diceSpacing);
 
+
     roll = [1 1 1 1 5 5 4];
 
     % Giver rullet til dicepoints
@@ -44,21 +45,22 @@ while numDice >= 1
 
     %Giver rollOptions til drawOptionsBox
     selectedDice = drawOptionBox(fig,rollOptions);
-    
+
     cla(axes)
 
     drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
-    
-    
-    if selectedDice(2,1) <= 16 && selectedDice(2,1) >= 10
-        antalTerninger = 3;
-    else
-        antalTerninger = size(selectedDice,2);
+
+    for t = 1:size(selectedDice,2)
+        if selectedDice(2,1) <= 16 && selectedDice(2,1) >= 10
+            antalTerninger = 3;
+        else
+            antalTerninger = size(selectedDice,2);
+        end
     end
 
     numDice = numDice - antalTerninger;
     rollNum = rollNum + 1;
-    
+
     disp("Antal Terninger")
     disp(numDice)
 
