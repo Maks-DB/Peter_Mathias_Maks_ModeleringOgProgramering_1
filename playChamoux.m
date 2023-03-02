@@ -53,7 +53,7 @@ while numDice >= 1
     cla(axes)
 
     drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
-
+    
     for t = 1:size(selectedDice,2)
         if selectedDice(2,1) <= 16 && selectedDice(2,1) >= 10
             usedDice = usedDice + 3;
