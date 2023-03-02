@@ -14,7 +14,7 @@ activateTurn = 1;
 %variabler der sendes til diceThrow
 numDice = 7; %antal terninger
 rollArray = zeros(1,numDice);
-diceSpacing = 1.1;
+diceSpacing = 1.1; %Afstand mellem terninger
 
 %varibler der sendes til dicePoints
 legalArray = zeros(4,numDice);
@@ -54,15 +54,15 @@ while numDice >= 1 && activateTurn ~=0
     % Kalder diceThrow og retunere dit rul
     roll = diceThrow(axes,numDice,rollArray,diceSpacing);
 
-
-    roll = [1 1 1 1 5 5 4];
+    %roll = [1 1 1 1 5 5 4];
 
     % Giver rullet til dicepoints
     rollOptions = dicePoints(numDice,roll,legalArray);
 
     %Giver rollOptions til drawOptionsBox
     [selectedDice, pointTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum);
-
+    
+    %Fjerner terninger til næste omgang
     cla(axes)
 
     % Bliver tegnet af drawOptionBox - pga. nyt brugsmønster
@@ -76,13 +76,12 @@ while numDice >= 1 && activateTurn ~=0
         end
     end
     
-    clc
-    disp("Brugte Terninger")
-    disp(selectedDice)
-
+    %Fjerner brugte terninger og sætter usedDice tilbage til 0 til næste
+    %loop
     numDice = numDice - usedDice;
     usedDice = 0;
-
+    
+    %Vi køre et extra rull
     rollNum = rollNum + 1;
 
     disp("Antal terninger tilbage")

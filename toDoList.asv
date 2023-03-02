@@ -1,18 +1,13 @@
-To do liste
+To do liste (scrool ned for info om de forskellige funktioner)
 
 Vigtigste opgaver
-
-Vis korekt antal terninger terninger ved næste slag - "fødte" 3stk virker ikke 
-"playChamoux"
-"drawOptionBox"
-Ansvarlig: Peter
 
 Opret knap for færdig tur
 "playChamoux"
 Måske ny funktion til "spiller og point" (hvis computeren skal kunne spille bliver det rart med en ekstra funktion)
 Ansvarlig: Maks
 
-Opret tabel for pointvisning
+Opret tabel for pointvisning, både samlede point for hver spiller og point for den "tur" der er i spil
 "playChamoux"
 Ansvarlig: ?
 
@@ -27,7 +22,7 @@ Ansvarlig: ?
         "dicePoints" - evaluere hvert slag for muligheder og point.
         "drawOptionBox" - tegner en tabel hvor brugerens muligheder listes/vælges.
         "drawSelectedDice" - tegner de udvalgte terninger for hvert slag.
-        "drawDiceFace" - grafisk tegning af en enkelt terning.
+        "drawDiceFace" - grafisk tegning af øjne på en terning
 
 
 >>spilløkker:
