@@ -178,13 +178,27 @@ optionBox.ColumnEditable = [false false false true];
 optionBox.Data = dataArray;
 
 %laver en knap til at vælge slaget
-continueButton = uicontrol(fig,'string', "Vælg Slag");
-continueButton.Position = [210 260 100 30];
+continueButton = uicontrol(fig,'string', "Tag terninger fra, vælg mindst en mulighed herunder");
+continueButton.Position = [20 260 260 30];
 continueButton.BackgroundColor = '#90EE90';
 %continueButton.Callback = 'uiresume(gcbf)'; - virker også
 %taget fra nettet varargin laver en function med variabel antal input
 %argumenter
 continueButton.Callback = @(varargin) uiresume(fig);
+
+%knap til at ende turen og føre point til listen - hvis man har over 3,5
+%point
+turPoint = 4;
+
+if turPoint > 3
+pointButton = uicontrol(fig,'string', "stop din tur og før point til listen");
+pointButton.Position = [300 260 180 30];
+pointButton.BackgroundColor = '#90EE90';
+%continueButton.Callback = 'uiresume(gcbf)'; - virker også
+%taget fra nettet varargin laver en function med variabel antal input
+%argumenter
+%continueButton.Callback = @(varargin) uiresume(fig);
+end
 
 %venter på knappen bliver trykket
 uiwait(fig)
