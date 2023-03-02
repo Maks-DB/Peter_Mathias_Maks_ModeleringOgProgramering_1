@@ -1,0 +1,10 @@
+function playerPoints(numPlayers)
+
+columnNameArray = strings
+for t = 1:numPlayers
+    columnNameArray(end+1) = sprintf("Spiller %d",t);
+end
+
+disp(columnNameArray)
+
+end

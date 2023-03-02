@@ -1,4 +1,4 @@
-function [selectedDice, pointTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum)
+function selectedDice = drawOptionBox(fig, rollOptions, diceSpacing, rollNum)
 %------------------
 
 % function tager en array rollOptions fra dicePoints samt en figur fig, og

@@ -3,6 +3,7 @@ function playChamoux
 
 %variabler til playChamoux
 usedDice = 0;
+pointsTurn = 0;
 
 %variabler til spillere og point
 numPlayers = 2;
@@ -60,7 +61,7 @@ while numDice >= 1 && activateTurn ~=0
     rollOptions = dicePoints(numDice,roll,legalArray);
 
     %Giver rollOptions til drawOptionsBox
-    [selectedDice, pointTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum);
+    selectedDice = drawOptionBox(fig, rollOptions, diceSpacing, rollNum);
     
     %Fjerner terninger til næste omgang
     cla(axes)
@@ -68,13 +69,16 @@ while numDice >= 1 && activateTurn ~=0
     % Bliver tegnet af drawOptionBox - pga. nyt brugsmønster
     %drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
     
+    %Finder antal brugte terninger
     for t = 1:size(selectedDice,2)
-        if selectedDice(2,t) <= 16 && selectedDice(2,t) >= 10
-            usedDice = usedDice + 3;
-        else
-            usedDice = usedDice + 1;
-        end
+            usedDice = usedDice + selectedDice(4);
     end
+    
+    %Finder antal point
+    for t = 1:size(selectedDice,2)
+        pointsTurn = pointsTurn + selectedDice(3);
+    end
+   
     
     %Fjerner brugte terninger og sætter usedDice tilbage til 0 til næste
     %loop
