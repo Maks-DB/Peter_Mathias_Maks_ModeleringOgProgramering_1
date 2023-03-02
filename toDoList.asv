@@ -1,5 +1,25 @@
 To do liste
 
+Vigtigste opgaver
+
+Vis korekt antal terninger terninger ved næste slag - "fødte" 3stk virker ikke 
+"playChamoux"
+"drawOptionBox"
+Ansvarlig: Peter
+
+Opret knap for færdig tur
+"playChamoux"
+Måske ny funktion til "spiller og point" (hvis computeren skal kunne spille bliver det rart med en ekstra funktion)
+Ansvarlig: Maks
+
+Opret tabel for pointvisning
+"playChamoux"
+Ansvarlig: ?
+
+spillemønster - afvikling af et spil med flere spillere
+"playChamoux"
+Ansvarlig: ?
+
 >>funktions forklaring:
     Funktion:
         "playChamoux" - styre selve spillet, starter funktioner og opsamler data.
@@ -38,12 +58,11 @@ To do liste
             "drawOptionBox" - turen går om [mangler at nulstille slag og starte ny tur]
 
     - turen kan spilles om max. 3 gange ved omslag 
-             "playChamoux" - holder styr på maksimal 3 omslag
+             "playChamoux" - holder styr på maksimal 3 omslag eller -4 point [mangler]
 
 
 "et slag"
     - der slås med de terninger der ikke er valgt fra (1-7 terninger) og slaget vises 
-        (delvist implementeret, funktioner: 
             "playChamoux" - starter slaget med "numDice" terninger [virker] Peter
             "diceThrow" - et terningslag med "numDice" terninger [virker] Peter
             "dicePoints" - evaluere hvert slag for muligheder og point [virker] Maks
@@ -51,7 +70,7 @@ To do liste
             "drawOptionBox" - fejl slag [mangler at sende turen videre til næste spiller]
             "drawSelectedDice" - lister de terninger der fjernes ved hvert slag. [virker for de fleste slag] Peter
             "drawDiceFace" - grafiske terninger vises på "fig" [virker] Peter
-        )
+
 
 
 

@@ -1,4 +1,24 @@
-To do liste
+To do liste (scrool ned for info om de forskellige funktioner)
+
+Vigtigste opgaver
+
+Vis korekt antal terninger terninger ved næste slag - "fødte" 3stk virker ikke 
+"playChamoux"
+"drawOptionBox"
+Ansvarlig: Peter
+
+Opret knap for færdig tur
+"playChamoux"
+Måske ny funktion til "spiller og point" (hvis computeren skal kunne spille bliver det rart med en ekstra funktion)
+Ansvarlig: Maks
+
+Opret tabel for pointvisning, både samlede point for hver spiller og point for den "tur" der er i spil
+"playChamoux"
+Ansvarlig: ?
+
+spillemønster - afvikling af et spil med flere spillere
+"playChamoux"
+Ansvarlig: ?
 
 >>funktions forklaring:
     Funktion:

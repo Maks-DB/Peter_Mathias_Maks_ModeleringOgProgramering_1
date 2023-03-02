@@ -159,7 +159,7 @@ for t = 1:numCol
             %indsætter antal point
             dataArray{t,2} = rollOptions(4,t);
 
-            %Fødte er altdi 3 terninger
+            %Fødte er altid 3 terninger
             dataArray{t,3} = 3;
 
 
