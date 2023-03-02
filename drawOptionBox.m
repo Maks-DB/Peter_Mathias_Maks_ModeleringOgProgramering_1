@@ -133,7 +133,7 @@ for t = 1:numCol
             dataArray{t,1} = "ØV ingen terninger kan vælges, -4 point";
 
             %indsætter antal point
-            dataArray{t,2} = rollOptions(4,t);
+            dataArray{t,2} = -4;
 
             %Der fratages ingen terninger
             dataArray{t,3} = 0;
@@ -145,11 +145,11 @@ for t = 1:numCol
             dataArray{t,1} = "Alle terninger tæller - du må slå runden om";
 
             %indsætter antal point
-            dataArray{t,2} = rollOptions(4,t);
+            dataArray{t,2} = 0;
 
             %Der fratages ingen terninger
             dataArray{t,3} = 0;
-            
+
             break
 
         otherwise
