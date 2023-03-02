@@ -42,7 +42,7 @@ while numDice >= 1
     roll = diceThrow(axes,numDice,rollArray,diceSpacing);
 
 
-    roll = [1 1 1 1 5 5 4];
+    %roll = [1 1 1 1 5 5 4];
 
     % Giver rullet til dicepoints
     rollOptions = dicePoints(numDice,roll,legalArray);
