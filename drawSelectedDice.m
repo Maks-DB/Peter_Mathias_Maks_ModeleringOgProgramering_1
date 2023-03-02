@@ -73,6 +73,23 @@ for t = 1:size(selectedDice,2)
             drawDice(6)
             drawDice(6)
 
+            %fødte
+        otherwise
+
+            %tegner en firkant rundt om de fødte
+            heightBornSquare = 3*((diceSpacing)*height);
+            widthBornSquare = width * diceSpacing;
+            posxBornSquare = posx - (0.5*diceSpacing);
+            posyBornSquare = posy - (0.5*diceSpacing);
+            
+            rectangle(axesSelectedDice, ...
+                Position = [posxBornSquare posyBornSquare widthBornSquare heightBornSquare], ...
+                Curvature=0.1,LineWidth=0.8)
+
+            for tt =1:3
+                drawDice(selectedDice(1,t))
+            end
+
     end
 
 end
