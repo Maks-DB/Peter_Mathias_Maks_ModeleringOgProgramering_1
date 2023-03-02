@@ -41,7 +41,9 @@ drawnow
 
 % funktion hvor man vælger antal spillere og starter spillet
 [numPlayers, activePlayer] = playersChamoux(fig, pointPlayers, activateTurn);
+disp('antal spillere')
 disp(numPlayers)
+disp('den aktive spiller')
 disp(activePlayer)
 
 %Laver en  varible til antal rull i et slag
@@ -63,6 +65,7 @@ while numDice >= 1 && activateTurn ~=0
 
     cla(axes)
 
+    % Bliver tegnet af drawOptionBox - pga. nyt brugsmønster
     %drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
     
     for t = 1:size(selectedDice,2)

@@ -249,14 +249,17 @@ drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
 %point
 turPoint = 4;
 if turPoint > 3
-pointButton = uicontrol(fig,'string', "stop din tur og før point til listen");
-pointButton.Position = [300 260 180 30];
-pointButton.BackgroundColor = '#90EE90';
-%continueButton.Callback = 'uiresume(gcbf)'; - virker også
-%taget fra nettet varargin laver en function med variabel antal input
-%argumenter
-%pointButton.Callback = @(varargin) uiresume(fig);
+    pointButton = uibutton(fig,'push','text','overfør point til listen og stop tur',...        
+        'ButtonPushedFcn', @(pointButton,event) disp('nogen trykker'));
+    pointButton.Position = [300 260 180 30];
+    pointButton.BackgroundColor = '#90EE90';
+    %continueButton.Callback = 'uiresume(gcbf)'; - virker også
+    %taget fra nettet varargin laver en function med variabel antal input
+    %argumenter
 end
+
+
+
 
 
 continueButton = uicontrol(fig,'string', "slå igen");

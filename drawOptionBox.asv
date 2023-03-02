@@ -1,4 +1,4 @@
-function selectedDice = drawOptionBox(fig, rollOptions, pointTurn)(fig,selectedDice,diceSpacing,rollNum)
+function selectedDice = drawOptionBox(fig, rollOptions, pointTurn, diceSpacing, rollNum)
 %------------------
 
 % function tager en array rollOptions fra dicePoints samt en figur fig, og
@@ -249,14 +249,20 @@ drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
 %point
 turPoint = 4;
 if turPoint > 3
-pointButton = uicontrol(fig,'string', "stop din tur og før point til listen");
-pointButton.Position = [300 260 180 30];
-pointButton.BackgroundColor = '#90EE90';
-%continueButton.Callback = 'uiresume(gcbf)'; - virker også
-%taget fra nettet varargin laver en function med variabel antal input
-%argumenter
-%pointButton.Callback = @(varargin) uiresume(fig);
+    pointButton = uic(fig,'string', "stop din tur og før point til listen");
+    pointButton.Position = [300 260 180 30];
+    pointButton.BackgroundColor = '#90EE90';
+    %continueButton.Callback = 'uiresume(gcbf)'; - virker også
+    %taget fra nettet varargin laver en function med variabel antal input
+    %argumenter
+    pointButton.Callback = @pointButtonPushed;
 end
+
+    function pointButtonPushed(src,event)
+        disp('nogen trykker');
+    end
+
+
 
 
 continueButton = uicontrol(fig,'string', "slå igen");
