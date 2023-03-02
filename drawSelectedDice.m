@@ -1,4 +1,7 @@
-function drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
+function pointTurn = drawSelectedDice(fig,selectedDice,diceSpacing,rollNum, pointTurn)
+
+% slagets point
+pointTurn = pointTurn;
 
 height = 10;
 width = 10;
@@ -26,6 +29,7 @@ for t = 1:size(selectedDice,2)
             for tt = 1:6
                 drawDice(tt)
             end
+            pointTurn = pointTurn + 20;
 
             %3 par
         case 40
@@ -33,45 +37,52 @@ for t = 1:size(selectedDice,2)
             for tt = 1:2
                 drawDice(selectedDice(1,t))
             end
+            pointTurn = pointTurn + 15;
 
             %en enkelt terning
         case 1
             drawDice(selectedDice(1,t))
-
+            if selectedDice(1,t) == 5
+                pointTurn = pointTurn + 0.5;
+            else
+                pointTurn = pointTurn + 1;
+            end
 
             % fejlslag - ingen terninger med værdi
         case 60
             drawDice(2)
+            pointTurn = -4 ;
 
 
             % omslag - alle terninger har værdi
         case 70
             drawDice(2)
+            pointTurn = 0;
 
-%         case 11
-%             drawDice(1)
-%             drawDice(1)
-%             drawDice(1)
-%         case 12
-%             drawDice(2)
-%             drawDice(2)
-%             drawDice(2)
-%         case 13
-%             drawDice(3)
-%             drawDice(3)
-%             drawDice(3)
-%         case 14
-%             drawDice(4)
-%             drawDice(4)
-%             drawDice(4)
-%         case 15
-%             drawDice(5)
-%             drawDice(5)
-%             drawDice(5)
-%         case 16
-%             drawDice(6)
-%             drawDice(6)
-%             drawDice(6)
+            %         case 11
+            %             drawDice(1)
+            %             drawDice(1)
+            %             drawDice(1)
+            %         case 12
+            %             drawDice(2)
+            %             drawDice(2)
+            %             drawDice(2)
+            %         case 13
+            %             drawDice(3)
+            %             drawDice(3)
+            %             drawDice(3)
+            %         case 14
+            %             drawDice(4)
+            %             drawDice(4)
+            %             drawDice(4)
+            %         case 15
+            %             drawDice(5)
+            %             drawDice(5)
+            %             drawDice(5)
+            %         case 16
+            %             drawDice(6)
+            %             drawDice(6)
+            %             drawDice(6)
 
             %fødte
         otherwise
@@ -81,13 +92,18 @@ for t = 1:size(selectedDice,2)
             widthBornSquare = width * diceSpacing;
             posxBornSquare = posx - (0.5*diceSpacing);
             posyBornSquare = posy - (0.5*diceSpacing);
-            
+
             rectangle(axesSelectedDice, ...
                 Position = [posxBornSquare posyBornSquare widthBornSquare heightBornSquare], ...
                 Curvature=0.1,LineWidth=0.8)
 
             for tt =1:3
                 drawDice(selectedDice(1,t))
+            end
+            if selectedDice(1,t) == 1
+                pointTurn = pointTurn + 10;
+            else
+                pointTurn = pointTurn + selectedDice(1,t);
             end
 
     end
@@ -106,6 +122,5 @@ end
 
         posy = posy + height*diceSpacing;
     end
-
 
 end
