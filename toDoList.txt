@@ -1,32 +1,56 @@
 To do liste
 
-Funktion "playChamoux"
-	skal holde styr på spillere, næste tur, samlede antal point osv.
-
-Funktion  "diceThrow"
-	Visuelt slag, synlige terninger
-
-	status - synlige terninger virker med n antal terninger
-
-	mangler - at kunne vise valgmuligheder fra "selectDice"
-	mangler - at kunne vise "diceStash"
-	mangler - at kunne vise "playerName"
-	mangler - at kunne vise "pointStatus"
+>>funktions forklaring:
+    Funktion:
+        "playChamoux" - styre selve spillet, starter funktioner og opsamler data.
+        "diceThrow" - laver tilfældige slag med "numDice" terninger.
+        "dicePoints" - evaluere hvert slag for muligheder og point.
+        "drawOptionBox" - tegner en tabel hvor brugerens muligheder listes/vælges.
+        "drawSelectedDice" - tegner de udvalgte terninger for hvert slag.
+        "drawDiceFace" - grafisk tegning af en enkelt terning.
 
 
-Funktion "selectDice"
-	Aflæsning af slag, med n terninger
+>>spilløkker:
+"et spil"
+    - åbner en brugerflade til spillet
+            "playChamoux" - åbner en uifigure "fig" [virker] Peter
+       
+    - registrering af spillere
+             "playChamoux" - interface hvor antal spillere vælges [mangler]
 
-	status - funktionen virker med n antal terninger
-	status - aflæsning af fødte og beregning af deres point værdi - Virker
-	status - aflæsning af cameron og beregning af point værdi - Virker
-	status - aflæsning af "tre par "og beregning af deres point værdi - Virker
-	status - aflæsning, fordobling af fødtes værdi og beregning af deres point værdi - Virker
-	status - aflæsning, enere og beregning point værdi - Virker
-	status - aflæsning, femmere og beregning point værdi - Virker
-	status - registrering af fejlslag, -4 point - Virker
-	status - registrering af "omslag" - Virker, men uden tæller for antal omslag.
+    - består af et antal runder hvor "turen" går på skift mellem spillerne.
+            "playChamoux" - starter en runde for det valgte antal spillere [mangler]
 
-	mangler - at modtage værdier fra "diceThrow"
-	mangler - at modtage valg fra spiller.
-	mangler - at overføre point til "pointStatus"
+"en runde" 
+    - den sidste runde er når en spiller får samlet mindst 43,5 point.
+            "playChamoux" - sidste runde [mangler]
+
+    - alle spillere får lov at spille sidste runde færdig, spilleren med flest point vinder.
+            "playChamoux" - spillerne spiller deres sidste tur [mangler]
+
+"en tur" 
+    - spilleren der har turen slår en serie "slag", spilleren vælger point eller afsluter "turen" efter hvert "slag"
+            "playChamoux" - vis hvem der er aktiv spiller [mangler]
+            "playChamoux" - "turens" point [mangler, kan hentes i variabel ...]
+            "playChamoux" - spilernes samlede point [mangler]
+            "playChamoux" - knap til "point overføres til listen", "turen" afsluttes [mangler]
+            "drawOptionBox" - spileren vælger at afslutte sin tur [mangler]
+            "drawOptionBox" - turen går om [mangler at nulstille slag og starte ny tur]
+
+    - turen kan spilles om max. 3 gange ved omslag 
+             "playChamoux" - holder styr på maksimal 3 omslag eller -4 point [mangler]
+
+
+"et slag"
+    - der slås med de terninger der ikke er valgt fra (1-7 terninger) og slaget vises 
+            "playChamoux" - starter slaget med "numDice" terninger [virker] Peter
+            "diceThrow" - et terningslag med "numDice" terninger [virker] Peter
+            "dicePoints" - evaluere hvert slag for muligheder og point [virker] Maks
+            "drawOptionBox" - spileren vælger sine point [virker for de fleste slag] Peter
+            "drawOptionBox" - fejl slag [mangler at sende turen videre til næste spiller]
+            "drawSelectedDice" - lister de terninger der fjernes ved hvert slag. [virker for de fleste slag] Peter
+            "drawDiceFace" - grafiske terninger vises på "fig" [virker] Peter
+
+
+
+
