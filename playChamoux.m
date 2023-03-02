@@ -8,7 +8,7 @@ usedDice = 0;
 numPlayers = 2;
 %activePlayer = 0;
 pointPlayers = zeros(2,numPlayers);
-pointTurn = 0;
+%pointTurn = 0;
 activateTurn = 1;
 
 %variabler der sendes til diceThrow
@@ -61,7 +61,7 @@ while numDice >= 1 && activateTurn ~=0
     rollOptions = dicePoints(numDice,roll,legalArray);
 
     %Giver rollOptions til drawOptionsBox
-    selectedDice = drawOptionBox(fig, rollOptions, pointTurn ,diceSpacing,rollNum);
+    [selectedDice, pointTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum);
 
     cla(axes)
 

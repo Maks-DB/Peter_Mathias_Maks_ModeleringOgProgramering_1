@@ -1,4 +1,4 @@
-function selectedDice = drawOptionBox(fig, rollOptions, pointTurn, diceSpacing, rollNum)
+function [selectedDice, pointTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum)
 %------------------
 
 % function tager en array rollOptions fra dicePoints samt en figur fig, og
@@ -38,6 +38,9 @@ end
 %sætter rolloptions til at være den uden nuller og sletter variablen.
 rollOptions = rollOptionsNoZero ;
 clear rollOptionsNoZero
+
+%variabel der sender turens point
+pointTurn = 0;
 
 %Fjerner ens søjler f.eks hvis der er fødte, unique virker kun med rækker
 %og vi transponere derfor matricen før og efter. Skal ikke gøres for 3 par
@@ -257,9 +260,6 @@ if turPoint > 3
     %taget fra nettet varargin laver en function med variabel antal input
     %argumenter
 end
-
-
-
 
 
 continueButton = uicontrol(fig,'string', "slå igen");
