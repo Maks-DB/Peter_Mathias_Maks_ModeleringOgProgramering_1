@@ -1,4 +1,4 @@
-function selectedDice = drawOptionBox(fig, rollOptions)
+function selectedDice = drawOptionBox(fig, rollOptions, pointTurn, diceSpacing, rollNum)
 %------------------
 
 % function tager en array rollOptions fra dicePoints samt en figur fig, og
@@ -186,22 +186,9 @@ continueButton.BackgroundColor = '#90EE90';
 %argumenter
 continueButton.Callback = @(varargin) uiresume(fig);
 
-%knap til at ende turen og føre point til listen - hvis man har over 3,5
-%point
-turPoint = 4;
-
-if turPoint > 3
-pointButton = uicontrol(fig,'string', "stop din tur og før point til listen");
-pointButton.Position = [300 260 180 30];
-pointButton.BackgroundColor = '#90EE90';
-%continueButton.Callback = 'uiresume(gcbf)'; - virker også
-%taget fra nettet varargin laver en function med variabel antal input
-%argumenter
-%continueButton.Callback = @(varargin) uiresume(fig);
-end
-
 %venter på knappen bliver trykket
 uiwait(fig)
+
 
 %bruger cell2mat til at lave det til en array
 %eksData = cell2mat(optionBox.Data);
@@ -230,6 +217,8 @@ end
 
 disp(outputOnlySelected)
 
+
+
 %checker om der er blevet valgt nogen slag
 if isempty(outputOnlySelected) == 1
     disp("Da der ingen slag blev valgt har functionen drawOptionBox sendt denne array ud: ")
@@ -252,4 +241,33 @@ delete(optionBox)
 
 %sætter selectedDice værdien til brug i andre funktioner
 selectedDice = outputOnlySelected;
+
+%Maks tester
+drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
+
+%knap til at ende turen og føre point til listen - hvis man har over 3,5
+%point
+turPoint = 4;
+if turPoint > 3
+pointButton = uicontrol(fig,'string', "stop din tur og før point til listen");
+pointButton.Position = [300 260 180 30];
+pointButton.BackgroundColor = '#90EE90';
+%continueButton.Callback = 'uiresume(gcbf)'; - virker også
+%taget fra nettet varargin laver en function med variabel antal input
+%argumenter
+%pointButton.Callback = @(varargin) uiresume(fig);
+end
+
+
+continueButton = uicontrol(fig,'string', "slå igen");
+continueButton.Position = [20 260 260 30];
+continueButton.BackgroundColor = '#90EE90';
+%continueButton.Callback = 'uiresume(gcbf)'; - virker også
+%taget fra nettet varargin laver en function med variabel antal input
+%argumenter
+continueButton.Callback = @(varargin) uiresume(fig);
+
+%venter på knappen bliver trykket
+uiwait(fig)
+
 return

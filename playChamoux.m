@@ -4,6 +4,12 @@ function playChamoux
 %variabler til playChamoux
 usedDice = 0;
 
+%variabler til spillere og point
+numPlayers = 2;
+%activePlayer = 0;
+pointPlayers = zeros(2,numPlayers);
+pointTurn = 0;
+activateTurn = 1;
 
 %variabler der sendes til diceThrow
 numDice = 7; %antal terninger
@@ -33,10 +39,15 @@ drawnow
 
 % ------
 
+% funktion hvor man vælger antal spillere og starter spillet
+[numPlayers, activePlayer] = playersChamoux(fig, pointPlayers, activateTurn);
+disp(numPlayers)
+disp(activePlayer)
+
 %Laver en  varible til antal rull i et slag
 rollNum = 0;
 
-while numDice >= 1
+while numDice >= 1 && activateTurn ~=0
 
     % Kalder diceThrow og retunere dit rul
     roll = diceThrow(axes,numDice,rollArray,diceSpacing);
@@ -48,11 +59,11 @@ while numDice >= 1
     rollOptions = dicePoints(numDice,roll,legalArray);
 
     %Giver rollOptions til drawOptionsBox
-    selectedDice = drawOptionBox(fig,rollOptions);
+    selectedDice = drawOptionBox(fig, rollOptions, pointTurn ,diceSpacing,rollNum);
 
     cla(axes)
 
-    drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
+    %drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
     
     for t = 1:size(selectedDice,2)
         if selectedDice(2,1) <= 16 && selectedDice(2,1) >= 10
