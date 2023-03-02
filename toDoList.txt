@@ -7,6 +7,7 @@ Opret knap for færdig tur
 Måske ny funktion til "spiller og point" (hvis computeren skal kunne spille bliver det rart med en ekstra funktion)
 Ansvarlig: Maks
 Knap oprettet - skjules indtil der er mindst 3,5 point
+Mangler funktionalitet der sender turen videre og gemmer point i tabel.. skriver kun en kommentar
 
 Opret tabel for pointvisning, både samlede point for hver spiller og point for den "tur" der er i spil
 "playChamoux"
