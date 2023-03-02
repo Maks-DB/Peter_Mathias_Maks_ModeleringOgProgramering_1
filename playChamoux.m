@@ -55,7 +55,7 @@ while numDice >= 1 && activateTurn ~=0
     roll = diceThrow(axes,numDice,rollArray,diceSpacing);
 
 
-    %roll = [1 1 1 1 5 5 4];
+    roll = [1 1 1 1 5 5 4];
 
     % Giver rullet til dicepoints
     rollOptions = dicePoints(numDice,roll,legalArray);
@@ -75,8 +75,14 @@ while numDice >= 1 && activateTurn ~=0
             usedDice = usedDice + 1;
         end
     end
+    
+    clc
+    disp("Brugte Terninger")
+    disp(selectedDice)
 
     numDice = numDice - usedDice;
+    usedDice = 0;
+
     rollNum = rollNum + 1;
 
     disp("Antal terninger tilbage")

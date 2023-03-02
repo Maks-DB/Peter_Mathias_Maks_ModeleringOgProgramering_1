@@ -1,4 +1,4 @@
-function selectedDice = drawOptionBox(fig, rollOptions, pointTurn, diceSpacing, rollNum)
+function [selectedDice, pointTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum)
 %------------------
 
 % function tager en array rollOptions fra dicePoints samt en figur fig, og
@@ -39,6 +39,9 @@ end
 rollOptions = rollOptionsNoZero ;
 clear rollOptionsNoZero
 
+%variabel der sender turens point
+pointTurn = 0;
+
 %Fjerner ens søjler f.eks hvis der er fødte, unique virker kun med rækker
 %og vi transponere derfor matricen før og efter. Skal ikke gøres for 3 par
 %da de håndteres anderledes
@@ -49,7 +52,8 @@ if rollOptions(2,1) ~= 40
     rollOptionsUnique = unique(rollOptions,"rows");
     rollOptions = transpose(rollOptionsUnique);
 else
-    %Finder de positioner hvor der er der er ikke-unikke søjler
+    %Finder alle IKKE unikke søgler, bruger unique til at finde positionen
+    %på de un
     [~,duplicatePos,~] = unique(rollOptions(1,:));
 
     %laver en ny array
@@ -249,20 +253,14 @@ drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
 %point
 turPoint = 4;
 if turPoint > 3
-    pointButton = uic(fig,'string', "stop din tur og før point til listen");
+    pointButton = uibutton(fig,'push','text','overfør point til listen og stop tur',...        
+        'ButtonPushedFcn', @(pointButton,event) disp('nogen trykker'));
     pointButton.Position = [300 260 180 30];
     pointButton.BackgroundColor = '#90EE90';
     %continueButton.Callback = 'uiresume(gcbf)'; - virker også
     %taget fra nettet varargin laver en function med variabel antal input
     %argumenter
-    pointButton.Callback = @pointButtonPushed;
 end
-
-    function pointButtonPushed(src,event)
-        disp('nogen trykker');
-    end
-
-
 
 
 continueButton = uicontrol(fig,'string', "slå igen");

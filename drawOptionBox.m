@@ -52,7 +52,8 @@ if rollOptions(2,1) ~= 40
     rollOptionsUnique = unique(rollOptions,"rows");
     rollOptions = transpose(rollOptionsUnique);
 else
-    %Finder de positioner hvor der er der er ikke-unikke søjler
+    %Finder alle IKKE unikke søgler, bruger unique til at finde positionen
+    %på de unikke søgler og henter alle andre søgler end dette.
     [~,duplicatePos,~] = unique(rollOptions(1,:));
 
     %laver en ny array
