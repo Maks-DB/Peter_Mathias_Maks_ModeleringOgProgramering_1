@@ -1,4 +1,4 @@
-function selectedDice = drawOptionBox(fig, rollOptions, diceSpacing, rollNum)
+function [selectedDice, pointTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave)
 %------------------
 
 % function tager en array rollOptions fra dicePoints samt en figur fig, og
@@ -40,7 +40,7 @@ rollOptions = rollOptionsNoZero ;
 clear rollOptionsNoZero
 
 %variabel der sender turens point
-pointTurn = 0;
+pointTurn = pointTurnSave;
 
 %Fjerner ens søjler f.eks hvis der er fødte, unique virker kun med rækker
 %og vi transponere derfor matricen før og efter. Skal ikke gøres for 3 par
@@ -247,12 +247,16 @@ delete(optionBox)
 selectedDice = outputOnlySelected;
 
 %Maks tester
-drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
+pointTurn = drawSelectedDice(fig,selectedDice,diceSpacing,rollNum,pointTurn);
+
+% points samlet for tur
+disp('Tur point')
+disp(pointTurn)
 
 %knap til at ende turen og føre point til listen - hvis man har over 3,5
 %point
-turPoint = 4;
-if turPoint > 3
+%turPoint = 4;
+if pointTurn > 3
     pointButton = uibutton(fig,'push','text','overfør point til listen og stop tur',...        
         'ButtonPushedFcn', @(pointButton,event) disp('nogen trykker'));
     pointButton.Position = [300 260 180 30];
