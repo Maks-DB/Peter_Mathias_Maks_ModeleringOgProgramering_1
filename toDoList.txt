@@ -6,14 +6,17 @@ Opret knap for færdig tur
 "playChamoux"
 Måske ny funktion til "spiller og point" (hvis computeren skal kunne spille bliver det rart med en ekstra funktion)
 Ansvarlig: Maks
+Knap oprettet - skjules indtil der er mindst 3,5 point
 
 Opret tabel for pointvisning, både samlede point for hver spiller og point for den "tur" der er i spil
 "playChamoux"
-Ansvarlig: ?
+Ansvarlig: ? + Maks
+point for tur er lavet - der mangler samlet pointtabel
 
 spillemønster - afvikling af et spil med flere spillere
 "playChamoux"
 Ansvarlig: ?
+
 
 >>funktions forklaring:
     Funktion:
