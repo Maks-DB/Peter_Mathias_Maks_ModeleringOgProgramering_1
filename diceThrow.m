@@ -1,7 +1,5 @@
 function roll = diceThrow (axes,numDice,rollArray,diceSpacing)
 
-%numDice = 7; %antal terninger    
-
 height = 10; %højden af terningen
 width = 10; %Bredden af terningen
 
@@ -59,7 +57,6 @@ cla(axes)
 end
 
 disp("Færdig med at kaste")
-%run("dicePoints(numDice, rollArray)")
 end
 
     

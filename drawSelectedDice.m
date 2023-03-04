@@ -17,6 +17,7 @@ for t = 1:size(selectedDice,2)
             for tt = 1:6
                 drawDice(tt)
             end
+            % sætter point hvis cameron vælges
             pointTurn = pointTurn + 20;
 
             %3 par
@@ -25,11 +26,14 @@ for t = 1:size(selectedDice,2)
             for tt = 1:2
                 drawDice(selectedDice(1,t))
             end
-            pointTurn = pointTurn + 5; %giver 15 men ganges med 3 ??!!
+             % sætter point hvis 3 par vælges
+           pointTurn = pointTurn + 5; %giver 15 men ganges med 3 ??!!
 
             %en enkelt terning
         case 1
             drawDice(selectedDice(1,t))
+ 
+            % sætter point hvis enkeltterning vælges
             if selectedDice(1,t) == 5
                 pointTurn = pointTurn + 0.5;
             else
@@ -38,13 +42,17 @@ for t = 1:size(selectedDice,2)
 
             % fejlslag - ingen terninger med værdi
         case 60
-            drawDice(2)
-            pointTurn = -4 ;
+            %drawDice(2)
+
+            % sætter point ved fejlslag
+           pointTurn = -4 ;
 
 
             % omslag - alle terninger har værdi
         case 70
-            drawDice(2)
+            %drawDice(2)
+
+            % nulstiller point ved omslag
             pointTurn = 0;
 
             
@@ -64,6 +72,8 @@ for t = 1:size(selectedDice,2)
             for tt =1:3
                 drawDice(selectedDice(1,t))
             end
+
+            % sætter point ved fødte, tre af en slags
             if selectedDice(1,t) == 1
                 pointTurn = pointTurn + 10;
             else
