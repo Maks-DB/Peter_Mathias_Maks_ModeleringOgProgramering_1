@@ -66,6 +66,12 @@ disp(numPlayers)
 disp('den aktive spiller')
 disp(activePlayer)
 
+
+if numPlayers <= 0
+    disp("Du har ingen spillere, dette er altså ikke et 0 player spil din pap cykel.")
+    return
+end
+
 %Laver en uitable til point pr spiller
 pointBox = playerPoints(fig,numPlayers);
 
@@ -136,7 +142,8 @@ while quitGame == 0
             
 
         end
-
+        
+        %Tilføjer antal point til point tablellen 
         pointBox.Data{1,activePlayerRound} = ...
             pointBox.Data{1,activePlayerRound} + pointTurn;
         
@@ -147,12 +154,14 @@ while quitGame == 0
     clc
 
     disp(pointBox.Data)
-
+    
+    %Finder hvilken spiller har flest point, og hvor mange point det så er
     [highestPoint,winner] = max(table2array(pointBox.Data));
 
     disp(highestPoint)
-
-    if highestPoint >= 2
+    
+    %Tjekker om nogen har vundet
+    if highestPoint >= 43
         quitGame = 1;
     end
 
@@ -160,6 +169,7 @@ end
 
 clc
 
+%Viser vinderen
 disp(winner)
 disp(highestPoint)
 
