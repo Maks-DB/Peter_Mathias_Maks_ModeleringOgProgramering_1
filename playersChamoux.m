@@ -1,7 +1,8 @@
-function [numPlayers, activePlayer] = playersChamoux(fig, pointPlayers, activateTurn, activePlayer)
-disp("PLAYERS")
+function [numPlayers] = playersChamoux(fig, pointPlayers, activateTurn)
+%function [numPlayers, activePlayer] = playersChamoux(fig, pointPlayers, activateTurn, activePlayer)
 
-activePlayer=activePlayer;
+% active player er både input og output - virker ikke uden denne 
+%activePlayer=activePlayer;
 
 playersArray = table('size',[1, 1],'VariableTypes',{'double'});
 playersArray.Properties.VariableNames = ["skriv antal spilere"];
@@ -22,12 +23,13 @@ numButton.BackgroundColor = '#90EE90';
 %argumenter
 numButton.Callback = @(varargin) uiresume(fig);
 
-% tekst der viser den aktive spiller
-activePlayerText = uitextarea(fig, ...
-    "Value", {'active player'} ,"Position",[300 450 150 30]);
+% % tekst der viser den aktive spiller
+% activePlayerText = uitextarea(fig, ...
+%     "Value", {'active player'} ,"Position",[300 450 150 30]);
 
 disp('Player')
 disp('activePlayer')
+
 
 
 

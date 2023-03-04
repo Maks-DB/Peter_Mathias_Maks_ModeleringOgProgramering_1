@@ -60,12 +60,10 @@ drawnow
 % ------
 
 % funktion hvor man vælger antal spillere og starter spillet
-[numPlayers, activePlayer] = playersChamoux(fig, pointPlayers, activateTurn, activePlayer);
+%[numPlayers, activePlayer] = playersChamoux(fig, pointPlayers, activateTurn, activePlayer);
+[numPlayers] = playersChamoux(fig, pointPlayers, activateTurn);
 disp('antal spillere')
 disp(numPlayers)
-disp('den aktive spiller')
-disp(activePlayer)
-
 
 if numPlayers <= 0
     disp("Du har ingen spillere, dette er altså ikke et 0 player spil din pap cykel.")
@@ -89,9 +87,28 @@ while quitGame == 0
     for activePlayerRound = 1:numPlayers
         disp('start runde loop')
 
+        disp('Spiller')
+        disp(activePlayerRound)
+        disp('!!! Spiller nu !!!')
+
+        % tekst der viser den aktive spiller
+
+        activePlayerArray = table(activePlayerRound);
+        activePlayerArray.Properties.VariableNames = ["Spilleren der har turen"];
+
+        activePlayerBox = uitable(fig);
+        activePlayerBox.Position = [300 430 170 60];
+        activePlayerBox.ColumnEditable = [false];
+
+        %sætter data til at være dataArray
+        activePlayerBox.Data = activePlayerArray;
+
+
         if activePlayer > numPlayers
             activePlayer = 1;
         end
+
+
 
         activateTurn = activateTurn + 1;
 
@@ -102,6 +119,8 @@ while quitGame == 0
 
         % while løkke for en tur
         while numDice >= 1 && activateTurn ~=0
+
+
 
             % Kalder diceThrow og retunere dit rul
             roll = diceThrow(axes,numDice,rollArray,diceSpacing);
@@ -124,7 +143,7 @@ while quitGame == 0
             for t = 1:size(selectedDice,2)
                 usedDice = usedDice + selectedDice(4);
             end
-            
+
 
             %Fjerner brugte terninger og sætter usedDice tilbage til 0 til næste
             %loop
@@ -136,17 +155,17 @@ while quitGame == 0
 
             disp("Antal terninger tilbage")
             disp(numDice)
-            
+
             disp(pointBox.Data)
 
-            
+
 
         end
-        
-        %Tilføjer antal point til point tablellen 
+
+        %Tilføjer antal point til point tablellen
         pointBox.Data{1,activePlayerRound} = ...
             pointBox.Data{1,activePlayerRound} + pointTurn;
-        
+
         cla(axesSelectedDice)
         clc
         disp("Runden er slut")
@@ -154,12 +173,12 @@ while quitGame == 0
     clc
 
     disp(pointBox.Data)
-    
+
     %Finder hvilken spiller har flest point, og hvor mange point det så er
     [highestPoint,winner] = max(table2array(pointBox.Data));
 
     disp(highestPoint)
-    
+
     %Tjekker om nogen har vundet
 
     if highestPoint >= 43
