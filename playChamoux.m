@@ -43,7 +43,7 @@ axes.YLim = [-5 5];
 %gemte terninger axis
 %--------
 axesSelectedDice = uiaxes(fig);
-axesSelectedDice.Position = [500 150 300 400];
+axesSelectedDice.Position = [500 150 500 400];
 
 axis(axesSelectedDice,'off')
 axis(axesSelectedDice,'equal')
@@ -51,7 +51,7 @@ axis(axesSelectedDice,'equal')
 axisy = 7 * (diceSpacing*10);
 
 axesSelectedDice.YLim = [-5 axisy];
-axesSelectedDice.XLim = [-5 5*(width*diceSpacing)];
+axesSelectedDice.XLim = [-5 8*(width*diceSpacing)];
 %--------
 
 

@@ -236,7 +236,7 @@ end
 
 %Fjerner om man har valgt den eller ej da dette altid nu vil være 1
 outputOnlySelected(end,:) = [];
-%Fjenrer om det er et unkikt slag da vi har fjernet alle der ikke er.
+%Fjener om det er et unkikt slag da vi har fjernet alle der ikke er.
 outputOnlySelected(3,:) = [];
 
 disp("Functionen drawOptionBox har sendt denne array ud: ")
