@@ -1,7 +1,6 @@
-function [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave)
+function [selectedDice, pointTurn, activeTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave)
 %------------------
-activateTurn = 1;
-pointTurnSave = 0;
+
 % function tager en array rollOptions fra dicePoints samt en figur fig, og
 % laver en uitable så brugeren kan vælge hvilke terninger der skal beholdes
 % og hvilke der blive tilbage, den sender så de valgte slag tilbage i et
@@ -194,13 +193,6 @@ continueButton.Callback = @(varargin) uiresume(fig);
 %venter på knappen bliver trykket
 uiwait(fig)
 
-
-%bruger cell2mat til at lave det til en array
-%eksData = cell2mat(optionBox.Data);
-
-disp("Tabellen efter valg burde have set sådanne ud: ")
-disp(optionBox.Data)
-
 output = table2array(optionBox.Data(:,3:4));
 output = transpose(output);
 
@@ -257,25 +249,18 @@ disp(pointTurn)
 %knap til at ende turen og føre point til listen - hvis man har over 3,5
 %point
 %turPoint = 4;
-if pointTurn >= 0.5
+if pointTurn > 3
     pointButton = uibutton(fig,'push','text','overfør point til listen og stop tur',...
-        assignin('drawOptionBox','activateTurn', 2));
+        'ButtonPushedFcn', @(pointButton,event) stopAndAddPoints);
     pointButton.Position = [300 260 180 30];
     pointButton.BackgroundColor = '#90EE90';
+
     %continueButton.Callback = 'uiresume(gcbf)'; - virker også
     %taget fra nettet varargin laver en function med variabel antal input
     %argumenter
-
-%     uicontrol('style', 'pushbutton', 'Parent', playChamoux.fig, ...
-%                 'Units', 'normalized', 'Position', [0.1, 0.5, buttonWidth, buttonHeight], ...
-%                 'String', 'Play Sound', 'Callback', @obj.playSound);
-
 end
 
-if activateTurn >=2
-    disp('Button pressed');
-    disp(activateTurn);
-end
+
 continueButton = uicontrol(fig,'string', "slå igen");
 continueButton.Position = [20 260 260 30];
 continueButton.BackgroundColor = '#90EE90';
@@ -287,5 +272,8 @@ continueButton.Callback = @(varargin) uiresume(fig);
 %venter på knappen bliver trykket
 uiwait(fig)
 
+    function stopAndAddPoints
+        activeTurn = 0;
+        uiresume(fig)
+    end
 end
-%return

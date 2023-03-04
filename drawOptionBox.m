@@ -1,4 +1,4 @@
-function [selectedDice, pointTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave)
+function [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave)
 %------------------
 
 % function tager en array rollOptions fra dicePoints samt en figur fig, og
@@ -193,13 +193,6 @@ continueButton.Callback = @(varargin) uiresume(fig);
 %venter på knappen bliver trykket
 uiwait(fig)
 
-
-%bruger cell2mat til at lave det til en array
-%eksData = cell2mat(optionBox.Data);
-
-disp("Tabellen efter valg burde have set sådanne ud: ")
-disp(optionBox.Data)
-
 output = table2array(optionBox.Data(:,3:4));
 output = transpose(output);
 
@@ -257,10 +250,11 @@ disp(pointTurn)
 %point
 %turPoint = 4;
 if pointTurn > 3
-    pointButton = uibutton(fig,'push','text','overfør point til listen og stop tur',...        
-        'ButtonPushedFcn', @(pointButton,event) disp('nogen trykker'));
+    pointButton = uibutton(fig,'push','text','overfør point til listen og stop tur',...
+        'ButtonPushedFcn', @(pointButton,event) stopAndAddPoints);
     pointButton.Position = [300 260 180 30];
     pointButton.BackgroundColor = '#90EE90';
+
     %continueButton.Callback = 'uiresume(gcbf)'; - virker også
     %taget fra nettet varargin laver en function med variabel antal input
     %argumenter
@@ -278,4 +272,8 @@ continueButton.Callback = @(varargin) uiresume(fig);
 %venter på knappen bliver trykket
 uiwait(fig)
 
-return
+    function stopAndAddPoints
+        activateTurn = 0;
+        uiresume(fig)
+    end
+end

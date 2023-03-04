@@ -3,12 +3,13 @@ function playChamoux
 
 %variabler til playChamoux
 usedDice = 0;
+pointsTurn = 0;
 
 %variabler til spillere og point
 numPlayers = 2;
-%activePlayer = 0;
+activePlayer = 0;
 pointPlayers = zeros(2,numPlayers);
-%pointTurn = 0;
+pointTurn = 0;
 activateTurn = 1;
 
 %variabler der sendes til diceThrow
@@ -40,7 +41,7 @@ drawnow
 % ------
 
 % funktion hvor man vælger antal spillere og starter spillet
-[numPlayers, activePlayer] = playersChamoux(fig, pointPlayers, activateTurn);
+[numPlayers, activePlayer] = playersChamoux(fig, pointPlayers, activateTurn, activePlayer);
 disp('antal spillere')
 disp(numPlayers)
 disp('den aktive spiller')
@@ -48,44 +49,75 @@ disp(activePlayer)
 
 %Laver en  varible til antal rull i et slag
 rollNum = 0;
+% while løkke for et spil
+while numPlayers > 0
+    disp('start spil loop')
+    numDice = 7; %antal terninger
+    activateTurn = 0;
 
-while numDice >= 1 && activateTurn ~=0
 
-    % Kalder diceThrow og retunere dit rul
-    roll = diceThrow(axes,numDice,rollArray,diceSpacing);
+    % while løkke for en runde
+    while activateTurn == 0 && numPlayers > 0
+        disp('start runde loop')
 
-    %roll = [1 1 1 1 5 5 4];
+        if activePlayer > numPlayers
+            activePlayer = 1;
+        end
 
-    % Giver rullet til dicepoints
-    rollOptions = dicePoints(numDice,roll,legalArray);
+        activateTurn = activateTurn + 1;
 
-    %Giver rollOptions til drawOptionsBox
-    [selectedDice, pointTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum);
-    
-    %Fjerner terninger til næste omgang
-    cla(axes)
+        % while løkke for en tur
+        while numDice >= 1 && activateTurn ~=0
 
-    % Bliver tegnet af drawOptionBox - pga. nyt brugsmønster
-    %drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
-    
-    %Finder antal brugte terninger
-    for t = 1:size(selectedDice,2)
+            % Kalder diceThrow og retunere dit rul
+            roll = diceThrow(axes,numDice,rollArray,diceSpacing);
 
-            usedDice = usedDice + selectedDice(4);
+            %roll = [1 1 1 1 5 5 4];
+
+            % Giver rullet til dicepoints
+            rollOptions = dicePoints(numDice,roll,legalArray);
+
+            %Giver rollOptions til drawOptionsBox
+            [selectedDice, pointTurn,activateTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurn);
+            
+            disp(activeTurn)
+
+
+            disp(pointsTurn)
+
+
+            %Fjerner terninger til næste omgang
+            cla(axes)
+
+            % Bliver tegnet af drawOptionBox - pga. nyt brugsmønster
+            %drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
+
+            %Finder antal brugte terninger
+            for t = 1:size(selectedDice,2)
+                usedDice = usedDice + selectedDice(4);
+            end
+
+            %Finder antal point
+            for t = 1:size(selectedDice,2)
+                pointsTurn = pointsTurn + selectedDice(3);
+            end
+
+
+            %Fjerner brugte terninger og sætter usedDice tilbage til 0 til næste
+            %loop
+            numDice = numDice - usedDice;
+            usedDice = 0;
+
+            %Vi køre et extra rull
+            rollNum = rollNum + 1;
+
+            disp("Antal terninger tilbage")
+            disp(numDice)
+
+        end
+        clc
+        disp("Runden er slut")
     end
-    
-    
-   
-    
-    %Fjerner brugte terninger og sætter usedDice tilbage til 0 til næste
-    %loop
-    numDice = numDice - usedDice;
-    usedDice = 0;
-    
-    %Vi køre et extra rull
-    rollNum = rollNum + 1;
-
-    disp("Antal terninger tilbage")
-    disp(numDice)
-
+    clc
+    disp("Spillet er Slut")
 end

@@ -78,10 +78,9 @@ while numPlayers > 0
             rollOptions = dicePoints(numDice,roll,legalArray);
 
             %Giver rollOptions til drawOptionsBox
-            [selectedDice, pointTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurn);
+            [selectedDice, pointTurn,activateTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurn);
 
             %Fjerner terninger til næste omgang
-            cla(axes)
 
             % Bliver tegnet af drawOptionBox - pga. nyt brugsmønster
             %drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
@@ -109,5 +108,10 @@ while numPlayers > 0
             disp(numDice)
 
         end
+        clc
+        disp("Runden er slut")
+        uiwait(fig)
     end
+    clc
+    disp("Spillet er Slut")
 end
