@@ -16,8 +16,8 @@ point for tur er lavet - der mangler samlet pointtabel
 
 spillemønster - afvikling af et spil med flere spillere
 "playChamoux"
-Ansvarlig: ?
-
+Ansvarlig: Peter
+Done
 
 >>funktions forklaring:
     Funktion:

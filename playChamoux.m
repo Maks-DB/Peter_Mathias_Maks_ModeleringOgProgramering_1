@@ -66,7 +66,6 @@ pointBox = playerPoints(fig,numPlayers);
 
 % while løkke for et spil
 while quitGame == 0
-    numDice = 7; %antal terninger
     activateTurn = 0;
 
     % forløkke for spillerunder
@@ -74,11 +73,11 @@ while quitGame == 0
 
         % tekst der viser den aktive spiller
         activePlayerArray = table(activePlayerRound);
-        activePlayerArray.Properties.VariableNames = ["Spilleren der har turen"];
+        activePlayerArray.Properties.VariableNames = "Spilleren der har turen";
 
         activePlayerBox = uitable(fig);
         activePlayerBox.Position = [300 430 170 60];
-        activePlayerBox.ColumnEditable = [false];
+        activePlayerBox.ColumnEditable = false;
 
         %sætter data til at være dataArray
         activePlayerBox.Data = activePlayerArray;
@@ -92,7 +91,13 @@ while quitGame == 0
 
         % while løkke for en tur
         while numDice >= 1 && activateTurn ~=0
-
+            
+            if activateTurn == 2
+                activateTurn = 1;
+                numDice = numDiceStart;
+                rollNum = 0;
+                cla(axesSelectedDice)
+            end
 
 
             % Kalder diceThrow og retunere dit rul
@@ -125,12 +130,18 @@ while quitGame == 0
         end
 
         %Tilføjer antal point til point tablellen
+
+
+        if numDice == 0
+            pointBox.Data{1,activePlayerRound} = -4;
+        else
         pointBox.Data{1,activePlayerRound} = ...
             pointBox.Data{1,activePlayerRound} + pointTurn;
 
         cla(axesSelectedDice)
         clc
         disp("Runden er slut")
+        end
     end
     clc
 
