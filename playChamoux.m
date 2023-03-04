@@ -159,12 +159,9 @@ while quitGame == 0
     [highestPoint,winner] = max(table2array(pointBox.Data));
 
     disp(highestPoint)
-<<<<<<< HEAD
-
-=======
     
     %Tjekker om nogen har vundet
->>>>>>> b52322dd41c8ee5b9b2fa22580b14aa62441c73e
+
     if highestPoint >= 43
         quitGame = 1;
     end
