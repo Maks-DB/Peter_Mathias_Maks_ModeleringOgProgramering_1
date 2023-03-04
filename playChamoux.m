@@ -41,7 +41,7 @@ drawnow
 % ------
 
 % funktion hvor man vælger antal spillere og starter spillet
-[numPlayers, activePlayer] = playersChamoux(fig, pointPlayers, activateTurn);
+[numPlayers, activePlayer] = playersChamoux(fig, pointPlayers, activateTurn, activePlayer);
 disp('antal spillere')
 disp(numPlayers)
 disp('den aktive spiller')
@@ -65,9 +65,6 @@ while numPlayers > 0
         end
 
         activateTurn = activateTurn + 1;
-
-        activePlayerText = uitextarea(fig, ...
-            "Value", {'activePlayer'} ,"Position",[300 450 150 30]);
 
         % while løkke for en tur
         while numDice >= 1 && activateTurn ~=0
