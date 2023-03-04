@@ -25,6 +25,9 @@ numCol = size(rollOptions,2);
 %laver en ny array
 rollOptionsNoZero = [];
 
+% starter turen igen med mindre man trykker stop
+activateTurn = 1;
+
 %fjerner alle nul søjler
 for t = 1:numCol
     if rollOptions(1,t) ~= 0
@@ -141,6 +144,9 @@ for t = 1:numCol
 
             %Der fratages ingen terninger
             dataArray{t,3} = 0;
+            
+            %Turen stopper
+            activateTurn = 0;
 
             break
 
@@ -153,6 +159,9 @@ for t = 1:numCol
 
             %Der fratages ingen terninger
             dataArray{t,3} = 0;
+            
+            %Slår om
+            activateTurn = 2;
 
             break
 
@@ -219,7 +228,8 @@ disp(outputOnlySelected)
 %checker om der er blevet valgt nogen slag
 if isempty(outputOnlySelected) == 1
     disp("Da der ingen slag blev valgt har functionen drawOptionBox sendt denne array ud: ")
-    selectedDice = [0;0;0;0];
+    selectedDice = [0;0;-4;0];
+    activateTurn = 0;
     disp(selectedDice)
     return
 end
@@ -254,7 +264,7 @@ if pointTurn > 3
         'ButtonPushedFcn', @(pointButton,event) stopAndAddPoints);
     pointButton.Position = [300 260 180 30];
     pointButton.BackgroundColor = '#90EE90';
-
+    
     %continueButton.Callback = 'uiresume(gcbf)'; - virker også
     %taget fra nettet varargin laver en function med variabel antal input
     %argumenter
@@ -271,6 +281,11 @@ continueButton.Callback = @(varargin) uiresume(fig);
 
 %venter på knappen bliver trykket
 uiwait(fig)
+
+if pointTurn > 3
+    delete(pointButton)
+end
+delete(continueButton)
 
     function stopAndAddPoints
         activateTurn = 0;

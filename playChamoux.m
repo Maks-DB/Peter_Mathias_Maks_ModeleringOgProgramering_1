@@ -47,6 +47,8 @@ disp(numPlayers)
 disp('den aktive spiller')
 disp(activePlayer)
 
+pointBox = playerPoints(fig,numPlayers);
+
 %Laver en  varible til antal rull i et slag
 rollNum = 0;
 % while løkke for et spil
@@ -57,7 +59,9 @@ while numPlayers > 0
 
 
     % while løkke for en runde
-    while activateTurn == 0 && numPlayers > 0
+    % while activateTurn == 0 && numPlayers > 0
+
+    for activePlayerRound = 1:numPlayers
         disp('start runde loop')
 
         if activePlayer > numPlayers
@@ -89,12 +93,7 @@ while numPlayers > 0
             for t = 1:size(selectedDice,2)
                 usedDice = usedDice + selectedDice(4);
             end
-
-            %Finder antal point
-            for t = 1:size(selectedDice,2)
-                pointsTurn = pointsTurn + selectedDice(3);
-            end
-
+            
 
             %Fjerner brugte terninger og sætter usedDice tilbage til 0 til næste
             %loop
@@ -106,9 +105,15 @@ while numPlayers > 0
 
             disp("Antal terninger tilbage")
             disp(numDice)
+            
+            disp(pointBox.Data)
+
+            
 
         end
-        clc
+        
+        pointBox.Data{1,activePlayerRound} = ...
+            pointBox.Data{1,activePlayerRound} + pointTurn;
         disp("Runden er slut")
         uiwait(fig)
     end

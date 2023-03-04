@@ -1,10 +1,20 @@
-function playerPoints(numPlayers)
+function pointBox = playerPoints(fig,numPlayers)
 
-columnNameArray = strings
+width 
+
+pointsCell = {};
 for t = 1:numPlayers
-    columnNameArray(end+1) = sprintf("Spiller %d",t);
+    pointsCell(t) =  cellstr(sprintf("Spiller %d",t));
 end
 
-disp(columnNameArray)
+disp(pointsCell)
+
+pointsTable = array2table(zeros(1,numPlayers));
+pointsTable.Properties.VariableNames = pointsCell;
+
+pointBox = uitable(fig);
+pointBox.Position = [580 100 200 50];
+pointBox.Data = pointsTable;
+pointBox.ColumnWidth = 'fit';
 
 end
