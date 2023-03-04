@@ -152,7 +152,7 @@ while quitGame == 0
 
     disp(highestPoint)
 
-    if highestPoint >= 2
+    if highestPoint >= 43
         quitGame = 1;
     end
 
