@@ -59,31 +59,7 @@ for t = 1:size(selectedDice,2)
             drawDice(2)
             pointTurn = 0;
 
-            %         case 11
-            %             drawDice(1)
-            %             drawDice(1)
-            %             drawDice(1)
-            %         case 12
-            %             drawDice(2)
-            %             drawDice(2)
-            %             drawDice(2)
-            %         case 13
-            %             drawDice(3)
-            %             drawDice(3)
-            %             drawDice(3)
-            %         case 14
-            %             drawDice(4)
-            %             drawDice(4)
-            %             drawDice(4)
-            %         case 15
-            %             drawDice(5)
-            %             drawDice(5)
-            %             drawDice(5)
-            %         case 16
-            %             drawDice(6)
-            %             drawDice(6)
-            %             drawDice(6)
-
+            
             %fødte
         otherwise
 
