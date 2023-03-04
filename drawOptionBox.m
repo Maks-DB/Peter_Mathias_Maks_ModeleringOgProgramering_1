@@ -49,7 +49,9 @@ pointTurn = pointTurnSave;
 %og vi transponere derfor matricen før og efter. Skal ikke gøres for 3 par
 %da de håndteres anderledes
 
-disp(rollOptions)
+% vis det sorterede array med muligheder
+% disp(rollOptions)
+
 if rollOptions(2,1) ~= 40
     rollOptions = transpose(rollOptions);
     rollOptionsUnique = unique(rollOptions,"rows");
@@ -180,7 +182,7 @@ for t = 1:numCol
 end
 
 
-%---------------------
+%---------------------%
 % laver tabelen
 
 optionBox = uitable(fig);
@@ -220,6 +222,7 @@ for t = 1:size(output,2)
     end
 end
 
+disp('outputOnlySelected')
 disp(outputOnlySelected)
 
 
@@ -248,7 +251,7 @@ delete(optionBox)
 %sætter selectedDice værdien til brug i andre funktioner
 selectedDice = outputOnlySelected;
 
-%Maks tester
+% samlede point og tegning af de valgte terninger
 pointTurn = drawSelectedDice(axesSelectedDice,selectedDice,diceSpacing,rollNum,pointTurn);
 
 % points samlet for tur

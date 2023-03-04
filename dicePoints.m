@@ -1,19 +1,8 @@
-% Varibler der skal overføres ved kald:
-% - numDice
-% - rollArray
-% - bornPreviousThrow
-% TEST - ovenstående sættes lige nu manuelt og der er et test terningslag
-
 function rollOptions = dicePoints(numDice,rollArray,playerOptionArray)
-% clc kun for test - skal fjernes når der åbnes med variabel værdier
-%clc
 
-%numDice = 7; %antal terninger
-%rollArray = zeros(1,numDice);
-
-% array med lovlige valg,
+% playerOptionArray er et array med lovlige valg,
 % række 1 antal øjne,
-% række 2 lovlige valg(0=ulovlig, 1=enkeltterning, n+10|n+20=fødte, 30=Cameron, 40=3 par)
+% række 2 lovlige valg(0=ulovlig, 1=enkeltterning, n+10|n+20=fødte, 30=Cameron, 40=3 par, 60=ugyldigt slag, 70= det hele om )
 % række 3 valg option. nummerisk fortløbende
 % "1 2 0 2 0 2" vælg 1 for pos1(enkeltterning), vælg 2 for pos 2,4,6(fødte)
 % række 4 - point for valget i række 3
@@ -52,18 +41,6 @@ tjekFemmere = 0;
 % havde der kun været et lovligt slag da de er fødte og turen slås om.
 selectOptionCount = 0;
 
-% Terningslag for test
-% for h = 1:numDice
-%     %ruller terningerne
-%      n = randi(6);
-%      rollArray(h)=n;
-%  end
-
-disp("Wauuu sikke et slag")
-
-
-
-
 % tæller antal øjne i slaget og gemmer i diceCount array "0 0 0 7 0 0" er 7 firere
 i = 0;
 while i < numDice
@@ -83,8 +60,8 @@ while i < numDice
         diceCount(6)= diceCount(6) + 1;
     end
 end
-disp("antal af hver")
-disp(diceCount)
+%disp("antal af hver")
+%disp(diceCount)
 %disp("tjek for antal af hver - done")
 
 
@@ -185,12 +162,8 @@ end
 % disp(rollArray)
 % disp("antal disponiple")
 % disp(diceCount)
-disp("tjek for fødte - done")
 
-
-
-
-
+% disp("tjek for fødte - done")
 
 % tjek for Cameron i første slag
 if diceCount(1) == 1 && diceCount(1) ~= 0 && diceCount(2) <= 2 && diceCount(2) ~= 0 && diceCount(3) <= 2 && diceCount(3) ~= 0 && diceCount(4) <= 2 && diceCount(4) ~= 0 && diceCount(5) == 1 && diceCount(6) <= 2 && diceCount(6) ~= 0
@@ -204,11 +177,7 @@ if diceCount(1) == 1 && diceCount(1) ~= 0 && diceCount(2) <= 2 && diceCount(2) ~
     disp("!!! CAMERON i første !!!")
 end
 
-disp("tjek Cameron - done")
-
-
-
-
+% disp("tjek Cameron - done")
 
 
 % tjek for tre par
@@ -244,12 +213,9 @@ if par == 3
         disp("!!! Tre par i første !!!")
     end
 end
-disp("antal par i første")
-disp(par)
-disp("tjek par - done")
-
-
-
+%disp("antal par i første")
+% disp(par)
+% disp("tjek par - done")
 
 
 % Tjek for point til doubling af fødte
@@ -276,14 +242,11 @@ for r = (1:6)
 end
 
 
-
-
-
-
 % tjek antal enere der kan vælges
 %tjekEnere = diceCount(1);
 for m = (1:numDice)
     if rollArray(m) == 1
+        disp("Der er en ener")
         selectOption = selectOption+1;
         playerOptionArray(1,m) = 1;
         playerOptionArray(2,m) = 1;
@@ -294,13 +257,14 @@ for m = (1:numDice)
         tjekEnere = tjekEnere + 1;
     end
 end
-disp("antal enere")
-disp(tjekEnere)
+% disp("antal enere")
+% disp(tjekEnere)
 
 % tjek antal femmere der kan vælges
 %tjekFemmere = diceCount(5);
 for p = (1:numDice)
     if rollArray(p) == 5
+        disp("Der er en femmer")
         selectOption = selectOption+1;
         playerOptionArray(1,p) = 5;
         playerOptionArray(2,p) = 1;
@@ -311,18 +275,18 @@ for p = (1:numDice)
         tjekFemmere = tjekFemmere + 1;
     end
 end
-disp("antal femmere")
-disp(tjekFemmere)
+% disp("antal femmere")
+% disp(tjekFemmere)
 
 % skal slaget slås om (er værdien 0 og selectOptionCount=1 er der omslag)
 tjekOmslag = numDice - diceWithValue;
-if tjekOmslag == 0 && selectOptionCount == 1
+if tjekOmslag == 0 % && selectOptionCount == 1
     disp("!!! Der er omslag !!!")
     selectOption = 1;
     %clear playerOptionArray
     playerOptionArray = [1 ; 70 ; 1 ; -4];
     diceWithValue = diceWithValue + 1;
-    disp(playerOptionArray)
+    %disp(playerOptionArray)
 end
 
 % tjek for ugyldigt slag (-4 point)
@@ -331,20 +295,20 @@ if diceWithValue == 0
     selectOption = 1;
     %clear playerOptionArray
     playerOptionArray = [1 ; 60 ; 1 ; 0];
-    disp(playerOptionArray)
+    %disp(playerOptionArray)
 end
 
-disp("antal terninger der ikke tæller")
-disp(tjekOmslag)
-
-disp("antal af lovlige valg")
-disp(selectOption)
-
-disp("mulige valg")
-disp("række 1 - n (terningens øjne)")
-disp("række 2 - (0=ulovlig, 1=enkeltterning, n+10|n+20=fødte, 30=Cameron, 40=3 par, 50=fødte fordobles, 60=fejlslag, 70=omslag)")
-disp("række 3 - valgets navn (integer)")
-disp("række 4 - valgets point værdi)")
-disp(playerOptionArray)
+% disp("antal terninger der ikke tæller")
+% disp(tjekOmslag)
+% 
+% disp("antal af lovlige valg")
+% disp(selectOption)
+% 
+% disp("mulige valg")
+% disp("række 1 - n (terningens øjne)")
+% disp("række 2 - (0=ulovlig, 1=enkeltterning, n+10|n+20=fødte, 30=Cameron, 40=3 par, 50=fødte fordobles, 60=fejlslag, 70=omslag)")
+% disp("række 3 - valgets navn (integer)")
+% disp("række 4 - valgets point værdi)")
+% disp(playerOptionArray)
 
 rollOptions = playerOptionArray;

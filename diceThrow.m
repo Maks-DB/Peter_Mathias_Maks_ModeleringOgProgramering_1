@@ -7,8 +7,6 @@ startPosx= 0; %x positionen af første terning
 
 numRolls = 10; %antal slag
 
-%rollArray = zeros(1,numDice);
-
 posx = startPosx; % posx bruges i hele dokumentet til at se positionen af terningen
 posy = 0-height/2; %sætter midten af terningen til at være i 0 y
 
