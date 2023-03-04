@@ -1,4 +1,5 @@
 function playChamoux
+clc
 
 %variabler til playChamoux
 usedDice = 0;
@@ -9,7 +10,6 @@ numDiceStart = 7; %antal terninger
 rollArray = zeros(1,numDiceStart);
 diceSpacing = 1.1; %Afstand mellem terninger
 width = 10;
-height = 10;
 
 %varibler der sendes til dicePoints (inputvariabel sendes til dicePoints)
 legalArray = zeros(4,numDiceStart);
@@ -66,6 +66,8 @@ pointBox = playerPoints(fig,numPlayers);
 
 % while løkke for et spil
 while quitGame == 0
+
+    % vælger om der skal spilles en tur
     activateTurn = 0;
 
     % forløkke for spillerunder
@@ -125,6 +127,7 @@ while quitGame == 0
 
             disp("Antal terninger tilbage")
             disp(numDice)
+
             disp(pointBox.Data)
 
         end
