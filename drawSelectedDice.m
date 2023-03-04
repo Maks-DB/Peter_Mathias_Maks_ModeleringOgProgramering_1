@@ -25,7 +25,7 @@ for t = 1:size(selectedDice,2)
             for tt = 1:2
                 drawDice(selectedDice(1,t))
             end
-            pointTurn = pointTurn + 15;
+            pointTurn = pointTurn + 5; %giver 15 men ganges med 3 ??!!
 
             %en enkelt terning
         case 1

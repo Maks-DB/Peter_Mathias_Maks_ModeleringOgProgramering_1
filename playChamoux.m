@@ -1,15 +1,8 @@
 function playChamoux
 
-
 %variabler til playChamoux
 usedDice = 0;
 quitGame = 0;
-
-%variabler til spillere og point
-numPlayers = 2;
-activePlayer = 0;
-pointPlayers = zeros(2,numPlayers);
-activateTurn = 1;
 
 %variabler der sendes til diceThrow
 numDiceStart = 7; %antal terninger
@@ -60,10 +53,7 @@ drawnow
 % ------
 
 % funktion hvor man vælger antal spillere og starter spillet
-%[numPlayers, activePlayer] = playersChamoux(fig, pointPlayers, activateTurn, activePlayer);
-[numPlayers] = playersChamoux(fig, pointPlayers, activateTurn);
-disp('antal spillere')
-disp(numPlayers)
+[numPlayers] = playersChamoux(fig);
 
 if numPlayers <= 0
     disp("Du har ingen spillere, dette er altså ikke et 0 player spil din pap cykel.")
@@ -76,23 +66,13 @@ pointBox = playerPoints(fig,numPlayers);
 
 % while løkke for et spil
 while quitGame == 0
-    disp('start spil loop')
     numDice = 7; %antal terninger
     activateTurn = 0;
 
-
-    % while løkke for en runde
-    % while activateTurn == 0 && numPlayers > 0
-
+    % forløkke for spillerunder
     for activePlayerRound = 1:numPlayers
-        disp('start runde loop')
-
-        disp('Spiller')
-        disp(activePlayerRound)
-        disp('!!! Spiller nu !!!')
 
         % tekst der viser den aktive spiller
-
         activePlayerArray = table(activePlayerRound);
         activePlayerArray.Properties.VariableNames = ["Spilleren der har turen"];
 
@@ -102,13 +82,6 @@ while quitGame == 0
 
         %sætter data til at være dataArray
         activePlayerBox.Data = activePlayerArray;
-
-
-        if activePlayer > numPlayers
-            activePlayer = 1;
-        end
-
-
 
         activateTurn = activateTurn + 1;
 
@@ -125,8 +98,6 @@ while quitGame == 0
             % Kalder diceThrow og retunere dit rul
             roll = diceThrow(axes,numDice,rollArray,diceSpacing);
 
-            %roll = [1 1 1 1 5 5 4];
-
             % Giver rullet til dicepoints
             rollOptions = dicePoints(numDice,roll,legalArray);
 
@@ -134,16 +105,10 @@ while quitGame == 0
             [selectedDice, pointTurn,activateTurn] = drawOptionBox(fig, ...
                 rollOptions, diceSpacing, rollNum, pointTurn,axesSelectedDice);
 
-            %Fjerner terninger til næste omgang
-
-            % Bliver tegnet af drawOptionBox - pga. nyt brugsmønster
-            %drawSelectedDice(fig,selectedDice,diceSpacing,rollNum)
-
             %Finder antal brugte terninger
             for t = 1:size(selectedDice,2)
                 usedDice = usedDice + selectedDice(4);
             end
-
 
             %Fjerner brugte terninger og sætter usedDice tilbage til 0 til næste
             %loop
@@ -155,10 +120,7 @@ while quitGame == 0
 
             disp("Antal terninger tilbage")
             disp(numDice)
-
             disp(pointBox.Data)
-
-
 
         end
 
