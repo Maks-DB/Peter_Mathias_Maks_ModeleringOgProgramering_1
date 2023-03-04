@@ -50,19 +50,17 @@ axesSelectedDice.XLim = [-5 8*(width*diceSpacing)];
 
 drawnow
 
-% ------
 
 % funktion hvor man vælger antal spillere og starter spillet
 [numPlayers] = playersChamoux(fig);
 
 if numPlayers <= 0
     disp("Du har ingen spillere, dette er altså ikke et 0 player spil din pap cykel.")
-    return
+
 end
 
 %Laver en uitable til point pr spiller
 pointBox = playerPoints(fig,numPlayers);
-
 
 % while løkke for et spil
 while quitGame == 0

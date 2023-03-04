@@ -10,13 +10,14 @@ playersBox.ColumnEditable = true;
 %sætter data til at være dataArray
 playersBox.Data = playersArray;
 
+
 %laver en knap til at vælge slaget
 numButton = uicontrol(fig,'string', "Start spillet");
 numButton.Position = [150 430 80 60];
 numButton.BackgroundColor = '#90EE90';
 
-%taget fra nettet varargin laver en function med variabel antal input
-%argumenter
+
+% laver en function med variabel antal input argumenter
 numButton.Callback = @(varargin) uiresume(fig);
 
 %venter på knappen bliver trykket

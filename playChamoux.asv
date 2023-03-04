@@ -1,4 +1,5 @@
 function playChamoux
+clc
 
 %variabler til playChamoux
 usedDice = 0;
@@ -49,19 +50,17 @@ axesSelectedDice.XLim = [-5 8*(width*diceSpacing)];
 
 drawnow
 
-% ------
 
 % funktion hvor man vælger antal spillere og starter spillet
 [numPlayers] = playersChamoux(fig);
 
 if numPlayers <= 0
     disp("Du har ingen spillere, dette er altså ikke et 0 player spil din pap cykel.")
-    return
+
 end
 
 %Laver en uitable til point pr spiller
 pointBox = playerPoints(fig,numPlayers);
-
 
 % while løkke for et spil
 while quitGame == 0
@@ -92,7 +91,13 @@ while quitGame == 0
 
         % while løkke for en tur
         while numDice >= 1 && activateTurn ~=0
-
+            
+            if activateTurn == 2
+                activateTurn = 1;
+                numDice = numDiceStart;
+                rollNum = 0;
+                cla(axesSelectedDice)
+            end
 
 
             % Kalder diceThrow og retunere dit rul
@@ -121,18 +126,23 @@ while quitGame == 0
             disp("Antal terninger tilbage")
             disp(numDice)
 
-            disp('Slagets data')
             disp(pointBox.Data)
 
         end
 
         %Tilføjer antal point til point tablellen
+
+
+        if numDice == 0
+            pointBox.Data{1,activePlayerRound} = -4;
+        else
         pointBox.Data{1,activePlayerRound} = ...
             pointBox.Data{1,activePlayerRound} + pointTurn;
 
         cla(axesSelectedDice)
         clc
         disp("Runden er slut")
+        end
     end
     clc
 

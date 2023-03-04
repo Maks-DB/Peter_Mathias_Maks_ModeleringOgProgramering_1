@@ -84,6 +84,7 @@ for t = 1:size(selectedDice,2)
 
 end
 
+
 % Tegner en firkant og kalder så drawDiceFace med en variable n.
 % Opdatere også højden
     function drawDice(n)
