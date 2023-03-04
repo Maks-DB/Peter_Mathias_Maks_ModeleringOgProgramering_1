@@ -3,22 +3,23 @@ function playChamoux
 
 %variabler til playChamoux
 usedDice = 0;
-pointsTurn = 0;
+quitGame = 0;
 
 %variabler til spillere og point
 numPlayers = 2;
 activePlayer = 0;
 pointPlayers = zeros(2,numPlayers);
-pointTurn = 0;
 activateTurn = 1;
 
 %variabler der sendes til diceThrow
-numDice = 7; %antal terninger
-rollArray = zeros(1,numDice);
+numDiceStart = 7; %antal terninger
+rollArray = zeros(1,numDiceStart);
 diceSpacing = 1.1; %Afstand mellem terninger
+width = 10;
+height = 10;
 
 %varibler der sendes til dicePoints
-legalArray = zeros(4,numDice);
+legalArray = zeros(4,numDiceStart);
 
 %opretter Uifigure
 fig = uifigure;
@@ -26,6 +27,8 @@ axes = uiaxes(fig);
 
 fig.Position = [100 100 1000 500];
 
+%Terninge axis
+%---------
 axes.Position = [0 100 500 500];
 
 axis(axes,'off')
@@ -35,6 +38,22 @@ axisx = 7 * (diceSpacing*10);
 
 axes.XLim = [0 axisx];
 axes.YLim = [-5 5];
+%---------
+
+%gemte terninger axis
+%--------
+axesSelectedDice = uiaxes(fig);
+axesSelectedDice.Position = [500 150 300 400];
+
+axis(axesSelectedDice,'off')
+axis(axesSelectedDice,'equal')
+
+axisy = 7 * (diceSpacing*10);
+
+axesSelectedDice.YLim = [-5 axisy];
+axesSelectedDice.XLim = [-5 5*(width*diceSpacing)];
+%--------
+
 
 drawnow
 
@@ -47,12 +66,12 @@ disp(numPlayers)
 disp('den aktive spiller')
 disp(activePlayer)
 
+%Laver en uitable til point pr spiller
 pointBox = playerPoints(fig,numPlayers);
 
-%Laver en  varible til antal rull i et slag
-rollNum = 0;
+
 % while løkke for et spil
-while numPlayers > 0
+while quitGame == 0
     disp('start spil loop')
     numDice = 7; %antal terninger
     activateTurn = 0;
@@ -70,6 +89,11 @@ while numPlayers > 0
 
         activateTurn = activateTurn + 1;
 
+        % Sætter point til 0, til næste spiller
+        pointTurn = 0;
+        rollNum = 0;
+        numDice = numDiceStart;
+
         % while løkke for en tur
         while numDice >= 1 && activateTurn ~=0
 
@@ -82,7 +106,8 @@ while numPlayers > 0
             rollOptions = dicePoints(numDice,roll,legalArray);
 
             %Giver rollOptions til drawOptionsBox
-            [selectedDice, pointTurn,activateTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurn);
+            [selectedDice, pointTurn,activateTurn] = drawOptionBox(fig, ...
+                rollOptions, diceSpacing, rollNum, pointTurn,axesSelectedDice);
 
             %Fjerner terninger til næste omgang
 
@@ -92,11 +117,6 @@ while numPlayers > 0
             %Finder antal brugte terninger
             for t = 1:size(selectedDice,2)
                 usedDice = usedDice + selectedDice(4);
-            end
-
-            %Finder antal point
-            for t = 1:size(selectedDice,2)
-                pointsTurn = pointsTurn + selectedDice(3);
             end
             
 
@@ -111,16 +131,25 @@ while numPlayers > 0
             disp("Antal terninger tilbage")
             disp(numDice)
             
+            disp(pointBox.Data)
+
             
 
-            pointBox.Data{2,activePlayerRound} = ...
-            pointBox.Data{2,activePlayerRound} + pointsTurn;
-
         end
+
+        pointBox.Data{1,activePlayerRound} = ...
+            pointBox.Data{1,activePlayerRound} + pointTurn;
+        
+        cla(axesSelectedDice)
         clc
         disp("Runden er slut")
-        uiwait(fig)
     end
     clc
-    disp("Spillet er Slut")
+
+    disp(pointBox.Data)
+
+    
+
+
+
 end

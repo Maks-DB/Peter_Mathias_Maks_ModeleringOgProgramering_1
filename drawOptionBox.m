@@ -1,4 +1,4 @@
-function [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave)
+function [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave,axesSelectedDice)
 %------------------
 
 % function tager en array rollOptions fra dicePoints samt en figur fig, og
@@ -250,7 +250,7 @@ delete(optionBox)
 selectedDice = outputOnlySelected;
 
 %Maks tester
-pointTurn = drawSelectedDice(fig,selectedDice,diceSpacing,rollNum,pointTurn);
+pointTurn = drawSelectedDice(axesSelectedDice,selectedDice,diceSpacing,rollNum,pointTurn);
 
 % points samlet for tur
 disp('Tur point')

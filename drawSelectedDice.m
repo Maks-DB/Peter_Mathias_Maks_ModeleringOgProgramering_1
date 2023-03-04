@@ -1,21 +1,9 @@
-function pointTurn = drawSelectedDice(fig,selectedDice,diceSpacing,rollNum, pointTurn)
+function pointTurn = drawSelectedDice(axesSelectedDice,selectedDice,diceSpacing,rollNum, pointTurn)
 
-% slagets point
-pointTurn = pointTurn;
+%Tjekker om det er en ny tur
 
 height = 10;
 width = 10;
-
-axesSelectedDice = uiaxes(fig);
-axesSelectedDice.Position = [500 150 300 400];
-
-axis(axesSelectedDice,'off')
-axis(axesSelectedDice,'equal')
-
-axisy = 7 * (diceSpacing*10);
-
-axesSelectedDice.YLim = [-5 axisy];
-axesSelectedDice.XLim = [-5 5*(width*diceSpacing)];
 
 posx = rollNum*(width*(1.5*diceSpacing));
 posy = 0;
