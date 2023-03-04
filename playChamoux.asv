@@ -11,7 +11,7 @@ diceSpacing = 1.1; %Afstand mellem terninger
 width = 10;
 height = 10;
 
-%varibler der sendes til dicePoints
+%varibler der sendes til dicePoints (inputvariabel sendes til dicePoints)
 legalArray = zeros(4,numDiceStart);
 
 %opretter Uifigure
@@ -69,7 +69,7 @@ while quitGame == 0
     numDice = 7; %antal terninger
     activateTurn = 0;
 
-
+    % forløkke for spillerunder
     for activePlayerRound = 1:numPlayers
 
         % tekst der viser den aktive spiller
@@ -97,8 +97,6 @@ while quitGame == 0
 
             % Kalder diceThrow og retunere dit rul
             roll = diceThrow(axes,numDice,rollArray,diceSpacing);
-
-            %roll = [1 1 1 1 5 5 4];
 
             % Giver rullet til dicepoints
             rollOptions = dicePoints(numDice,roll,legalArray);

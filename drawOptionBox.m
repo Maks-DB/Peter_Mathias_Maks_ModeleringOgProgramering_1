@@ -144,7 +144,7 @@ for t = 1:numCol
 
             %Der fratages ingen terninger
             dataArray{t,3} = 0;
-            
+
             %Turen stopper
             activateTurn = 0;
 
@@ -159,7 +159,7 @@ for t = 1:numCol
 
             %Der fratages ingen terninger
             dataArray{t,3} = 0;
-            
+
             %Slår om
             activateTurn = 2;
 
@@ -190,13 +190,12 @@ optionBox.ColumnEditable = [false false false true];
 %sætter data til at være dataArray
 optionBox.Data = dataArray;
 
-%laver en knap til at vælge slaget
+% laver en knap til at vælge slaget
 continueButton = uicontrol(fig,'string', "Tag terninger fra, vælg mindst en mulighed herunder");
 continueButton.Position = [20 260 260 30];
 continueButton.BackgroundColor = '#90EE90';
-%continueButton.Callback = 'uiresume(gcbf)'; - virker også
-%taget fra nettet varargin laver en function med variabel antal input
-%argumenter
+
+% varargin laver en function med variabel antal input argumenter
 continueButton.Callback = @(varargin) uiresume(fig);
 
 %venter på knappen bliver trykket
@@ -264,19 +263,13 @@ if pointTurn > 3
         'ButtonPushedFcn', @(pointButton,event) stopAndAddPoints);
     pointButton.Position = [300 260 180 30];
     pointButton.BackgroundColor = '#90EE90';
-    
-    %continueButton.Callback = 'uiresume(gcbf)'; - virker også
-    %taget fra nettet varargin laver en function med variabel antal input
-    %argumenter
 end
 
-
+%knap til at slå med de tilbageværende terninger
 continueButton = uicontrol(fig,'string', "slå igen");
 continueButton.Position = [20 260 260 30];
 continueButton.BackgroundColor = '#90EE90';
-%continueButton.Callback = 'uiresume(gcbf)'; - virker også
-%taget fra nettet varargin laver en function med variabel antal input
-%argumenter
+
 continueButton.Callback = @(varargin) uiresume(fig);
 
 %venter på knappen bliver trykket
@@ -285,10 +278,12 @@ uiwait(fig)
 if pointTurn > 3
     delete(pointButton)
 end
+
 delete(continueButton)
 
     function stopAndAddPoints
         activateTurn = 0;
         uiresume(fig)
     end
+
 end

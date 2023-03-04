@@ -11,7 +11,7 @@ diceSpacing = 1.1; %Afstand mellem terninger
 width = 10;
 height = 10;
 
-%varibler der sendes til dicePoints
+%varibler der sendes til dicePoints (inputvariabel sendes til dicePoints)
 legalArray = zeros(4,numDiceStart);
 
 %opretter Uifigure

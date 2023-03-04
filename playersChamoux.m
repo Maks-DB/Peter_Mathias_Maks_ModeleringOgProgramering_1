@@ -1,11 +1,11 @@
 function [numPlayers] = playersChamoux(fig)
 
 playersArray = table('size',[1, 1],'VariableTypes',{'double'});
-playersArray.Properties.VariableNames = ["skriv antal spilere"];
+playersArray.Properties.VariableNames = "skriv antal spilere";
 
 playersBox = uitable(fig);
 playersBox.Position = [10 430 130 60];
-playersBox.ColumnEditable = [true];
+playersBox.ColumnEditable = true;
 
 %sætter data til at være dataArray
 playersBox.Data = playersArray;
@@ -19,14 +19,10 @@ numButton.BackgroundColor = '#90EE90';
 %argumenter
 numButton.Callback = @(varargin) uiresume(fig);
 
-disp('Player')
-disp('activePlayer')
-
 %venter på knappen bliver trykket
 uiwait(fig)
 
+% sætter antal spillere (output variabel)
 numPlayers = table2array(playersBox.Data(1,1));
-
-disp(numPlayers)
 
 end
