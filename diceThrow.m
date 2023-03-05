@@ -43,8 +43,6 @@ end
 %pause så man kan nå at se noget ske. 
 pause(0.1)
 
-%genstarter til næste loop
-
 %undgå at slette til sidst
 if t == numRolls
     %disp(rollArray)
