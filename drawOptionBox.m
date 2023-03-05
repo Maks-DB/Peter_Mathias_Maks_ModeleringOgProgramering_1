@@ -1,4 +1,6 @@
-function [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave,axesSelectedDice,axes)
+function [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, ...
+    rollOptions, diceSpacing, rollNum, ...
+    pointTurnSave,axesSelectedDice,axes)
 %------------------
 
 % function tager en array rollOptions fra dicePoints samt en figur fig, og
@@ -67,7 +69,8 @@ else
     %tiljøjer de ikke-unikke søjler til den nye array
     for i = 1:size(rollOptions,2)
         if ismember(i,duplicatePos) == 0
-            rollOptionsOnlyDuplicate=cat(2,rollOptionsOnlyDuplicate,rollOptions(:,i));
+            rollOptionsOnlyDuplicate=cat(2, ...
+                rollOptionsOnlyDuplicate,rollOptions(:,i));
         end
     end
 
@@ -83,7 +86,8 @@ numCol = size(rollOptions,2);
 % bygger data array
 
 %vi laver et table og giver variablerne navne.
-dataArray = table('size',[numCol, 4],'VariableTypes',{'string','double','double','logical'});
+dataArray = table('size',[numCol, 4], ...
+    'VariableTypes',{'string','double','double','logical'});
 dataArray.Properties.VariableNames = ["Slag","Point","Terninger","Valg"];
 
 %Hver mulighed tilføres til dataArray
@@ -96,7 +100,8 @@ for t = 1:numCol
         %enkelt terning
         case 1
             %Indsætter forklarende tekst
-            dataArray{t,1} = sprintf("Du har slået en %d'er ",rollOptions(1,t));
+            dataArray{t,1} = ...
+                sprintf("Du har slået en %d'er ",rollOptions(1,t));
 
             %indsætter antal point
             dataArray{t,2} = rollOptions(4,t);
@@ -154,7 +159,8 @@ for t = 1:numCol
 
         case 70
             %Indsætter forklarende tekst
-            dataArray{t,1} = "Alle terninger tæller - du må slå runden om";
+            dataArray{t,1} = "Alle terninger tæller " + ...
+                "- du må slå runden om";
 
             %indsætter antal point
             dataArray{t,2} = 0;
@@ -169,7 +175,8 @@ for t = 1:numCol
 
         otherwise
             %Indsætter forklarende tekst
-            dataArray{t,1} = sprintf("Du har slået fødte %d'er",rollOptions(1,t));
+            dataArray{t,1} = ...
+            sprintf("Du har slået fødte %d'er",rollOptions(1,t));
 
             %indsætter antal point
             dataArray{t,2} = rollOptions(4,t);
@@ -193,7 +200,8 @@ optionBox.ColumnEditable = [false false false true];
 optionBox.Data = dataArray;
 
 % laver en knap til at vælge slaget
-continueButton = uicontrol(fig,'string', "Tag terninger fra, vælg mindst en mulighed herunder");
+continueButton = uicontrol(fig, ...
+    'string', "Tag terninger fra, vælg mindst en mulighed herunder");
 continueButton.Position = [20 260 260 30];
 continueButton.BackgroundColor = '#90EE90';
 
@@ -230,7 +238,8 @@ disp(outputOnlySelected)
 
 %checker om der er blevet valgt nogen slag
 if isempty(outputOnlySelected) == 1
-    disp("Da der ingen slag blev valgt har functionen drawOptionBox sendt denne array ud: ")
+    disp("Da der ingen slag blev valgt har " + ...
+        "functionen drawOptionBox sendt denne array ud: ")
     selectedDice = [0;0;-4;0];
     pointTurn = -4;
     activateTurn = 0;
@@ -254,7 +263,8 @@ delete(optionBox)
 selectedDice = outputOnlySelected;
 
 % samlede point og tegning af de valgte terninger
-pointTurn = drawSelectedDice(axesSelectedDice,selectedDice,diceSpacing,rollNum,pointTurn);
+pointTurn = drawSelectedDice(axesSelectedDice, ...
+    selectedDice,diceSpacing,rollNum,pointTurn);
 
 % points samlet for tur
 disp('Tur point')
@@ -264,14 +274,15 @@ disp(pointTurn)
 %point
 %turPoint = 4;
 if pointTurn > 3
-    pointButton = uibutton(fig,'push','text','overfør point til listen og stop tur',...
+    pointButton = uibutton(fig,'push','text', ...
+        'overfør point til listen og stop tur',...
         'ButtonPushedFcn', @(pointButton,event) stopAndAddPoints);
     pointButton.Position = [300 260 180 30];
     pointButton.BackgroundColor = '#90EE90';
 end
 
-%Ændre continue knappens position og tekst, samt tænder den igen så den kan
-%ses
+%Ændre continue knappens position og tekst, 
+%Samt tænder den igen så den kan ses
 continueButton.String = "slå igen";
 continueButton.Position = [20 260 260 30];
 continueButton.Enable = 'on';
