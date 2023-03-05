@@ -183,7 +183,7 @@ end
 
 
 %---------------------%
-% laver tabelen
+% laver tabelen over mulige valg
 
 optionBox = uitable(fig);
 optionBox.Position = [10 100 500 150];

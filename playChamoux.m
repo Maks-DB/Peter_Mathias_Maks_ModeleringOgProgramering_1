@@ -53,9 +53,11 @@ drawnow
 % funktion hvor man vælger antal spillere og starter spillet
 [numPlayers] = playersChamoux(fig);
 
+%Tjekker om der ingen spillere er og lukker programmet
 if numPlayers <= 0
+    uialert(fig,winnerMessage,"Tilykke!",'Icon','success','CloseFcn',@(varargin) close(fig));
     disp("Du har ingen spillere, dette er altså ikke et 0 player spil din pap cykel.")
-
+    return
 end
 
 %Laver en uitable til point pr spiller
@@ -90,7 +92,7 @@ while quitGame == 0
 
         % while løkke for en tur
         while numDice >= 1 && activateTurn ~=0
-            
+
             %Hvis activateTurn er 2 betyder det at der ska slås helt om
             if activateTurn == 2
                 activateTurn = 1;
@@ -108,8 +110,8 @@ while quitGame == 0
             rollOptions = dicePoints(numDice,roll,legalArray);
 
             %Giver rollOptions til drawOptionsBox
-            [selectedDice, pointTurn,activateTurn] = drawOptionBox(fig, ...
-                rollOptions, diceSpacing, rollNum, pointTurn,axesSelectedDice);
+            [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, ...
+                rollOptions, diceSpacing, rollNum, pointTurn, axesSelectedDice);
 
             %Finder antal brugte terninger
             for t = 1:size(selectedDice,2)
@@ -134,32 +136,36 @@ while quitGame == 0
 
         %Tilføjer antal point til point tablellen
         if numDice <= 0
-            pointBox.Data{1,activePlayerRound} = -4;
-        else
-        pointBox.Data{1,activePlayerRound} = ...
-            pointBox.Data{1,activePlayerRound} + pointTurn;
-        
-        %Fjerner de tidligere valgte terninger
-        cla(axesSelectedDice)
-        disp("Runden er slut")
+
+
+            if numDice == 0
+                pointBox.Data{1,activePlayerRound} = -4;
+            else
+
+                pointBox.Data{1,activePlayerRound} = ...
+                    pointBox.Data{1,activePlayerRound} + pointTurn;
+
+                %Fjerner de tidligere valgte terninger
+                cla(axesSelectedDice)
+                disp("Runden er slut")
+            end
         end
+        clc
+
+        disp(pointBox.Data)
+
+        %Finder hvilken spiller har flest point, og hvor mange point det så er
+        [highestPoint,winner] = max(table2array(pointBox.Data));
+
+        disp(highestPoint)
+
+        %Tjekker om nogen har vundet
+        if highestPoint >= 43.5
+            quitGame = 1;
+        end
+
     end
-    clc
-
-    disp(pointBox.Data)
-
-    %Finder hvilken spiller har flest point, og hvor mange point det så er
-    [highestPoint,winner] = max(table2array(pointBox.Data));
-
-    disp(highestPoint)
-
-    %Tjekker om nogen har vundet
-    if highestPoint >= 43.5
-        quitGame = 1;
-    end
-
 end
-
 
 %Viser vinderen
 disp(winner)
