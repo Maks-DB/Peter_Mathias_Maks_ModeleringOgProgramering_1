@@ -1,4 +1,4 @@
-function rollOptions = dicePoints(numDice,rollArray,playerOptionArray)
+function rollOptions = dicePoints(numDice,rollArray, playerOptionArray)
 
 % playerOptionArray er et array med lovlige valg,
 % række 1 antal øjne,

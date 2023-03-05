@@ -88,6 +88,9 @@ while quitGame == 0
         pointTurn = 0;
         rollNum = 0;
         numDice = numDiceStart;
+        bornPreviousThrow = 0;
+        disp('bornPreviousThrow')
+        disp(bornPreviousThrow)
 
         % while løkke for en tur
         while numDice >= 1 && activateTurn ~=0
@@ -104,11 +107,11 @@ while quitGame == 0
             roll = diceThrow(axes,numDice,rollArray,diceSpacing);
 
             % Giver rullet til dicepoints
-            rollOptions = dicePoints(numDice,roll,legalArray);
+            rollOptions = dicePoints(numDice,roll,legalArray, bornPreviousThrow);
 
             %Giver rollOptions til drawOptionsBox
-            [selectedDice, pointTurn,activateTurn] = drawOptionBox(fig, ...
-                rollOptions, diceSpacing, rollNum, pointTurn,axesSelectedDice);
+            [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, ...
+                rollOptions, diceSpacing, rollNum, pointTurn, axesSelectedDice);
 
             %Finder antal brugte terninger
             for t = 1:size(selectedDice,2)
@@ -132,10 +135,10 @@ while quitGame == 0
 
         %Tilføjer antal point til point tablellen
 
-
         if numDice == 0
             pointBox.Data{1,activePlayerRound} = -4;
         else
+
         pointBox.Data{1,activePlayerRound} = ...
             pointBox.Data{1,activePlayerRound} + pointTurn;
 

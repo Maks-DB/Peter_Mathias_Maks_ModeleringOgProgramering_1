@@ -107,8 +107,8 @@ while quitGame == 0
             rollOptions = dicePoints(numDice,roll,legalArray);
 
             %Giver rollOptions til drawOptionsBox
-            [selectedDice, pointTurn,activateTurn] = drawOptionBox(fig, ...
-                rollOptions, diceSpacing, rollNum, pointTurn,axesSelectedDice);
+            [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, ...
+                rollOptions, diceSpacing, rollNum, pointTurn, axesSelectedDice);
 
             %Finder antal brugte terninger
             for t = 1:size(selectedDice,2)
@@ -132,10 +132,10 @@ while quitGame == 0
 
         %Tilføjer antal point til point tablellen
 
-
         if numDice == 0
             pointBox.Data{1,activePlayerRound} = -4;
         else
+
         pointBox.Data{1,activePlayerRound} = ...
             pointBox.Data{1,activePlayerRound} + pointTurn;
 
