@@ -1,4 +1,4 @@
-function [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave,axesSelectedDice)
+function [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave,axesSelectedDice,axes)
 %------------------
 
 % function tager en array rollOptions fra dicePoints samt en figur fig, og
@@ -198,7 +198,7 @@ continueButton.Position = [20 260 260 30];
 continueButton.BackgroundColor = '#90EE90';
 
 % varargin laver en function med variabel antal input argumenter
-continueButton.Callback = @(varargin) uiresume(fig);
+continueButton.Callback = @
 
 %venter på knappen bliver trykket
 uiwait(fig)
@@ -271,9 +271,6 @@ end
 %knap til at slå med de tilbageværende terninger
 continueButton = uicontrol(fig,'string', "slå igen");
 continueButton.Position = [20 260 260 30];
-continueButton.BackgroundColor = '#90EE90';
-
-continueButton.Callback = @(varargin) uiresume(fig);
 
 %venter på knappen bliver trykket
 uiwait(fig)
@@ -289,5 +286,11 @@ delete(continueButton)
         uiresume(fig)
         cla(axes)
     end
+
+    function continueButtonPushed(~,~)
+        uiresume(fig)
+        cla(axes)
+    end
+
 
 end

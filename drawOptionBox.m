@@ -198,7 +198,7 @@ continueButton.Position = [20 260 260 30];
 continueButton.BackgroundColor = '#90EE90';
 
 % varargin laver en function med variabel antal input argumenter
-continueButton.Callback = @(varargin) uiresume(fig);
+continueButton.Callback = @continueButtonPushed;
 
 %venter på knappen bliver trykket
 uiwait(fig)
@@ -245,7 +245,7 @@ disp("Functionen drawOptionBox har sendt denne array ud: ")
 disp(outputOnlySelected)
 
 %sletter knappen og uitable
-delete(continueButton)
+continueButton.Enable = 'off';
 delete(optionBox)
 
 %sætter selectedDice værdien til brug i andre funktioner
@@ -269,11 +269,9 @@ if pointTurn > 3
 end
 
 %knap til at slå med de tilbageværende terninger
-continueButton = uicontrol(fig,'string', "slå igen");
+continueButton.String = "slå igen";
 continueButton.Position = [20 260 260 30];
-continueButton.BackgroundColor = '#90EE90';
-
-continueButton.Callback = @(varargin) uiresume(fig);
+continueButton.Enable = 'on';
 
 %venter på knappen bliver trykket
 uiwait(fig)
@@ -289,5 +287,11 @@ delete(continueButton)
         uiresume(fig)
         cla(axes)
     end
+
+    function continueButtonPushed(~,~)
+        uiresume(fig)
+        cla(axes)
+    end
+
 
 end
