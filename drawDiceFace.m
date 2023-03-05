@@ -1,6 +1,18 @@
-%tegner terninge øjne
 function drawDiceFace(axes,n,posx,posy,width,height)
+%-------------------------
+%Funktionen tegner øjne på en terning
+
+%Funktionen bruger:
+%axes som er den axe der tegnes på
+% n som er det slag der er lavet og derved det antal øjne der skal tegnes
+% posx og posy er positionen af terning øjnene skal laves på
+% width og height er højden og bredden på terningen
+
+%-------------------------
+
+
 rad = 1.8; %radius på terning øjne
+
 
 midPos = 0.5;
 smallPos = 0.2;

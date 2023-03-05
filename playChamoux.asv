@@ -20,20 +20,20 @@ axes = uiaxes(fig);
 
 fig.Position = [100 100 1000 500];
 
-%Terninge axis
+%Terning axis
 %---------
 axes.Position = [0 100 500 500];
 
 axis(axes,'off')
 axis(axes,'equal')
 
-axisx = 7 * (diceSpacing*10);
+axisx = numDiceStart * (diceSpacing*10);
 
 axes.XLim = [0 axisx];
 axes.YLim = [-5 5];
 %---------
 
-%gemte terninger axis
+% Gemte terninger axis
 %--------
 axesSelectedDice = uiaxes(fig);
 axesSelectedDice.Position = [500 150 500 400];
@@ -92,10 +92,12 @@ while quitGame == 0
         % while løkke for en tur
         while numDice >= 1 && activateTurn ~=0
             
+            %Hvis activateTurn er 2 betyder det at der ska slås helt om
             if activateTurn == 2
                 activateTurn = 1;
                 numDice = numDiceStart;
                 rollNum = 0;
+                pointTurn = 0;
                 cla(axesSelectedDice)
             end
 
@@ -120,7 +122,8 @@ while quitGame == 0
             numDice = numDice - usedDice;
             usedDice = 0;
 
-            %Vi køre et extra rull
+            % Tæller hvor mange gange der er blevet slået i turen, bruges
+            % blandt andet til at at tegne de valgte terninger
             rollNum = rollNum + 1;
 
             disp("Antal terninger tilbage")
@@ -131,16 +134,14 @@ while quitGame == 0
         end
 
         %Tilføjer antal point til point tablellen
-
-
-        if numDice == 0
+        if numDice <= 0
             pointBox.Data{1,activePlayerRound} = -4;
         else
         pointBox.Data{1,activePlayerRound} = ...
             pointBox.Data{1,activePlayerRound} + pointTurn;
-
+        
+        %Fjerner de tidligere valgte terninger
         cla(axesSelectedDice)
-        clc
         disp("Runden er slut")
         end
     end
@@ -154,8 +155,7 @@ while quitGame == 0
     disp(highestPoint)
 
     %Tjekker om nogen har vundet
-
-    if highestPoint >= 43
+    if highestPoint >= 43.5
         quitGame = 1;
     end
 
@@ -167,4 +167,8 @@ clc
 disp(winner)
 disp(highestPoint)
 
-fprintf("AND THE WINNER ISSS..... spiller %d med %.1f point!!",winner,highestPoint);
+%Laver en alertbox når nogen vinder, og lukker figuren når der trykkes ok
+winnerMessage = sprintf("AND THE WINNER ISSS..... spiller %d med %.1f point!!",winner,highestPoint);
+
+uialert(fig,winnerMessage,"Tilykke!",'Icon','success','CloseFcn',@(varargin) close(fig));
+

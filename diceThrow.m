@@ -1,23 +1,25 @@
-function roll = diceThrow (axes,numDice,rollArray,diceSpacing)
+function roll = diceThrow (axes,numDice,diceSpacing)
+%-------------------------
+% Funktionen kaster med terninger, her kaldes drawDiceFace for at tegne
+% øjnene, funktionen sender roll variablet ud som er det slag der er blevet
+% lavet. 
 
+%Funktionen bruger
+%axes som er den axe der tegnes på
+% numDice som er antallet af terninger der skal slås med
+% diceSpacing som er afstanden mellem terningerne
+%-------------------------
 height = 10; %højden af terningen
 width = 10; %Bredden af terningen
 
 startPosx= 0; %x positionen af første terning
 
-numRolls = 10; %antal slag
+numRolls = 10; %antal slag den laver for at simulere at der bliver rystet med terningerne
 
 posx = startPosx; % posx bruges i hele dokumentet til at se positionen af terningen
 posy = 0-height/2; %sætter midten af terningen til at være i 0 y
 
-%diceSpacing = 1.1; %afstand scalar mellem terninger. 
-
-%laver akser på koordinat systemet
-axisx = numDice * (diceSpacing*width)+2*posx; %x aksen skal være lang nok til alle terningerne
-axisy = axisx/2;
-
-% ax.XLim = [0 axisx];
-% ax.YLim = [-axisy axisy];
+rollArray = zeros(1,numDice);
 
 %Tegner terningerne 
 for t=1:numRolls
