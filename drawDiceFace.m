@@ -11,12 +11,12 @@ function drawDiceFace(axes,n,posx,posy,width,height)
 %-------------------------
 
 
-rad = 1.8; %radius på terning øjne
+dia = 1.8; %radius på terning øjne
 
 
 midPos = 0.5;
-smallPos = 0.2;
-bigPos = 0.8;
+smallPos = 0.25;
+bigPos = 0.75;
 
 
 %switch i stedet for if else fordi det er hurtigere B)
@@ -137,14 +137,14 @@ end
 
 %Tegner øjne
     function drawPip
-        r = rectangle(axes,Position=[cornerx cornery rad rad]);
+        r = rectangle(axes,Position=[cornerx cornery dia dia]);
         r.Curvature=[1 1];
         r.FaceColor='black';
     end
 
 % bestemmer hjørnet af øjne.
     function corner = cornerPos(posVar, rectSize,scalar)
-        corner = (posVar + rectSize*scalar) - rad*scalar;
+        corner = (posVar + rectSize*scalar) - dia*0.5;
 
     end
 
