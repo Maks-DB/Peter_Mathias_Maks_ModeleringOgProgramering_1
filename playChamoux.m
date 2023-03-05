@@ -113,7 +113,7 @@ while quitGame == 0
 
             %Giver rollOptions til drawOptionsBox
             [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, ...
-                rollOptions, diceSpacing, rollNum, pointTurn, axesSelectedDice);
+                rollOptions, diceSpacing, rollNum, pointTurn, axesSelectedDice,axes);
 
             %Finder antal brugte terninger
             for t = 1:size(selectedDice,2)

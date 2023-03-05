@@ -1,4 +1,4 @@
-function [selectedDice, pointTurn, activeTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave)
+function [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave,axesSelectedDice)
 %------------------
 
 % function tager en array rollOptions fra dicePoints samt en figur fig, og
@@ -25,6 +25,9 @@ numCol = size(rollOptions,2);
 %laver en ny array
 rollOptionsNoZero = [];
 
+% starter turen igen med mindre man trykker stop
+activateTurn = 1;
+
 %fjerner alle nul søjler
 for t = 1:numCol
     if rollOptions(1,t) ~= 0
@@ -46,7 +49,9 @@ pointTurn = pointTurnSave;
 %og vi transponere derfor matricen før og efter. Skal ikke gøres for 3 par
 %da de håndteres anderledes
 
-disp(rollOptions)
+% vis det sorterede array med muligheder
+% disp(rollOptions)
+
 if rollOptions(2,1) ~= 40
     rollOptions = transpose(rollOptions);
     rollOptionsUnique = unique(rollOptions,"rows");
@@ -142,6 +147,9 @@ for t = 1:numCol
             %Der fratages ingen terninger
             dataArray{t,3} = 0;
 
+            %Turen stopper
+            activateTurn = 0;
+
             break
 
         case 70
@@ -153,6 +161,9 @@ for t = 1:numCol
 
             %Der fratages ingen terninger
             dataArray{t,3} = 0;
+
+            %Slår om
+            activateTurn = 2;
 
             break
 
@@ -171,8 +182,8 @@ for t = 1:numCol
 end
 
 
-%---------------------
-% laver tabelen
+%---------------------%
+% laver tabelen over mulige valg
 
 optionBox = uitable(fig);
 optionBox.Position = [10 100 500 150];
@@ -181,13 +192,12 @@ optionBox.ColumnEditable = [false false false true];
 %sætter data til at være dataArray
 optionBox.Data = dataArray;
 
-%laver en knap til at vælge slaget
+% laver en knap til at vælge slaget
 continueButton = uicontrol(fig,'string', "Tag terninger fra, vælg mindst en mulighed herunder");
 continueButton.Position = [20 260 260 30];
 continueButton.BackgroundColor = '#90EE90';
-%continueButton.Callback = 'uiresume(gcbf)'; - virker også
-%taget fra nettet varargin laver en function med variabel antal input
-%argumenter
+
+% varargin laver en function med variabel antal input argumenter
 continueButton.Callback = @(varargin) uiresume(fig);
 
 %venter på knappen bliver trykket
@@ -212,6 +222,7 @@ for t = 1:size(output,2)
     end
 end
 
+disp('outputOnlySelected')
 disp(outputOnlySelected)
 
 
@@ -219,14 +230,15 @@ disp(outputOnlySelected)
 %checker om der er blevet valgt nogen slag
 if isempty(outputOnlySelected) == 1
     disp("Da der ingen slag blev valgt har functionen drawOptionBox sendt denne array ud: ")
-    selectedDice = [0;0;0;0];
+    selectedDice = [0;0;-4;0];
+    activateTurn = 0;
     disp(selectedDice)
     return
 end
 
 %Fjerner om man har valgt den eller ej da dette altid nu vil være 1
 outputOnlySelected(end,:) = [];
-%Fjenrer om det er et unkikt slag da vi har fjernet alle der ikke er.
+%Fjener om det er et unkikt slag da vi har fjernet alle der ikke er.
 outputOnlySelected(3,:) = [];
 
 disp("Functionen drawOptionBox har sendt denne array ud: ")
@@ -239,8 +251,8 @@ delete(optionBox)
 %sætter selectedDice værdien til brug i andre funktioner
 selectedDice = outputOnlySelected;
 
-%Maks tester
-pointTurn = drawSelectedDice(fig,selectedDice,diceSpacing,rollNum,pointTurn);
+% samlede point og tegning af de valgte terninger
+pointTurn = drawSelectedDice(axesSelectedDice,selectedDice,diceSpacing,rollNum,pointTurn);
 
 % points samlet for tur
 disp('Tur point')
@@ -254,26 +266,28 @@ if pointTurn > 3
         'ButtonPushedFcn', @(pointButton,event) stopAndAddPoints);
     pointButton.Position = [300 260 180 30];
     pointButton.BackgroundColor = '#90EE90';
-
-    %continueButton.Callback = 'uiresume(gcbf)'; - virker også
-    %taget fra nettet varargin laver en function med variabel antal input
-    %argumenter
 end
 
-
+%knap til at slå med de tilbageværende terninger
 continueButton = uicontrol(fig,'string', "slå igen");
 continueButton.Position = [20 260 260 30];
 continueButton.BackgroundColor = '#90EE90';
-%continueButton.Callback = 'uiresume(gcbf)'; - virker også
-%taget fra nettet varargin laver en function med variabel antal input
-%argumenter
+
 continueButton.Callback = @(varargin) uiresume(fig);
 
 %venter på knappen bliver trykket
 uiwait(fig)
 
+if pointTurn > 3
+    delete(pointButton)
+end
+
+delete(continueButton)
+
     function stopAndAddPoints
-        activeTurn = 0;
+        activateTurn = 0;
         uiresume(fig)
+        cla(axes)
     end
+
 end

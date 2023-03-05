@@ -1,4 +1,4 @@
-function [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave,axesSelectedDice)
+function [selectedDice, pointTurn, activateTurn] = drawOptionBox(fig, rollOptions, diceSpacing, rollNum, pointTurnSave,axesSelectedDice,axes)
 %------------------
 
 % function tager en array rollOptions fra dicePoints samt en figur fig, og
@@ -287,6 +287,7 @@ delete(continueButton)
     function stopAndAddPoints
         activateTurn = 0;
         uiresume(fig)
+        cla(axes)
     end
 
 end
