@@ -203,6 +203,7 @@ continueButton.Callback = @continueButtonPushed;
 %venter på knappen bliver trykket
 uiwait(fig)
 
+
 output = table2array(optionBox.Data(:,3:4));
 output = transpose(output);
 
@@ -231,6 +232,7 @@ disp(outputOnlySelected)
 if isempty(outputOnlySelected) == 1
     disp("Da der ingen slag blev valgt har functionen drawOptionBox sendt denne array ud: ")
     selectedDice = [0;0;-4;0];
+    pointTurn = -4;
     activateTurn = 0;
     disp(selectedDice)
     return
