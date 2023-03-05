@@ -244,7 +244,7 @@ outputOnlySelected(3,:) = [];
 disp("Functionen drawOptionBox har sendt denne array ud: ")
 disp(outputOnlySelected)
 
-%sletter knappen og uitable
+%sletter uitable og gemmer knappen
 continueButton.Enable = 'off';
 delete(optionBox)
 
@@ -268,7 +268,8 @@ if pointTurn > 3
     pointButton.BackgroundColor = '#90EE90';
 end
 
-%knap til at slå med de tilbageværende terninger
+%Ændre continue knappens position og tekst, samt tænder den igen så den kan
+%ses
 continueButton.String = "slå igen";
 continueButton.Position = [20 260 260 30];
 continueButton.Enable = 'on';
@@ -281,13 +282,15 @@ if pointTurn > 3
 end
 
 delete(continueButton)
-
+    
+    %functionen til stop knappen
     function stopAndAddPoints
         activateTurn = 0;
         uiresume(fig)
         cla(axes)
     end
-
+    
+    %Funktionen til slå videre knappen
     function continueButtonPushed(~,~)
         uiresume(fig)
         cla(axes)
