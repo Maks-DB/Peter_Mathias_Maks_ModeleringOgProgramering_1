@@ -138,35 +138,30 @@ while quitGame == 0
 
         %Tilføjer antal point til point tablellen
         if numDice <= 0
+            pointBox.Data{1,activePlayerRound} = -4;
+        else
+            pointBox.Data{1,activePlayerRound} = ...
+                pointBox.Data{1,activePlayerRound} + pointTurn;
 
-
-            if numDice == 0
-                pointBox.Data{1,activePlayerRound} = -4;
-            else
-
-                pointBox.Data{1,activePlayerRound} = ...
-                    pointBox.Data{1,activePlayerRound} + pointTurn;
-
-                %Fjerner de tidligere valgte terninger
-                cla(axesSelectedDice)
-                disp("Runden er slut")
-            end
+            %Fjerner de tidligere valgte terninger
+            cla(axesSelectedDice)
+            disp("Runden er slut")
         end
-        clc
-
-        disp(pointBox.Data)
-
-        %Finder hvilken spiller har flest point, og hvor mange point det så er
-        [highestPoint,winner] = max(table2array(pointBox.Data));
-
-        disp(highestPoint)
-
-        %Tjekker om nogen har vundet
-        if highestPoint >= 43.5
-            quitGame = 1;
-        end
-
     end
+    clc
+
+    disp(pointBox.Data)
+
+    %Finder hvilken spiller har flest point, og hvor mange point det så er
+    [highestPoint,winner] = max(table2array(pointBox.Data));
+
+    disp(highestPoint)
+
+    %Tjekker om nogen har vundet
+    if highestPoint >= 43.5
+        quitGame = 1;
+    end
+
 end
 
 %Viser vinderen
