@@ -136,9 +136,12 @@ while quitGame == 0
 
         end
 
+
+
         %Tilføjer antal point til point tablellen
         if numDice <= 0
-            pointBox.Data{1,activePlayerRound} = -4;
+            pointBox.Data{1,activePlayerRound} =... 
+                pointBox.Data{1,activePlayerRound}-4;
         else
             pointBox.Data{1,activePlayerRound} = ...
                 pointBox.Data{1,activePlayerRound} + pointTurn;

@@ -86,9 +86,9 @@ numCol = size(rollOptions,2);
 % bygger data array
 
 %vi laver et table og giver variablerne navne.
-dataArray = table('size',[numCol, 4], ...
+dataTable = table('size',[numCol, 4], ...
     'VariableTypes',{'string','double','double','logical'});
-dataArray.Properties.VariableNames = ["Slag","Point","Terninger","Valg"];
+dataTable.Properties.VariableNames = ["Slag","Point","Terninger","Valg"];
 
 %Hver mulighed tilføres til dataArray
 for t = 1:numCol
@@ -100,28 +100,28 @@ for t = 1:numCol
         %enkelt terning
         case 1
             %Indsætter forklarende tekst
-            dataArray{t,1} = ...
+            dataTable{t,1} = ...
                 sprintf("Du har slået en %d'er ",rollOptions(1,t));
 
             %indsætter antal point
-            dataArray{t,2} = rollOptions(4,t);
+            dataTable{t,2} = rollOptions(4,t);
 
             %en terning er en terning :)
-            dataArray{t,3} = 1;
+            dataTable{t,3} = 1;
 
             %cameron
         case 30
             %Indsætter forklarende tekst
-            dataArray{t,1} = "Tilykke du har slået Cameron";
+            dataTable{t,1} = "Tilykke du har slået Cameron";
 
             %indsætter antal point
-            dataArray{t,2} = rollOptions(4,t);
+            dataTable{t,2} = rollOptions(4,t);
 
             %cameron er altid 6 terninger
-            dataArray{t,3} = 6;
+            dataTable{t,3} = 6;
 
             %Undgå at tilføje alle cameron muligheder
-            dataArray(2:numCol,:) =[];
+            dataTable(2:numCol,:) =[];
 
             %Fjerner også unødige rækker fra rollOptions
             rollOptions(:,2:numCol) = [];
@@ -130,27 +130,27 @@ for t = 1:numCol
             %3 par
         case 40
             %Indsætter forklarende tekst
-            dataArray{t,1} = "Tilykke du har slået 3 Par i første slag";
+            dataTable{t,1} = "Tilykke du har slået 3 Par i første slag";
 
             %indsætter antal point
-            dataArray{t,2} = rollOptions(4,t);
+            dataTable{t,2} = rollOptions(4,t);
 
-            %3 par er altid 6 terninger
-            dataArray{t,3} = 6;
+            %hver par er 2 terninger
+            dataTable{t,3} = 2;
 
             %Undgå at tilføje alle par
-            dataArray(2:numCol,:) =[];
+            dataTable(2:numCol,:) =[];
             break
 
         case 60
             %Indsætter forklarende tekst
-            dataArray{t,1} = "ØV ingen terninger kan vælges, -4 point";
+            dataTable{t,1} = "ØV ingen terninger kan vælges, -4 point";
 
             %indsætter antal point
-            dataArray{t,2} = -4;
+            dataTable{t,2} = -4;
 
             %Der fratages ingen terninger
-            dataArray{t,3} = 0;
+            dataTable{t,3} = 0;
 
             %Turen stopper
             activateTurn = 0;
@@ -159,14 +159,15 @@ for t = 1:numCol
 
         case 70
             %Indsætter forklarende tekst
-            dataArray{t,1} = "Alle terninger tæller " + ...
+            dataTable{t,1} = "Alle terninger tæller " + ...
                 "- du må slå runden om";
 
             %indsætter antal point
-            dataArray{t,2} = 0;
+            dataTable{t,2} = 0;
 
-            %Der fratages ingen terninger
-            dataArray{t,3} = 0;
+            %Der fratages et meget stort tal for at give -4 senere i
+            %programmet
+            dataTable{t,3} = 1000;
 
             %Slår om
             activateTurn = 2;
@@ -175,14 +176,14 @@ for t = 1:numCol
 
         otherwise
             %Indsætter forklarende tekst
-            dataArray{t,1} = ...
+            dataTable{t,1} = ...
             sprintf("Du har slået fødte %d'er",rollOptions(1,t));
 
             %indsætter antal point
-            dataArray{t,2} = rollOptions(4,t);
+            dataTable{t,2} = rollOptions(4,t);
 
             %Fødte er altid 3 terninger
-            dataArray{t,3} = 3;
+            dataTable{t,3} = 3;
 
 
     end
@@ -197,7 +198,7 @@ optionBox.Position = [10 100 500 150];
 optionBox.ColumnEditable = [false false false true];
 
 %sætter data til at være dataArray
-optionBox.Data = dataArray;
+optionBox.Data = dataTable;
 
 % laver en knap til at vælge slaget
 continueButton = uicontrol(fig, ...
