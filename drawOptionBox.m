@@ -165,9 +165,8 @@ for t = 1:numCol
             %indsætter antal point
             dataTable{t,2} = 0;
 
-            %Der fratages et meget stort tal for at give -4 senere i
-            %programmet
-            dataTable{t,3} = 1000;
+            %Der fratages ingen terninger
+            dataTable{t,3} = 0;
 
             %Slår om
             activateTurn = 2;
